@@ -1,0 +1,14 @@
+{
+    "name": "htdocs/kwaret",
+    "description": "Skeleton Application for kwaret",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "kwaret"
+    ],
+    "homepage": "http://kwaret.ovh/",
+    "require": {
+        "php": ">=5.5",
+        "zendframework/zendframework": "~2.5"
+    }
+}
