@@ -46,12 +46,12 @@ class IndexController extends AbstractActionController
                     } //set formElementErrors
                     $form->setMessages(array('fileUpload'=>$error ));
                 } else {
-                    $adapter->setDestination(dirname(__DIR__));
+        // \Zend\Debug\Debug::dump(); die; 
+                    $adapter->setDestination('C:\xampp\htdocs\kwaret\data\formsDoc');
                     if ($adapter->receive($File['name'])) {
-        // \Zend\Debug\Debug::dump($form->getData()); die; 
 
                         $forms->exchangeArray($form->getData());
-                        echo 'forms Name '.$forms->FormName.' upload '.$forms->fileUpload;
+                        echo 'forms Name '.$forms->FormName.'upload'.$forms->fileUpload;
                     }
                 }  
             }
