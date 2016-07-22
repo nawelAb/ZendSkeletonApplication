@@ -17,8 +17,8 @@ class IndexController extends AbstractActionController
     
         if ($request->isPost()) {
             
-            $profile = new forms();
-            $form->setInputFilter($profile->getInputFilter());
+            $forms = new forms();
+            $form->setInputFilter($forms->getInputFilter());
             
             $nonFile = $request->getPost()->toArray();
             $File    = $this->params()->fromFiles('fileUpload');
@@ -50,8 +50,8 @@ class IndexController extends AbstractActionController
                     if ($adapter->receive($File['name'])) {
         // \Zend\Debug\Debug::dump($form->getData()); die; 
 
-                        $profile->exchangeArray($form->getData());
-                        echo 'forms Name '.$profile->FormName.' upload '.$profile->fileUpload;
+                        $forms->exchangeArray($form->getData());
+                        echo 'forms Name '.$forms->FormName.' upload '.$forms->fileUpload;
                     }
                 }  
             }
