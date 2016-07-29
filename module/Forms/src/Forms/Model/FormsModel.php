@@ -12,9 +12,9 @@ use Zend\Validator\File\Size;
 
 class FormsModel implements InputFilterAwareInterface
 {   
-    protected $fileUpload;
-    protected $form_id;
-    protected $form_name;
+    public $fileUpload;
+    public $form_id;
+    public $form_name;
     protected $inputFilter;
     
     public function exchangeArray($data)
