@@ -20,10 +20,10 @@ class FormsTable
         return $resultSet;
     }
 
-    public function getForm($form_id)
+    public function getForm($id)
     {
-        $form_id  = (int) $form_id;
-        $rowset = $this->tableGateway->select(array('form_id' => $form_id));
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -35,18 +35,18 @@ class FormsTable
     {
         // pour Zend\Db\TableGateway\TableGateway les donnes doivent etre dans un tableau non un objet 
         $data = array(           
-            'form_id'   => $form->form_id,
+            'id'   => $form->id,
             'form_name' => $form->form_name,                    
         );
         // a remplacer par  getArrayCopy() defini dans Auth
         // $data = $form->getArrayCopy();
 
-        $form_id = (int)$form->form_id;
-        if ($form_id == 0) {
+        $id = (int)$form->id;
+        if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getUser($form_id)) {
-                $this->tableGateway->update($data, array('form_id' => $form_id));
+            if ($this->getUser($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new \Exception('Form id does not exist');
             }
@@ -55,6 +55,6 @@ class FormsTable
     
     public function deleteForm($id)
     {
-        $this->tableGateway->delete(array('form_id' => $form_id));
+        $this->tableGateway->delete(array('id' => $id));
     }    
 }
