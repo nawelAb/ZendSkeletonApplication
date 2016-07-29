@@ -7,20 +7,22 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-use Zend\Validator\File\ExcludeExtension;
 use Zend\Filter\File\RenameUpload;
 use Zend\Validator\File\Size;
 
-class Forms implements InputFilterAwareInterface
-{
-    public $FormName;
-    public $fileUpload;
+class FormsModel implements InputFilterAwareInterface
+{   
+    protected $fileUpload;
+    protected $form_id;
+    protected $form_name;
     protected $inputFilter;
     
     public function exchangeArray($data)
-    {
-        $this->FormName  = (isset($data['FormName']))  ? $data['FormName']     : null; 
-        $this->fileUpload  = (isset($data['fileUpload']))  ? $data['fileUpload']     : null; 
+    {        
+        $this->form_id     = (isset($data['form_id'])) ? $data['form_id'] : null;
+        $this->form_name = (isset($data['form_name'])) ? $data['form_name'] : null;
+        $this->fileUpload  = (isset($data['fileUpload']))  ? $data['fileUpload'] : null;  
+
     } 
     
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -36,7 +38,7 @@ class Forms implements InputFilterAwareInterface
              
             $inputFilter->add(
                 $factory->createInput(array(
-                    'name'     => 'FormName',
+                    'name'     => 'form_name',
                     'required' => true,
                     'filters'  => array(
                         array('name' => 'StripTags'),
@@ -67,13 +69,7 @@ class Forms implements InputFilterAwareInterface
                     //             'max'      => '30MB',
                     //         ],
                     // ],
-                        // array(
-                        //     'name'  => 'Zend\Validator\File\Extension',
-                        //     'options' =>
-                        //         array(
-                        //             'extension' => array('pdf') // a corriger 
-                        //         ),
-                        // ),
+                        
                     )
                 ))
             );

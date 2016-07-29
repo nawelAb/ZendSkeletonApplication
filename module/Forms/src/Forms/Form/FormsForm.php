@@ -13,7 +13,7 @@ class FormsForm extends Form
         $this->setAttribute('enctype','multipart/form-data');
         
         $this->add(array(
-            'name' => 'FormName',
+            'name' => 'form_name',
             'attributes' => array(
                 'type'  => 'text',
             ),

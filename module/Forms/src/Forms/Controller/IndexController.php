@@ -3,13 +3,14 @@
 namespace Forms\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Forms\Model\FormsModel;
 
-use Forms\Model\forms;
 use Forms\Form\FormsForm;
-use Zend\Validator\File\Size;
+use Zend\Validator\File\Size; 
 
 class IndexController extends AbstractActionController
 {
+    protected $formsTable;
     public function uploadFormAction() // UploadForm
     {
         $form = new FormsForm();
@@ -17,7 +18,7 @@ class IndexController extends AbstractActionController
     
         if ($request->isPost()) {
             
-            $forms = new forms();
+            $forms = new FormsModel();
             $form->setInputFilter($forms->getInputFilter());
             
             $nonFile = $request->getPost()->toArray();
@@ -33,8 +34,7 @@ class IndexController extends AbstractActionController
                 
                 $size = new Size(array('min'=>20000)); //min filesize
                 
-                $adapter = new \Zend\File\Transfer\Adapter\Http(); 
-              
+                $adapter = new \Zend\File\Transfer\Adapter\Http();               
                 $adapter->setValidators(array($size), $File['name']);
                 
                 if (!$adapter->isValid()){
@@ -47,11 +47,18 @@ class IndexController extends AbstractActionController
                     $form->setMessages(array('fileUpload'=>$error ));
                 } else {
         // \Zend\Debug\Debug::dump(); die; 
+        // renomer avant de sauvegarder 
                     $adapter->setDestination('C:\xampp\htdocs\kwaret\data\formsDoc');
                     if ($adapter->receive($File['name'])) {
 
-                        $forms->exchangeArray($form->getData());
-                        echo 'forms Name '.$forms->FormName.'upload'.$forms->fileUpload;
+                        $data = $form->getData();
+                        // $data = $this->prepareData($data);
+                        $forms->exchangeArray($data);
+                        ////////////////ajout de la sauvegarde dans la bdd/////////
+                        $this->getFormsTable()->saveForm($forms);                    
+
+                        echo 'forms success ';//.$forms->FormName.'upload'.$forms->fileUpload;
+                        // \Zend\Debug\Debug::dump($a);die;
                     }
                 }  
             }
@@ -59,7 +66,15 @@ class IndexController extends AbstractActionController
         return array('form' => $form);
     }
 
-
+    public function getFormsTable()
+    {
+        if (!$this->formsTable) {
+            $sm = $this->getServiceLocator();
+            $this->formsTable = $sm->get('Forms\Model\FormsTable');
+        }
+        return $this->formsTable;
+    }
+    
     public function uploadProgressAction()
     {
         $id = $this->params()->fromQuery('id', null);
