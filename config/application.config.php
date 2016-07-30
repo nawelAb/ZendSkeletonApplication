@@ -10,7 +10,8 @@ return array(
     'modules' => array(
         'Application',
         'Auth',
-        'Forms',        
+        'Forms', 
+        'Comments',       
 
     ),
 

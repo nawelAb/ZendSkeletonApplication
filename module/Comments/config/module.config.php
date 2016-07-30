@@ -1,21 +1,25 @@
 <?php
-
 return array(
 	'controllers' => array(
         'invokables' => array(
-            'Comments\Controller\Index' => 'Comments\Controller\IndexController',	
+            'Comments\Controller\Comments' => 'Comments\Controller\CommentsController',
+             // 'Forms\Controller\CommentsController' => 'Forms\Controller\CommentsControllerController',	
         ),
 	),
     'router' => array(
         'routes' => array(
 			'comments' => array(
+			// 'forms' => array(
 				'type'    => 'Literal',
 				'options' => array(
 					'route'    => '/comments',
+					// 'route'    => '/forms',
 					'defaults' => array(
 						'__NAMESPACE__' => 'Comments\Controller',
-						'controller'    => 'Index',
-						'action'        => 'addComment',
+						// '__NAMESPACE__' => 'Forms\Controller',
+						'controller'    => 'CommentsController',
+						'action'        => 'addComments',
+						// 'action'        => 'uploadForm',
 					),
 				),
 				'may_terminate' => true,
@@ -42,7 +46,8 @@ return array(
 //            'layout/Auth'           => __DIR__ . '/../view/layout/Auth.phtml',
 //        ),
         'template_path_stack' => array(
-            'forms' => __DIR__ . '/../view'
+            'comments' => __DIR__ . '/../view'
+            // 'forms' => __DIR__ . '/../view'
         ),
 		
 		'display_exceptions' => true,
