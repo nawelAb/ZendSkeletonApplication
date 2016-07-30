@@ -11,7 +11,8 @@ return array(
         'Application',
         'Auth',
         'Forms', 
-        'Comments',       
+        'Comments',
+        'Tags'       
 
     ),
 

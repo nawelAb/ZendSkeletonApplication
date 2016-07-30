@@ -1,24 +1,26 @@
 <?php 
-// filename : module/Forms/src/Forms/Controller/IndexController.php
-namespace Forms\Controller;
+// filename : module/Tags/src/Tags/Controller/IndexController.php
+namespace Tags\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Forms\Model\FormsModel;
+use Tags\Model\TagsModel;
 
-use Forms\Form\FormsForm;
+use Tags\Form\TagsForm;
 use Zend\Validator\File\Size; 
 
-class IndexController extends AbstractActionController
+class TagsController extends AbstractActionController
 {
     protected $formsTable;
-    public function uploadFormAction() // UploadForm
-    {
-        $form = new FormsForm();
+    public function addTagsAction() // UploadForm
+
+    {  
+        var_dump('controller'); die; // le routes sont correcte
+        $form = new TagsForm();
         $request = $this->getRequest();  
     
         if ($request->isPost()) {
             
-            $forms = new FormsModel();
+            $forms = new TagsModel();
             $form->setInputFilter($forms->getInputFilter());
             
             $nonFile = $request->getPost()->toArray();
@@ -55,7 +57,7 @@ class IndexController extends AbstractActionController
                         // $data = $this->prepareData($data);
                         $forms->exchangeArray($data);
                         ////////////////ajout de la sauvegarde dans la bdd/////////
-                        $this->getFormsTable()->saveForm($forms);                    
+                        $this->getTagsTable()->saveForm($forms);                    
 
                         echo 'forms success ';//.$forms->FormName.'upload'.$forms->fileUpload;
                         // \Zend\Debug\Debug::dump($a);die;
@@ -66,11 +68,11 @@ class IndexController extends AbstractActionController
         return array('form' => $form);
     }
 
-    public function getFormsTable()
+    public function getTagsTable()
     {
         if (!$this->formsTable) {
             $sm = $this->getServiceLocator();
-            $this->formsTable = $sm->get('Forms\Model\FormsTable');
+            $this->formsTable = $sm->get('Tags\Model\TagsTable');
         }
         return $this->formsTable;
     }

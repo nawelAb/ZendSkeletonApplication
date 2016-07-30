@@ -1,9 +1,9 @@
 <?php
-namespace Forms; 
+namespace Tags; 
 
 // Table Date Gateway
-use Forms\Model\FormsModel;
-use Forms\Model\FormsTable;
+use Tags\Model\TagsModel;
+use Tags\Model\TagsTable;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -29,32 +29,4 @@ class Module
             ),
         );
     }
-
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                // table data Gateway
-                'Forms\Model\FormsTable' =>  function($sm) {
-                    $tableGateway = $sm->get('FormsTableGateway');
-                    $table = new FormsTable($tableGateway);
-                    return $table;
-                },
-                'FormsTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    // var_dump("expression");die;
-                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormsModel()); // Notice what is set here
-                    return new TableGateway('forms', $dbAdapter, null, $resultSetPrototype);
-                },
-                //SMTP transport
-                // 'mail.transport' => function (ServiceManager $serviceManager) {
-                //     $config = $serviceManager->get('Config'); 
-                //     $transport = new Smtp();                
-                //     $transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
-                //     return $transport;
-                // },
-            ),
-        );
-    }   
 }

@@ -12,6 +12,6 @@ class CommentsController extends AbstractActionController
 {
     public function addCommentsAction() // UploadForm
     {
-        var_dump('controller yesssssssss');die;
+        var_dump('controller ');die; // les routes sont correcte
     }
 }

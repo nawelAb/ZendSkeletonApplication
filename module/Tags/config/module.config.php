@@ -3,7 +3,7 @@
 return array(
 	'controllers' => array(
         'invokables' => array(
-            'Tag\Controller\Index' => 'Tags\Controller\IndexController',	
+            'Tags\Controller\Tags' => 'Tags\Controller\TagsController',	
         ),
 	),
     'router' => array(
@@ -11,11 +11,11 @@ return array(
 			'tags' => array(
 				'type'    => 'Literal',
 				'options' => array(
-					'route'    => '/comments',
+					'route'    => '/tags',
 					'defaults' => array(
-						'__NAMESPACE__' => 'Forms\Controller',
-						'controller'    => 'Index',
-						'action'        => 'addComment',
+						'__NAMESPACE__' => 'Tags\Controller',
+						'controller'    => 'Tags',
+						'action'        => 'addTags',
 					),
 				),
 				'may_terminate' => true,
@@ -42,7 +42,7 @@ return array(
 //            'layout/Auth'           => __DIR__ . '/../view/layout/Auth.phtml',
 //        ),
         'template_path_stack' => array(
-            'forms' => __DIR__ . '/../view'
+            'tags' => __DIR__ . '/../view'
         ),
 		
 		'display_exceptions' => true,
