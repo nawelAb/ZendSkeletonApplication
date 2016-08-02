@@ -60,7 +60,7 @@ class AdminController extends AbstractActionController
 			$form->setData($this->getUsersTable()->select(array('usr_id' => $id))->current());			
 		}
 		
-		return new ViewModel(array('form' => $form, 'id' => $id));
+		return new ViewModel(array('form'=> $form, 'id' => $id));
 	}
 	
 	
