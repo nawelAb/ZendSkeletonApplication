@@ -5,82 +5,76 @@ namespace Tags\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Tags\Model\TagsModel;
 
+use Zend\View\Model\ViewModel;
+
 use Tags\Form\TagsForm;
 use Zend\Validator\File\Size; 
 
 class TagsController extends AbstractActionController
 {
-    protected $formsTable;
+    protected $tagsTable;
     public function addTagsAction() // UploadForm
 
     {  
-        var_dump('controller'); die; // le routes sont correcte
         $form = new TagsForm();
         $request = $this->getRequest();  
+                // \Zend\Debug\Debug::dump($request->isPost());die;
+  
     
         if ($request->isPost()) {
-            
-            $forms = new TagsModel();
-            $form->setInputFilter($forms->getInputFilter());
-            
-            $nonFile = $request->getPost()->toArray();
-            $File    = $this->params()->fromFiles('fileUpload');
-            $data = array_merge(
-                 $nonFile,  
-                 array('fileUpload'=> $File['name']) 
-             );
-         
+
+            $tags = new TagsModel();
+            $form->setInputFilter($tags->getInputFilter());              
             $form->setData($data);
-
             if ($form->isValid()) {
-                
-                $size = new Size(array('min'=>20000)); //min filesize
-                
-                $adapter = new \Zend\File\Transfer\Adapter\Http();               
-                $adapter->setValidators(array($size), $File['name']);
-                
-                if (!$adapter->isValid()){
-                    $dataError = $adapter->getMessages();
-                    $error = array();
-                    foreach($dataError as $key=>$row)
-                    {
-                        $error[] = $row;
-                    } //set formElementErrors
-                    $form->setMessages(array('fileUpload'=>$error ));
-                } else {
-        // \Zend\Debug\Debug::dump(); die; 
-        // renomer avant de sauvegarder 
-                    $adapter->setDestination('C:\xampp\htdocs\kwaret\data\formsDoc');
-                    if ($adapter->receive($File['name'])) {
+        
+                $data = $form->getData();          
+                $tags->exchangeArray($data);               
+                $this->getTagsTable()->saveTag($tags);      
 
-                        $data = $form->getData();
-                        // $data = $this->prepareData($data);
-                        $forms->exchangeArray($data);
-                        ////////////////ajout de la sauvegarde dans la bdd/////////
-                        $this->getTagsTable()->saveForm($forms);                    
+                echo 'tags success ';
+               
+        //     }
+        // }         
+        // return array('form' => $form);
+        return $this->redirect()->toRoute('tags/default', array('controller'=>'Tags', 'action'=>'addTagsAction'));                   
+            }            
+        }
+        return new ViewModel(array('form' => $form));
+    
 
-                        echo 'forms success ';//.$forms->FormName.'upload'.$forms->fileUpload;
-                        // \Zend\Debug\Debug::dump($a);die;
-                    }
-                }  
-            }
-        }         
-        return array('form' => $form);
+
+        // $form = new TagsForm();
+        // $request = $this->getRequest();  
+        
+        // if ($request->isPost()) {
+        //     $form->setInputFilter(new RegistrationFilter($this->getServiceLocator()));
+        //     $form->setData($request->getPost());
+        //      if ($form->isValid()) {             
+        //         $data = $form->getData();
+        //         $data = $this->prepareData($data);
+        //         $auth = new Auth();
+        //         $auth->exchangeArray($data);
+
+        //         $this->getUsersTable()->saveUser($auth);
+        //     /* la confirmation de l inscription ne fonctionne pas 
+        //         $this->sendConfirmationEmail($auth);
+        //         $this->flashMessenger()->addMessage($auth->usr_email);
+        //         // \Zend\Debug\Debug::dump('Success'); die;
+        //     */
+        //         return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'registration-success'));                   
+        //     }            
+        // }
+        // return new ViewModel(array('form' => $form));
     }
 
     public function getTagsTable()
     {
-        if (!$this->formsTable) {
+        if (!$this->tagsTable) {
             $sm = $this->getServiceLocator();
-            $this->formsTable = $sm->get('Tags\Model\TagsTable');
+            $this->tagsTable = $sm->get('Tags\Model\TagsTable');
         }
-        return $this->formsTable;
-    }
+        return $this->tagsTable;
+    } 
     
-    public function uploadProgressAction()
-    {
-        $id = $this->params()->fromQuery('id', null);
-        $progress = new \Zend\ProgressBar\Upload\SessionProgress();
-        return new \Zend\View\Model\JsonModel($progress->getProgress($id));
-    }
 }

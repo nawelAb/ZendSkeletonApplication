@@ -2,6 +2,7 @@
 return array(
 	'controllers' => array(
         'invokables' => array(
+        	'Comments\Controller\Index' => 'Comments\Controller\IndexController',
             'Comments\Controller\Comments' => 'Comments\Controller\CommentsController',
              // 'Forms\Controller\CommentsController' => 'Forms\Controller\CommentsControllerController',	
         ),
@@ -17,8 +18,8 @@ return array(
 					'defaults' => array(
 						'__NAMESPACE__' => 'Comments\Controller',
 						// '__NAMESPACE__' => 'Forms\Controller',
-						'controller'    => 'CommentsController',
-						'action'        => 'addComments',
+						'controller'    => 'Index',
+						'action'        => 'index',
 						// 'action'        => 'uploadForm',
 					),
 				),
@@ -42,9 +43,9 @@ return array(
 		),
 	),
     'view_manager' => array(
-//        'template_map' => array(
-//            'layout/Auth'           => __DIR__ . '/../view/layout/Auth.phtml',
-//        ),
+       'template_map' => array(
+           'layout/Comments'           => __DIR__ . '/../view/layout/index.phtml',
+       ),
         'template_path_stack' => array(
             'comments' => __DIR__ . '/../view'
             // 'forms' => __DIR__ . '/../view'
@@ -53,8 +54,11 @@ return array(
 		'display_exceptions' => true,
     ),
 	'service_manager' => array(
+		 // 'factories' => array(
+		     // 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory', 
 		// added for Authentication and Authorization. Without this each time we have to create a new instance.
 		// This code should be moved to a module to allow Doctrine to overwrite it
+		// ),
 		
 	),
 );

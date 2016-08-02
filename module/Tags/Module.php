@@ -29,4 +29,25 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                // table data Gateway
+                'Tags\Model\TagsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('TagsTableGateway');
+                    $table = new TagsTable($tableGateway);
+                    return $table;
+                },
+                'TagsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    // var_dump("expression");die;
+                    $resultSetPrototype->setArrayObjectPrototype(new \Tags\Model\TagsModel()); 
+                    return new TableGateway('tags', $dbAdapter, null, $resultSetPrototype);
+                },                
+            ),
+        );
+    }   
 }

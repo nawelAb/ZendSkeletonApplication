@@ -14,8 +14,8 @@ class IndexController extends AbstractActionController
     public function uploadFormAction() // UploadForm
     {
         $form = new FormsForm();
-        $request = $this->getRequest();  
-    
+        $request = $this->getRequest();    
+        
         if ($request->isPost()) {
             
             $forms = new FormsModel();
@@ -53,12 +53,12 @@ class IndexController extends AbstractActionController
 
                         $data = $form->getData();
                         // $data = $this->prepareData($data);
-                        $forms->exchangeArray($data);
+                        $forms->exchangeArray($data);  \Zend\Debug\Debug::dump( $this->getFormsTable());die;
                         ////////////////ajout de la sauvegarde dans la bdd/////////
                         $this->getFormsTable()->saveForm($forms);                    
 
                         echo 'forms success ';//.$forms->FormName.'upload'.$forms->fileUpload;
-                        // \Zend\Debug\Debug::dump($a);die;
+                       
                     }
                 }  
             }

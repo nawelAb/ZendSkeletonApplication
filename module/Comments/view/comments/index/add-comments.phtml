@@ -1,0 +1,31 @@
+
+<h1>Comments</h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('comments/default', array('controller' => 'Comments', 'action' => 'addComments')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+?>
+<?php
+
+// $form = $this->form;
+
+// $form->setAttribute('action', $this->url('comments/default', array('controller' => 'Comments', 'action' => 'addComments')));
+//    // \Zend\Debug\Debug::dump(''); die; 
+// $form->prepare();
+
+// echo $this->form()->openTag($form);
+
+// echo $this->formFileSessionProgress();
+
+
+// echo $this->formRow($form->get('value'))."<br></br>";
+
+
+// echo $this->formSubmit($form->get('submit'))."<br></br>";
+// echo $this->form()->closeTag();
+?>

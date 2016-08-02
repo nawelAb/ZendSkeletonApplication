@@ -1,7 +1,6 @@
 <?php
 namespace Forms; 
 
-// Table Date Gateway
 use Forms\Model\FormsModel;
 use Forms\Model\FormsTable;
 
@@ -10,7 +9,6 @@ use Zend\Mvc\MvcEvent;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
-
 
 class Module
 {
@@ -46,14 +44,7 @@ class Module
                     // var_dump("expression");die;
                     $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormsModel()); // Notice what is set here
                     return new TableGateway('forms', $dbAdapter, null, $resultSetPrototype);
-                },
-                //SMTP transport
-                // 'mail.transport' => function (ServiceManager $serviceManager) {
-                //     $config = $serviceManager->get('Config'); 
-                //     $transport = new Smtp();                
-                //     $transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
-                //     return $transport;
-                // },
+                },                
             ),
         );
     }   

@@ -1,31 +1,32 @@
 <?php 
-namespace Comments\Form;
-// filename : module/Comments/src/Comments/Form/CommentsForm.php
+
+namespace Tags\Form;
 
 use Zend\Form\Form;
 
-class CommentsForm extends Form
+class TagsForm extends Form
 {
     public function __construct($name = null)
-    {        
-        parent::__construct('comments');
+    {
+        parent::__construct('Tags');
         $this->setAttribute('method', 'post');
-       
+        // $this->setAttribute('enctype','multipart/form-data');
+        
         $this->add(array(
             'name' => 'value',
             'attributes' => array(
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Value',
+                'label' => ' Tag ',
             ),
-        ));      
-        
+        ));    
+   
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Submit'
+                'value' => 'submit'
             ),
         )); 
     }

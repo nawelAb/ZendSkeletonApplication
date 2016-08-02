@@ -14,9 +14,8 @@ echo $this->form()->openTag($form);
 echo $this->formFileSessionProgress();
 
 
-echo $this->formRow($form->get('form_name'))."<br></br>";
+echo $this->formRow($form->get('value'))."<br></br>";
 
-echo $this->formRow($form->get('fileUpload'))."</br>";
 
 echo $this->formSubmit($form->get('submit'))."<br></br>";
 echo $this->form()->closeTag();

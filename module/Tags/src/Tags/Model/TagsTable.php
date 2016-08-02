@@ -20,10 +20,10 @@ class TagsTable
         return $resultSet;
     }
 
-    public function getTag($tag_id)
+    public function getTag($id)
     {
-        $tag_id  = (int) $tag_id;
-        $rowset = $this->tableGateway->select(array('tag_id' => $tag_id));
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -35,17 +35,17 @@ class TagsTable
     {
         
         $data = array(           
-            'tag_id'   => $tag->tag_id,
-            'tag_name' => $tag->tag_name,                    
+            'id'   => $tag->id,
+            'value' => $tag->value,                    
         );
     
 
-        $tag_id = (int)$tag->tag_id;
-        if ($tag_id == 0) {
+        $id = (int)$tag->id;
+        if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getUser($tag_id)) {
-                $this->tableGateway->update($data, array('tag_id' => $tag_id));
+            if ($this->getUser($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new \Exception('Tag id does not exist');
             }
@@ -54,6 +54,6 @@ class TagsTable
     
     public function deleteTag($id)
     {
-        $this->tableGateway->delete(array('tag_id' => $tag_id));
+        $this->tableGateway->delete(array('id' => $id));
     }    
 }

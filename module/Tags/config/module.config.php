@@ -42,7 +42,8 @@ return array(
 //            'layout/Auth'           => __DIR__ . '/../view/layout/Auth.phtml',
 //        ),
         'template_path_stack' => array(
-            'tags' => __DIR__ . '/../view'
+            'tags' => __DIR__ . '/../view',
+            // __DIR__ . '/../view',
         ),
 		
 		'display_exceptions' => true,

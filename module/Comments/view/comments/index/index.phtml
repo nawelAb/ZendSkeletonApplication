@@ -1,0 +1,12 @@
+
+<h1>Comments index</h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('comments/default', array('controller' => 'Index', 'action' => 'index')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+ ?> 

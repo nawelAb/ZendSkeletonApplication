@@ -13,16 +13,14 @@ use Zend\InputFilter\InputFilter;
 class TagsModel implements InputFilterAwareInterface
 {   
     // public $fileUpload;
-    public $tag_id;
-    public $tag_name;
+    public $id;
+    public $value;
     protected $inputFilter;
     
     public function exchangeArray($data)
     {        
-        $this->form_id     = (isset($data['form_id'])) ? $data['form_id'] : null;
-        $this->form_name = (isset($data['form_name'])) ? $data['form_name'] : null;
-        $this->fileUpload  = (isset($data['fileUpload']))  ? $data['fileUpload'] : null;  
-
+        $this->id     = (isset($data['id'])) ? $data['id'] : null;
+        $this->value = (isset($data['value'])) ? $data['value'] : null;       
     } 
     
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -38,7 +36,7 @@ class TagsModel implements InputFilterAwareInterface
              
             $inputFilter->add(
                 $factory->createInput(array(
-                    'name'     => 'form_name',
+                    'name'     => 'value',
                     'required' => true,
                     'filters'  => array(
                         array('name' => 'StripTags'),
@@ -56,24 +54,7 @@ class TagsModel implements InputFilterAwareInterface
                     ),
                 ))
             );
-            
-            $inputFilter->add(
-                $factory->createInput(array(
-                    'name'     => 'fileUpload',
-                    'required' => true,
-                    'validators' => array(
-                    //     [
-                    //     'name'  => 'Zend\Validator\File\Size',
-                    //     'options' =>
-                    //         [
-                    //             'max'      => '30MB',
-                    //         ],
-                    // ],
-                        
-                    )
-                ))
-            );
-            
+                       
             $this->inputFilter = $inputFilter;
         }        
         return $this->inputFilter;
