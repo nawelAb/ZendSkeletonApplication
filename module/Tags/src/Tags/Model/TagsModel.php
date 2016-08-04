@@ -4,8 +4,8 @@ namespace Tags\Model;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
-// use Zend\InputFilter\InputFilterAwareInterface;
-// use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
 // use Zend\Filter\File\RenameUpload;
 // use Zend\Validator\File\Size;

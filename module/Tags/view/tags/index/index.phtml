@@ -5,7 +5,7 @@ $form = $this->form;
 //                     $this->url('test/default', //your route name ...
 //                                array('controller'=>'Profile', 'action' => 'add'))); 
 
-$form->setAttribute('action', $this->url('tags/default', array('controller' => 'Tags', 'action' => 'addTags')));
+$form->setAttribute('action', $this->url('tags/default', array('controller' => 'Index', 'action' => 'index')));
    // \Zend\Debug\Debug::dump(''); die; 
 $form->prepare();
 

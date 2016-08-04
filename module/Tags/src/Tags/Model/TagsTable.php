@@ -4,7 +4,6 @@ namespace Tags\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\ResultSet\ResultSet;
 
-
 class TagsTable
 {
     protected $tableGateway;
@@ -31,7 +30,7 @@ class TagsTable
         return $row;
     }
 
-    public function saveTag(TagModel $tag)
+    public function saveTag(TagsModel $tag)
     {
         
         $data = array(           
@@ -39,7 +38,6 @@ class TagsTable
             'value' => $tag->value,                    
         );
     
-
         $id = (int)$tag->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);

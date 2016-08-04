@@ -3,7 +3,7 @@
 return array(
 	'controllers' => array(
         'invokables' => array(
-            'Tags\Controller\Tags' => 'Tags\Controller\TagsController',	
+            'Tags\Controller\Index' => 'Tags\Controller\IndexController',	
         ),
 	),
     'router' => array(
@@ -14,8 +14,8 @@ return array(
 					'route'    => '/tags',
 					'defaults' => array(
 						'__NAMESPACE__' => 'Tags\Controller',
-						'controller'    => 'Tags',
-						'action'        => 'addTags',
+						'controller'    => 'Index',
+						'action'        => 'index',
 					),
 				),
 				'may_terminate' => true,

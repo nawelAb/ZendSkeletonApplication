@@ -1,36 +1,33 @@
 <?php
-namespace Comments\Controller;
+namespace Tags\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-
-use Comments\Model\CommentsModel;
-use Comments\Model\CommentsTable;
-
-use Comments\Form\CommentsForm;
+use Tags\Model\TagsModel;
+use Tags\Model\TagsTable;
+use Tags\Form\TagsForm;
 
 class IndexController extends AbstractActionController
 {
-	protected $commentsTable = null;
+	protected $tagsTable = null;
 
 	public function indexAction()
     {
-    	$form = new CommentsForm();
+    	$form = new TagsForm();
 		$request = $this->getRequest();
         if ($request->isPost()) {
         	
-        	$comments = new CommentsModel();
-				// \Zend\Debug\Debug::dump($comments); die;
-			$form->setInputFilter($comments->getInputFilter());    
+        	$tags = new TagsModel();
+			$form->setInputFilter($tags->getInputFilter());    
 			$form->setData($request->getPost());
 			 if ($form->isValid()) {			 
 				$data = $form->getData();
-				$comments->exchangeArray($data);
-				$this->getCommentsTable()->saveComment($comments);			
-				return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'index'));					
+				$tags->exchangeArray($data);
+				$this->getTagsTable()->saveTag($tags);			
+				return $this->redirect()->toRoute('tags/default', array('controller'=>'Index', 'action'=>'index'));					
+				// \Zend\Debug\Debug::dump("eddd"); die;
 			}			 
 		}
 		return new ViewModel(array('form' => $form));   
@@ -45,12 +42,8 @@ class IndexController extends AbstractActionController
     {
 		$id = $this->params()->fromRoute('id');
 		if (!$id) return $this->redirect()->toRoute('comments/default', array('controller' => 'Index', 'action' => 'index'));
-		$form = new CommentsForm();
+		$form = new TagsForm();
 		$request = $this->getRequest();
-
-
-
-
         if ($request->isPost()) {
 			$form->setInputFilter(new UserFilter());
 			$form->setData($request->getPost());
@@ -73,19 +66,18 @@ class IndexController extends AbstractActionController
     {
 		$id = $this->params()->fromRoute('id');
 		if ($id) {
-			$this->getCommentsTable()->delete(array('usr_id' => $id));
+			$this->getTagsTable()->delete(array('usr_id' => $id));
 		}
 		
 		return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));											
-	}
-	
+	}	
 
-	public function getCommentsTable()
+	public function getTagsTable()
     {
-        if (!$this->getCommentsTable) {
+        if (!$this->tagsTable) {
             $sm = $this->getServiceLocator();
-            $this->getCommentsTable = $sm->get('Comments\Model\CommentsTable');
+            $this->tagsTable = $sm->get('Tags\Model\TagsTable');
         }
-        return $this->getCommentsTable;
+        return $this->tagsTable;
     } 		
 }
