@@ -9,6 +9,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Comments\Model\CommentsModel;
 use Comments\Model\CommentsTable;
+use Zend\Db\TableGateway\TableGateway;
 
 use Comments\Form\CommentsForm;
 
@@ -18,23 +19,31 @@ class IndexController extends AbstractActionController
 
 	public function indexAction()
     {
+		// return new ViewModel(array('rowset' => $this->getSelectCommentsTable()->select())); // pr afficher les data 
+				// \Zend\Debug\Debug::dump($this->getCommentsTable()->fetchAll()); die;
     	$form = new CommentsForm();
 		$request = $this->getRequest();
         if ($request->isPost()) {
         	
         	$comments = new CommentsModel();
-				// \Zend\Debug\Debug::dump($comments); die;
 			$form->setInputFilter($comments->getInputFilter());    
 			$form->setData($request->getPost());
 			 if ($form->isValid()) {			 
 				$data = $form->getData();
 				$comments->exchangeArray($data);
 				$this->getCommentsTable()->saveComment($comments);			
-				return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'index'));					
+				return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'index'));
+
 			}			 
 		}
 		return new ViewModel(array('form' => $form));   
 	}
+
+	// public function indexAction() 
+ //    { 
+	// 	// array('rowset' => $this->getCommentsTable()->select());					
+	// }
+	
 
 	public function addSuccessAction()
 	{
@@ -47,9 +56,6 @@ class IndexController extends AbstractActionController
 		if (!$id) return $this->redirect()->toRoute('comments/default', array('controller' => 'Index', 'action' => 'index'));
 		$form = new CommentsForm();
 		$request = $this->getRequest();
-
-
-
 
         if ($request->isPost()) {
 			$form->setInputFilter(new UserFilter());
@@ -77,15 +83,26 @@ class IndexController extends AbstractActionController
 		}
 		
 		return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));											
-	}
-	
+	}	
 
-	public function getCommentsTable()
+	public function getSelectCommentsTable()// pr l affichages des donnes 
+    {        
+    	if (!$this->commentsTable) {
+			$this->commentsTable = new TableGateway(
+				'comments', 
+				$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+			);
+		}
+		return $this->commentsTable;	
+    } 	
+
+    public function getCommentsTable()
     {
-        if (!$this->getCommentsTable) {
+        if (!$this->commentsTable) {
             $sm = $this->getServiceLocator();
-            $this->getCommentsTable = $sm->get('Comments\Model\CommentsTable');
+            $this->commentsTable = $sm->get('Comments\Model\CommentsTable');
         }
-        return $this->getCommentsTable;
-    } 		
+        return $this->commentsTable;
+    }
 }

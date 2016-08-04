@@ -9,6 +9,8 @@ use Tags\Model\TagsModel;
 use Tags\Model\TagsTable;
 use Tags\Form\TagsForm;
 
+use Zend\Db\TableGateway\TableGateway;
+
 class IndexController extends AbstractActionController
 {
 	protected $tagsTable = null;
@@ -72,12 +74,24 @@ class IndexController extends AbstractActionController
 		return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));											
 	}	
 
-	public function getTagsTable()
+	public function getSelectTagsTable() // pr afficher les donnees depuis la bdd 
+    {
+        if (!$this->tagsTable) {
+			$this->tagsTable = new TableGateway(
+				'tags', 
+				$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+			);
+		}
+		return $this->tagsTable;    
+    } 		
+
+    public function getTagsTable()
     {
         if (!$this->tagsTable) {
             $sm = $this->getServiceLocator();
             $this->tagsTable = $sm->get('Tags\Model\TagsTable');
         }
         return $this->tagsTable;
-    } 		
+    }
 }
