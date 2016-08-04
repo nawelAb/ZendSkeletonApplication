@@ -1,23 +1,22 @@
+
+<h1>index liste des commentaires</h1>
+<a href="<?php echo $this->url('tags/default', array('controller' => 'Index', 
+		'action' => 'add'));?>"><?php echo $this->translate('Ajouter un tag'); ?></a>
+<table>
+<tr>
+	<th>id</th>
+	<th>value</th>
+</tr>
 <?php
-
-$form = $this->form;
-// $form->setAttribute('action',
-//                     $this->url('test/default', //your route name ...
-//                                array('controller'=>'Profile', 'action' => 'add'))); 
-
-$form->setAttribute('action', $this->url('tags/default', array('controller' => 'Index', 'action' => 'index')));
-   // \Zend\Debug\Debug::dump(''); die; 
-$form->prepare();
-
-echo $this->form()->openTag($form);
-
-echo $this->formFileSessionProgress();
-
-
-echo $this->formRow($form->get('value'))."<br></br>";
-
-
-echo $this->formSubmit($form->get('submit'))."<br></br>";
-echo $this->form()->closeTag();
+	foreach ($rowset as $row) {
 ?>
-
+		<tr>
+			<td><?php  echo $row['id']; ?></td>
+			<td><?php  echo $row['value']; ?></td>
+		</tr>
+			
+<?php
+	}
+?>
+</table> 
+ 

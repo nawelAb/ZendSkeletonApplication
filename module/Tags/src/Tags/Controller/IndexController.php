@@ -15,7 +15,7 @@ class IndexController extends AbstractActionController
 {
 	protected $tagsTable = null;
 
-	public function indexAction()
+	public function addAction()
     {
     	$form = new TagsForm();
 		$request = $this->getRequest();
@@ -33,6 +33,13 @@ class IndexController extends AbstractActionController
 		}
 		return new ViewModel(array('form' => $form));   
 	}
+
+	public function indexAction() 
+    { 
+		return new ViewModel(array('rowset' => $this->getSelectTagsTable()->select())); // pr afficher les data 
+		// array('rowset' => $this->getCommentsTable()->select());					
+	}
+	
 
 	public function addSuccessAction()
 	{
