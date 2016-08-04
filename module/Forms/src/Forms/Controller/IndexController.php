@@ -53,7 +53,7 @@ class IndexController extends AbstractActionController
 
                         $data = $form->getData();
                         // $data = $this->prepareData($data);
-                        $forms->exchangeArray($data);  \Zend\Debug\Debug::dump( $this->getFormsTable());die;
+                        $forms->exchangeArray($data);  
                         ////////////////ajout de la sauvegarde dans la bdd/////////
                         $this->getFormsTable()->saveForm($forms);                    
 

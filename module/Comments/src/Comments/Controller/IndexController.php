@@ -17,9 +17,8 @@ class IndexController extends AbstractActionController
 {
 	protected $commentsTable = null;
 
-	public function indexAction()
+	public function addAction()
     {
-		// return new ViewModel(array('rowset' => $this->getSelectCommentsTable()->select())); // pr afficher les data 
 				// \Zend\Debug\Debug::dump($this->getCommentsTable()->fetchAll()); die;
     	$form = new CommentsForm();
 		$request = $this->getRequest();
@@ -32,17 +31,18 @@ class IndexController extends AbstractActionController
 				$data = $form->getData();
 				$comments->exchangeArray($data);
 				$this->getCommentsTable()->saveComment($comments);			
-				return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'index'));
+				return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'add'));
 
 			}			 
 		}
 		return new ViewModel(array('form' => $form));   
 	}
 
-	// public function indexAction() 
- //    { 
-	// 	// array('rowset' => $this->getCommentsTable()->select());					
-	// }
+	public function indexAction() 
+    { 
+		return new ViewModel(array('rowset' => $this->getSelectCommentsTable()->select())); // pr afficher les data 
+		// array('rowset' => $this->getCommentsTable()->select());					
+	}
 	
 
 	public function addSuccessAction()

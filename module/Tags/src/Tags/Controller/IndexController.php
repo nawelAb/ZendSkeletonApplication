@@ -19,8 +19,7 @@ class IndexController extends AbstractActionController
     {
     	$form = new TagsForm();
 		$request = $this->getRequest();
-        if ($request->isPost()) {
-        	
+        if ($request->isPost()) {        	
         	$tags = new TagsModel();
 			$form->setInputFilter($tags->getInputFilter());    
 			$form->setData($request->getPost());
