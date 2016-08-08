@@ -3,24 +3,19 @@ return array(
 	'controllers' => array(
         'invokables' => array(
         	'Comments\Controller\Index' => 'Comments\Controller\IndexController',
-            'Comments\Controller\Comments' => 'Comments\Controller\CommentsController',
-             // 'Forms\Controller\CommentsController' => 'Forms\Controller\CommentsControllerController',	
+            'Comments\Controller\Comments' => 'Comments\Controller\CommentsController',            	
         ),
 	),
     'router' => array(
         'routes' => array(
-			'comments' => array(
-			// 'forms' => array(
+			'comments' => array(			
 				'type'    => 'Literal',
 				'options' => array(
-					'route'    => '/comments',
-					// 'route'    => '/forms',
+					'route'    => '/comments',					
 					'defaults' => array(
-						'__NAMESPACE__' => 'Comments\Controller',
-						// '__NAMESPACE__' => 'Forms\Controller',
+						'__NAMESPACE__' => 'Comments\Controller',						
 						'controller'    => 'Index',
-						'action'        => 'index',
-						// 'action'        => 'uploadForm',
+						'action'        => 'index',						
 					),
 				),
 				'may_terminate' => true,
@@ -47,8 +42,7 @@ return array(
            'layout/Comments'           => __DIR__ . '/../view/layout/index.phtml',
        ),
         'template_path_stack' => array(
-            'comments' => __DIR__ . '/../view'
-            // 'forms' => __DIR__ . '/../view'
+            'comments' => __DIR__ . '/../view'          
         ),
 		
 		'display_exceptions' => true,

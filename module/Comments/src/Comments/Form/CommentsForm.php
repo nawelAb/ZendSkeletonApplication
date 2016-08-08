@@ -1,7 +1,5 @@
 <?php 
 namespace Comments\Form;
-// filename : module/Comments/src/Comments/Form/CommentsForm.php
-
 use Zend\Form\Form;
 
 class CommentsForm extends Form

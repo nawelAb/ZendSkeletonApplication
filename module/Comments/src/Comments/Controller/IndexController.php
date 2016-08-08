@@ -40,10 +40,8 @@ class IndexController extends AbstractActionController
 
 	public function indexAction() 
     { 
-		return new ViewModel(array('rowset' => $this->getSelectCommentsTable()->select())); // pr afficher les data 
-		// array('rowset' => $this->getCommentsTable()->select());					
-	}
-	
+		return new ViewModel(array('rowset' => $this->getSelectCommentsTable()->select())); // pr afficher les data 					
+	}	
 
 	public function addSuccessAction()
 	{
