@@ -1,5 +1,5 @@
 <?php 
-// filename : module/Forms/src/Forms/Controller/IndexController.php
+
 namespace Forms\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -7,6 +7,7 @@ use Forms\Model\FormsModel;
 
 use Forms\Form\FormsForm;
 use Zend\Validator\File\Size; 
+use Zend\Http\PhpEnvironment\Request;
 
 class IndexController extends AbstractActionController
 {
@@ -19,23 +20,32 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
             
             $forms = new FormsModel();
-            $form->setInputFilter($forms->getInputFilter());
-            
+            $form->setInputFilter($forms->getInputFilter());       
+          
             $nonFile = $request->getPost()->toArray();
             $File    = $this->params()->fromFiles('fileUpload');
             $data = array_merge(
                  $nonFile,  
                  array('fileUpload'=> $File['name']) 
              );
-         
+            
             $form->setData($data);
 
             if ($form->isValid()) {
                 
-                $size = new Size(array('min'=>20000)); //min filesize
-                
+                $size = new Size(array('min'=>20000)); //min filesize                
                 $adapter = new \Zend\File\Transfer\Adapter\Http();               
                 $adapter->setValidators(array($size), $File['name']);
+
+                // renomer le fichier en ajoutant un rand
+                $destination = 'C:\xampp\htdocs\kwaret\data\formsDoc';
+                $ext = pathinfo($File['name'], PATHINFO_EXTENSION);
+
+                $newName = md5(rand(). $File['name']) . '.' . $ext;
+                $adapter->addFilter('File\Rename', array(
+                     'target' => $destination . '/' . $File['name'].$newName,
+                ));
+        // \Zend\Debug\Debug::dump($newName); die;                 
                 
                 if (!$adapter->isValid()){
                     $dataError = $adapter->getMessages();
@@ -46,19 +56,16 @@ class IndexController extends AbstractActionController
                     } //set formElementErrors
                     $form->setMessages(array('fileUpload'=>$error ));
                 } else {
-        // \Zend\Debug\Debug::dump(); die; 
         // renomer avant de sauvegarder 
-                    $adapter->setDestination('C:\xampp\htdocs\kwaret\data\formsDoc');
-                    if ($adapter->receive($File['name'])) {
+                    // $adapter->setDestination($destination);
+                    if ($adapter->receive($File['name'])) { 
 
                         $data = $form->getData();
                         // $data = $this->prepareData($data);
-                        $forms->exchangeArray($data);  
-                        ////////////////ajout de la sauvegarde dans la bdd/////////
+                        $forms->exchangeArray($data);                        
                         $this->getFormsTable()->saveForm($forms);                    
 
-                        echo 'forms success ';//.$forms->FormName.'upload'.$forms->fileUpload;
-                       
+                        echo 'forms success ';                       
                     }
                 }  
             }
@@ -73,12 +80,5 @@ class IndexController extends AbstractActionController
             $this->formsTable = $sm->get('Forms\Model\FormsTable');
         }
         return $this->formsTable;
-    }
-    
-    public function uploadProgressAction()
-    {
-        $id = $this->params()->fromQuery('id', null);
-        $progress = new \Zend\ProgressBar\Upload\SessionProgress();
-        return new \Zend\View\Model\JsonModel($progress->getProgress($id));
     }
 }

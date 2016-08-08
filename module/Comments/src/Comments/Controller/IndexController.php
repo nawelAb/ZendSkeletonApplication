@@ -27,7 +27,7 @@ class IndexController extends AbstractActionController
         	$comments = new CommentsModel();
 			$form->setInputFilter($comments->getInputFilter());    
 			$form->setData($request->getPost());
-			 if ($form->isValid()) {			 
+			if ($form->isValid()) {			 
 				$data = $form->getData();
 				$comments->exchangeArray($data);
 				$this->getCommentsTable()->saveComment($comments);			
