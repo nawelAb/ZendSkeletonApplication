@@ -75,8 +75,6 @@ class FormsModel implements InputFilterAwareInterface
                     )
                 ))
             );
-
-
             
             $this->inputFilter = $inputFilter;
         }        

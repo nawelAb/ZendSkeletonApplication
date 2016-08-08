@@ -9,9 +9,18 @@ use Forms\Form\FormsForm;
 use Zend\Validator\File\Size; 
 use Zend\Http\PhpEnvironment\Request;
 
+use Zend\Db\TableGateway\TableGateway;
+use Zend\View\Model\ViewModel;
+
 class IndexController extends AbstractActionController
 {
     protected $formsTable;
+
+    public function indexAction() 
+    { 
+        return new ViewModel(array('rowset' => $this->getSelectFormsTable()->select())); // pr afficher les data                     
+    }   
+
     public function uploadFormAction() // UploadForm
     {
         $form = new FormsForm();
@@ -81,4 +90,16 @@ class IndexController extends AbstractActionController
         }
         return $this->formsTable;
     }
+
+    public function getSelectFormsTable()// pr l affichages des donnes 
+    {        
+        if (!$this->formsTable) {
+            $this->formsTable = new TableGateway(
+                'forms', 
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+            );
+        }
+        return $this->formsTable;    
+    }   
 }

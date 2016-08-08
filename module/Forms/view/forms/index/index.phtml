@@ -1,0 +1,21 @@
+
+<h1>index liste des commentaires</h1>
+<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
+		'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un formulaire'); ?></a>
+<table>
+<tr>
+	<th>id</th>
+	<th>name</th>
+</tr>
+<?php
+	foreach ($rowset as $row) {
+?>
+		<tr>
+			<td><?php  echo $row['id']; ?></td>
+			<td><?php  echo $row['form_name']; ?></td>
+		</tr>			
+<?php
+	}
+?>
+</table> 
+ 
