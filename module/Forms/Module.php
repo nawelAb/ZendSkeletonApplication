@@ -4,6 +4,9 @@ namespace Forms;
 use Forms\Model\FormsModel;
 use Forms\Model\FormsTable;
 
+use Forms\Model\CategoryModel;
+use Forms\Model\CategoryTable;
+
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -44,7 +47,20 @@ class Module
                     // var_dump("expression");die;
                     $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormsModel()); // Notice what is set here
                     return new TableGateway('forms', $dbAdapter, null, $resultSetPrototype);
-                },                
+                },    
+
+                'Forms\Model\CategoryTable' =>  function($sm) {
+                    $tableGateway = $sm->get('CategoryTableGateway');
+                    $table = new CategoryTable($tableGateway);
+                    return $table;
+                },
+                'CategoryTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    // var_dump("expression");die;
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CategoryModel()); // Notice what is set here
+                    return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
+                },               
             ),
         );
     }   

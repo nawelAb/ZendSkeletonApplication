@@ -30,7 +30,17 @@ class FormsForm extends Form
             'options' => array(
                 'label' => 'File Upload',
             ),
-        ));         
+        )); 
+
+        $this->add(array(
+            'name' => 'category',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'category Name',
+            ),
+        ));        
         
         $this->add(array(
             'name' => 'submit',

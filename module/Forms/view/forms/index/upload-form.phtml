@@ -8,10 +8,8 @@ $form->prepare();
 
 echo $this->form()->openTag($form);
 
-echo $this->formFileSessionProgress();
-
-
 echo $this->formRow($form->get('form_name'))."<br></br>";
+echo $this->formRow($form->get('category'))."</br>";
 
 echo $this->formRow($form->get('fileUpload'))."</br>";
 

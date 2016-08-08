@@ -15,10 +15,17 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
     protected $formsTable;
+    protected $categoryTable;
 
     public function indexAction() 
-    { 
-        return new ViewModel(array('rowset' => $this->getSelectFormsTable()->select())); // pr afficher les data                     
+    {   
+        $formulaire = $this->getSelectFormsTable()->select();
+        // $cat = $this->getSelectCategoryTable();
+        return new ViewModel(array('rowset' => $formulaire)); // pr afficher les data    
+                                // return array(
+        //     'iduser'    => $id,
+        //     'user' => $this->getUserTable()->getUser($id)
+        // );                  
     }   
 
     public function uploadFormAction() // UploadForm
@@ -81,6 +88,10 @@ class IndexController extends AbstractActionController
         }         
         return array('form' => $form);
     }
+    public function getCategoriesAction()
+    {
+        return new ViewModel(array('rowset' => $this->getSelectCategoryTable()->select())); 
+    }
 
     public function getFormsTable()
     {
@@ -101,5 +112,17 @@ class IndexController extends AbstractActionController
             );
         }
         return $this->formsTable;    
+    }   
+
+    public function getSelectCategoryTable()// pr l affichages des donnes 
+    {        
+        if (!$this->categoryTable) {
+            $this->categoryTable = new TableGateway(
+                'category', 
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+            );
+        }
+        return $this->categoryTable;    
     }   
 }
