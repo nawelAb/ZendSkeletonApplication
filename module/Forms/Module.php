@@ -44,7 +44,6 @@ class Module
                 'FormsTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    // var_dump("expression");die;
                     $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormsModel()); // Notice what is set here
                     return new TableGateway('forms', $dbAdapter, null, $resultSetPrototype);
                 },    
@@ -57,7 +56,7 @@ class Module
                 'CategoryTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    // var_dump("expression");die;
+                    var_dump("expression");die;
                     $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CategoryModel()); // Notice what is set here
                     return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
                 },               

@@ -20,8 +20,9 @@ class IndexController extends AbstractActionController
     public function indexAction() 
     {   
         $formulaire = $this->getSelectFormsTable()->select();
-        // $cat = $this->getSelectCategoryTable();
-        return new ViewModel(array('rowset' => $formulaire)); // pr afficher les data    
+        $catigories = $this->getSelectCategoryTable()->select();
+              // \Zend\Debug\Debug::dump($catigories); die; 
+        return new ViewModel(array('rowset' => $formulaire, 'categories' => $catigories)); // pr afficher les data    
                                 // return array(
         //     'iduser'    => $id,
         //     'user' => $this->getUserTable()->getUser($id)
@@ -54,14 +55,14 @@ class IndexController extends AbstractActionController
                 $adapter->setValidators(array($size), $File['name']);
 
                 // renomer le fichier en ajoutant un rand
-                $destination = 'C:\xampp\htdocs\kwaret\data\formsDoc';
+                $destination = '.\data\UPLOADS';
                 $ext = pathinfo($File['name'], PATHINFO_EXTENSION);
 
                 $newName = md5(rand(). $File['name']) . '.' . $ext;
                 $adapter->addFilter('File\Rename', array(
                      'target' => $destination . '/' . $File['name'].$newName,
                 ));
-        // \Zend\Debug\Debug::dump($newName); die;                 
+                  
                 
                 if (!$adapter->isValid()){
                     $dataError = $adapter->getMessages();

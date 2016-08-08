@@ -20,7 +20,7 @@ class CategoryTable
         return $resultSet;
     }
 
-    public function getForm($id)
+    public function getCatgegory($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('id' => $id));
@@ -31,29 +31,20 @@ class CategoryTable
         return $row;
     }
 
-    public function saveForm(FormsModel $form)
+    public function saveCategory(FormsModel $form)
     {
         // pour Zend\Db\TableGateway\TableGateway les donnes doivent etre dans un tableau non un objet 
         $data = array(           
-            'id'   => $form->id,
-            'form_name' => $form->form_name,                    
+            'id'   => $category->id,
+            'value' => $category->value,                    
         );
-        // a remplacer par  getArrayCopy() defini dans Auth
-        // $data = $form->getArrayCopy();
-
-        $id = (int)$form->id;
+        $id = (int)$category->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
-        } else {
-            if ($this->getUser($id)) {
-                $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('Form id does not exist');
-            }
-        }
+        }         
     }
     
-    public function deleteForm($id)
+    public function deleteCategory($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }    

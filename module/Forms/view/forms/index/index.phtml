@@ -13,6 +13,19 @@
 		<tr>
 			<td><?php  echo $row['id']; ?></td>
 			<td><?php  echo $row['form_name']; ?></td>
+			<td><?php  //echo $row['value']; ?></td>
+		</tr>			
+<?php
+	}
+?>
+
+<?php
+	foreach ($categories as $categorie) {
+?>
+		<tr>
+			<td><?php  echo $categorie['id']; ?></td>
+			<td><?php  echo $categorie['value']; ?></td>
+			<td><?php // echo $row['form_name']; ?></td>
 		</tr>			
 <?php
 	}
