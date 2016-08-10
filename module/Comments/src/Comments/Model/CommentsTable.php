@@ -45,7 +45,7 @@ class CommentsTable
             if ($this->getUser($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
-                throw new \Exception('Form id does not exist');
+                throw new \Exception('comment id does not exist');
             }
         }
     }

@@ -7,6 +7,9 @@ use Forms\Model\FormsTable;
 use Forms\Model\CategoryModel;
 use Forms\Model\CategoryTable;
 
+use Forms\Model\FormCommentModel;
+use Forms\Model\FormCommentTable;
+
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -56,10 +59,23 @@ class Module
                 'CategoryTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    var_dump("expression");die;
+                    // var_dump("expression");die;
                     $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CategoryModel()); // Notice what is set here
                     return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
-                },               
+                },    
+
+                'Forms\Model\FormCommentTable' =>  function($sm) {
+                    $tableGateway = $sm->get('FormCommentTableGateway');
+                    $table = new FormCommentTable($tableGateway);
+                    return $table;
+                },
+                'FormCommentTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    // var_dump("expression");die;
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormCommentModel()); // Notice what is set here
+                    return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
+                },             
             ),
         );
     }   

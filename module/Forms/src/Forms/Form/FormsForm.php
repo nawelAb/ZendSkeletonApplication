@@ -42,6 +42,16 @@ class FormsForm extends Form
             ),
         ));        
         
+         $this->add(array(
+            'name' => 'value',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            'options' => array(
+                'label' => 'Value',
+            ),
+        ));      
+        
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

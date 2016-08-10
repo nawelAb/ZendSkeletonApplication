@@ -15,6 +15,7 @@ class FormsModel implements InputFilterAwareInterface
     public $fileUpload;
     public $id;
     public $form_name;
+    public $category;
     protected $inputFilter;
     
     public function exchangeArray($data)
@@ -22,6 +23,7 @@ class FormsModel implements InputFilterAwareInterface
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
         $this->form_name = (isset($data['form_name'])) ? $data['form_name'] : null;
         $this->fileUpload  = (isset($data['fileUpload']))  ? $data['fileUpload'] : null;  
+        $this->category  = (isset($data['category']))  ? $data['category'] : null;  
 
     } 
     
@@ -72,6 +74,15 @@ class FormsModel implements InputFilterAwareInterface
                     // 
                         
                         
+                    )
+                ))
+            );
+
+            $inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'category',
+                    'required' => true,
+                    'validators' => array(
                     )
                 ))
             );

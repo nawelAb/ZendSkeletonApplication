@@ -36,20 +36,15 @@ class FormsTable
         // pour Zend\Db\TableGateway\TableGateway les donnes doivent etre dans un tableau non un objet 
         $data = array(           
             'id'   => $form->id,
-            'form_name' => $form->form_name,                    
+            'form_name' => $form->form_name,
+            'category_id' => $form->category,                   
         );
         // a remplacer par  getArrayCopy() defini dans Auth
         // $data = $form->getArrayCopy();
 
         $id = (int)$form->id;
         if ($id == 0) {
-            $this->tableGateway->insert($data);
-        } else {
-            if ($this->getUser($id)) {
-                $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('Form id does not exist');
-            }
+            $this->tableGateway->insert($data);          
         }
     }
     
