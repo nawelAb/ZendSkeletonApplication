@@ -36,6 +36,13 @@ class IndexController extends AbstractActionController
         //     'user' => $this->getUserTable()->getUser($id)
         // );                  
     }   
+
+    public function listFormAction()
+    {
+       $list = $this->getSelectFormsTable()->select();
+       $categories = $this->getSelectCategoryTable()->select();
+       return new ViewModel(array('rowset' => $list, 'categories' => $categories)); 
+    }
 // //////////////////////////////////////////////////////////////////:
     
     public function detailFormAction()
