@@ -1,0 +1,48 @@
+<h1>index liste des formulaires</h1>
+<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
+		'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un formulaire'); ?></a>
+<br></br>
+<table>
+<tr>
+	<th>id</th>
+	<th>name</th>
+	<th>comment</th>
+</tr>
+<?php
+	foreach ($unformulaire as $formulaire) {
+?>
+	<tr>
+		<td><?php  echo $formulaire['id']; ?></td>		
+		<td><?php  echo $formulaire['form_name']; ?></td>
+	</tr>
+</table>	
+<?php
+	}
+?>
+
+<?php
+	foreach ($comment as $a) {
+?>
+	<tr>
+		<td><?php  echo $a['id']; ?></td>		
+		<td><?php  echo $a['value']; ?></td>
+	</tr>
+</table>	
+<?php
+	}
+?>
+_________________________________________________________________________
+<h1>Comments add</h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('comments/default', array('controller' => 'Index', 'action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+ ?>
+
+
+
