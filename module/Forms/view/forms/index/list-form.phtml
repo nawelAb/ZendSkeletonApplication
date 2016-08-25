@@ -1,15 +1,28 @@
+<h1> Liste des fomulaires </h1>
+<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
+		'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un nouveau formulaire'); ?></a>
+
+
 <table>
 <tr>
 	<th>id</th>
-	<th>name</th>
+	<th>Nom formulaire</th>
 	<th>formulaire</th>
 </tr>
 <?php
 	foreach ($rowset as $row) {
 ?>
-	<tr>
-		<td><?php  echo $row['id']; ?></td>		
-		<td><?php  echo $row['form_name']; ?></td>
+	<tr>		
+		<td><a href="<?php echo $this->url('forms/default', 
+		       array('controller' => 'index', 'action' => 'detail-form', 'id' => $row['id'])); ?>"><?php  echo $row['form_name'];?>			
+		   </a>
+		</td>
+
+		<td><a href="<?php echo $this->url('forms/default',
+			array('controller' => 'index', 'action' => 'delete', 'id' => $row['id']));?>"onclick="return confirm('Do you rely want to delete the record;')">Delete
+		   </a>
+		</td> 
+		</br>
 	</tr>
 </table>	
 <?php
@@ -17,12 +30,14 @@
 ?>
 <br>
 </br>
+<h1> Liste des categories</h1>
 <?php
 	foreach ($categories as $a) {
 ?>
 	<tr>
 		<td><?php  echo $a['id']; ?></td>		
 		<td><?php  echo $a['value']; ?></td>
+		</br>
 	</tr>
 </table>	
 <?php

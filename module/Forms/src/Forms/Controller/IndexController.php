@@ -3,20 +3,32 @@
 namespace Forms\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Forms\Model\FormsModel;
 
-use Forms\Form\FormsForm;
 use Zend\Validator\File\Size; 
 use Zend\Http\PhpEnvironment\Request;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\View\Model\ViewModel;
 
-use Forms\Model\FormsTable;
+use Forms\Form\FormsForm;
 
-use Comments\Form\CommentsForm;
-use Comments\Model\CommentsModel;
-use Comments\Model\CommentsTable;
+use Forms\Model\FormsTable;
+use Forms\Model\FormsModel;
+
+use Forms\Form\CommentsForm;
+use Forms\Model\CommentsModel;
+use Forms\Model\CommentsTable;
+
+use Forms\Model\FormCommentModel;
+
+
+// use Comments\Form\CommentsForm;
+// use Comments\Model\CommentsModel;
+// use Comments\Model\CommentsTable;*
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Select;
+
+use Zend\Db\Adapter\Adapter;
 
 class IndexController extends AbstractActionController
 {
@@ -35,66 +47,12 @@ class IndexController extends AbstractActionController
         //     'iduser'    => $id,
         //     'user' => $this->getUserTable()->getUser($id)
         // );                  
-    }   
-
-    public function listFormAction()
-    {
-       $list = $this->getSelectFormsTable()->select();
-       $categories = $this->getSelectCategoryTable()->select();
-       return new ViewModel(array('rowset' => $list, 'categories' => $categories)); 
-    }
-// //////////////////////////////////////////////////////////////////:
-    
-    public function detailFormAction()
-    {
-        $id = $this->params()->fromRoute('id');
-        // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
-        $unformulaire = $this->getSelectFormsTable()->select(array('id' => $id));
-                $comment_id = $this->getSelectCommentsTable()->select();
-
-        $form = new CommentsForm();
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            
-            $comments = new CommentsModel();
-            $form->setInputFilter($comments->getInputFilter());    
-            $form->setData($request->getPost());
-            if ($form->isValid()) {          
-                $data = $form->getData();
-          \Zend\Debug\Debug::dump($data); die;
-                $comments->exchangeArray($data);
-                $this->getCommentsTable()->saveComment($comments);          
-                // return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'add'));
-                // l id du formulairee est dans l url 
-                // il faut sauvegarder id comment et id form dans formComment
-                // recup id comment apres sauvegarde 
-                $comment_id = $this->getSelectCommentsTable()->select();
-                $ids = [$comment_id,$id];
-                $commentform = new FormCommentModel();
-                $commentform->exchangeArray($ids);
-
-            }            
-        }
-        
-        return new ViewModel(array('form'=> $form,'unformulaire' => $unformulaire, 'comment'=> $comment_id)); // pr afficher les data    
-        // \Zend\Debug\Debug::dump($formulaire) ; die;
-    }
+    } 
+////////////////////////////////////////Forms//////////////////////////////////////////////////////////  
 
 
-    public function getSelectCommentsTable()// pr l affichages des donnes 
-    {        
-        if (!$this->commentsTable) {
-            $this->commentsTable = new TableGateway(
-                'comments', 
-                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
-            );
-        }
-        return $this->commentsTable;    
-    }   
-
-
-
-    public function uploadFormAction() // UploadForm
+     // UploadForm
+    public function uploadFormAction() 
     {
         $form = new FormsForm();
         $request = $this->getRequest();    
@@ -138,7 +96,7 @@ class IndexController extends AbstractActionController
                     } //set formElementErrors
                     $form->setMessages(array('fileUpload'=>$error ));
                 } else {
-        // renomer avant de sauvegarder 
+                      // renomer avant de sauvegarder 
                     // $adapter->setDestination($destination);
                     if ($adapter->receive($File['name'])) { 
 
@@ -154,6 +112,102 @@ class IndexController extends AbstractActionController
         }         
         return array('form' => $form);
     }
+
+    // liste des formulaires 
+    public function listFormAction()
+    {
+       $list = $this->getSelectFormsTable()->select();
+       $categories = $this->getSelectCategoryTable()->select();
+        return new ViewModel(array('rowset' => $list, 'categories' => $categories)); 
+    }
+
+    // les commentaires d'un formulaire  
+    public function detailFormAction() 
+    {
+        $formId = $this->params()->fromRoute('id');
+        
+        // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
+        $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId));
+        // $comment = $this->getSelectCommentsTable()->select();
+     
+        // ajout d un commentauire 
+        $form = new CommentsForm();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+        }
+        
+        return new ViewModel(array('form'=>$form,  'unformulaire' => $unformulaire,  'form_id'=>$formId)); // pr afficher les data    
+        // \Zend\Debug\Debug::dump($formulaire) ; die;
+         
+        
+         
+    }
+   
+////////////////////////////////////////Comments//////////////////////////////////////////////////////////
+
+
+    public function addCommentAction()
+    {           
+        $form = new CommentsForm();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            
+            $comments = new CommentsModel();
+            $form->setInputFilter($comments->getInputFilter());    
+            $form->setData($request->getPost());
+            if ($form->isValid()) {          
+                $data = $form->getData();
+                $comments->exchangeArray($data);
+                            
+                $comment_id = $this->getCommentsTable()->saveComment($comments);
+                // $comment_id =$this->getCommentId();                
+                $formComment = new FormCommentModel();
+                $dataId['form_id'] = $data['form_id'];
+                $dataId['comment_id'] = $comment_id;             
+
+                $formComment->exchangeArray($dataId);
+                $this->getFormCommentTable()->saveFormComment($formComment);
+
+                // $formIdUrl = (int)$data['form_id'];
+                // $comments = $this->getFormsTable()->formsget($formIdUrl);
+                // \Zend\Debug\Debug::dump($comments) ; die;
+                // var_dump($this->getFormCommentTable()->saveFormComment($formComment)); die;
+            }
+             $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'add-comment'));
+        }
+        return new ViewModel(array('form' => $form, 'comments'=>$comments));        
+    }
+
+    public function getFormCommentTable()
+    {
+        if (!$this->formCommentTable) {
+            $sm = $this->getServiceLocator();
+            $this->formCommentTable = $sm->get('Forms\Model\FormCommentTable');
+        }
+        return $this->formCommentTable;
+    }
+
+    public function getCommentsTable()
+    {
+        if (!$this->commentsTable) {
+            $sm = $this->getServiceLocator();
+            $this->commentsTable = $sm->get('Forms\Model\CommentsTable');
+        }
+        return $this->commentsTable;
+    }
+   
+    public function getSelectCommentsTable()// pr l affichages des donnes 
+    {        
+        if (!$this->commentsTable) {
+            $this->commentsTable = new TableGateway(
+                'comments', 
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+            );
+        }
+        return $this->commentsTable;    
+    }   
+////////////////////////////////////////  Tags  //////////////////////////////////////////////////////////
     public function getCategoriesAction()
     {
         return new ViewModel(array('rowset' => $this->getSelectCategoryTable()->select())); 
@@ -168,15 +222,7 @@ class IndexController extends AbstractActionController
         return $this->formsTable;
     }
 
-    public function getFormCommentTable()
-    {
-        if (!$this->formCommentTable) {
-            $sm = $this->getServiceLocator();
-            $this->formCommentTable = $sm->get('Forms\Model\FormCommentTable');
-        }
-        return $this->formCommentTable;
-    }
-
+    
     public function getSelectFormsTable()// pr l affichages des donnes 
     {        
         if (!$this->formsTable) {

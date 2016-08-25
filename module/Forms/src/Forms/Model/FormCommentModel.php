@@ -12,14 +12,16 @@ use Zend\Validator\File\Size;
 
 class FormCommentModel implements InputFilterAwareInterface
 {   
+    public $id;
     public $comment_id;
     public $form_id;
     protected $inputFilter;
     
     public function exchangeArray($data)
     {        
-        $this->comment_id     = (isset($data['comment_id'])) ? $data['comment_id'] : null;
-        $this->form_id = (isset($data['form_id'])) ? $data['form_id'] : null;
+        $this->id               = (isset($data['id'])) ? $data['id'] : null;
+        $this->comment_id       = (isset($data['comment_id'])) ? $data['comment_id'] : null;
+        $this->form_id          = (isset($data['form_id'])) ? $data['form_id'] : null;
     } 
     
     public function setInputFilter(InputFilterInterface $inputFilter)

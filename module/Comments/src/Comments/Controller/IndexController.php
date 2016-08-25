@@ -30,10 +30,18 @@ class IndexController extends AbstractActionController
 			if ($form->isValid()) {			 
 				$data = $form->getData();
 				$comments->exchangeArray($data);
+				\Zend\Debug\Debug::dump($comments->exchangeArray($data)); die;
 				$this->getCommentsTable()->saveComment($comments);			
-				return $this->redirect()->toRoute('comments/default', array('controller'=>'Index', 'action'=>'add'));
+				return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'detail-form'));
+			}
 
-			}			 
+
+
+
+
+
+
+
 		}
 		return new ViewModel(array('form' => $form));   
 	}

@@ -1,0 +1,29 @@
+<?php
+	foreach ($comments as $formulaire) {
+?>
+	<tr>	
+		<td><?php  echo "<strong> Nom formulaire : </strong>".$formulaire['comment_id']; ?></td>		
+		<td><?php  //echo "<strong> Nom formulaire : </strong>".$form_id['form_id']; ?></td>		
+	</tr>
+</table>	
+	</br>
+<?php
+	}
+?>
+
+
+_________________________________________________________________________________________________________
+<h2>Ajouter un nouveau commentaire</h2>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'addComment')));
+$form->prepare();
+
+/*echo $this->form()->openTag($form);
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();*/
+ ?>
+
+
+

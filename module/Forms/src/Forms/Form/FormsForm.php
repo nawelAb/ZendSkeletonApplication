@@ -42,7 +42,7 @@ class FormsForm extends Form
             ),
         ));        
         
-         $this->add(array(
+        $this->add(array(
             'name' => 'value',
             'attributes' => array(
                 'type'  => 'text',
