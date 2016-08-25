@@ -18,6 +18,13 @@ class AdminController extends AbstractActionController
     { 
 		return new ViewModel(array('rowset' => $this->getUsersTable()->select()));
 	}
+
+	public function gererUserAction()
+    { 
+
+    	$users = $this->getUsersTable()->select();
+		return new ViewModel(array('rowset' => $users));
+	}
 	
 
     public function createAction()
@@ -64,7 +71,7 @@ class AdminController extends AbstractActionController
 	}
 	
 	
-    public function deleteAction()
+    public function deleteAction() //delete user
     {
 		$id = $this->params()->fromRoute('id');
 		if ($id) {
@@ -72,6 +79,11 @@ class AdminController extends AbstractActionController
 		}
 		
 		return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));											
+	}
+
+	public function deleteFormAction()
+    {
+		$this->tableGateway->delete(array('id' => $usr_id));											
 	}
 	
 	public function getUsersTable()

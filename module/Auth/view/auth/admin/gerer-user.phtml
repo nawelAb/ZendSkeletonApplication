@@ -22,54 +22,55 @@
       <a class="navbar-brand" href="#">Kwaret</a>
     </div>
     <ul class="nav navbar-nav">
-      <li ><a href="#">Home</a></li>
-      <li class="active"><a href="#">Gérer les formulaires reçus</a></li>
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Gérer les formulaires reçus</a></li>
       <li><a href="#">Gérer les comptes utilisateurs</a></li> 
     </ul>
   </div>
 </nav>
  </div>
 </nav>
- 	<ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right">
       <li><p>Bienvenue @admin</p></li>
       
     </ul>
 
-				<div class="row" >
-				<br>
-				</br>
-				</div>
+        <div class="row" >
+        <br>
+        </br>
+        </div>
 
 
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>#</th>
-      <th>Nom formulaire</th>
-      <th>Date de publication</th>
+      <th>Email</th>
+      <th>Date inscription</th>
       <th>Traitement/Validation</th>
      
     </tr>
   </thead>
   <tbody>
+
     <tr>
       <th scope="row">1</th>
-      <td>Formulaire 1</td>
+      <td>@email 1</td>
       <td>@date</td>
-      <td>@validé</td>
-      
+      <td>Validé</td>
+
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Formulaire 2</td>
+      <td>@email 2</td>
       <td>@date</td>
-      <td>@en cours</td>
+      <td>En cours</td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>Formulaire 3</td>
+      <td>@email 3</td>
       <td>@date</td>
-      <td>@en cours</td>
+      <td>En cours</td>
     </tr>
  
  
@@ -90,25 +91,34 @@
 
 
 
+
+
+
+
+
+
 <!-- <h1>Index</h1>
 <a href="<?php echo $this->url('auth/default', array('controller' => 'admin', 'action' => 'create')); ?>">Create</a>
 <table>
 <tr>
-	<th>usr_id</th>
-	<th>usr_email</th>
+  <th>usr_id</th>
+  <th>usr_email</th>
 </tr>
 <?php
-	foreach ($rowset as $row) {
+  foreach ($rowset as $row) {
 ?>
-		<tr>
-			<td><?php  echo $row['usr_id']; ?></td>
-			<td><?php  echo $row['usr_email']; ?></td>
-			<td><a href="<?php echo $this->url('auth/default', 
-				array('controller' => 'admin', 'action' => 'update', 'id' => $row['usr_id'])); ?>">Edit</a></td>
-			<td><a href="<?php echo $this->url('auth/default',
-				array('controller' => 'admin', 'action' => 'delete', 'id' => $row['usr_id']));?>" onclick="return confirm('Do you rely want to delete the record;')">Delete</a></td>
-		</tr>
+    <tr>
+      <td><?php  echo $row['usr_id']; ?></td>
+      <td><?php  echo $row['usr_email']; ?></td>
+      <td><a href="<?php echo $this->url('auth/default', 
+        array('controller' => 'admin', 'action' => 'update', 'id' => $row['usr_id'])); ?>">Edit</a></td>
+      <td><a href="<?php echo $this->url('auth/default',
+        array('controller' => 'admin', 'action' => 'delete', 'id' => $row['usr_id']));?>" onclick="return confirm('Do you rely want to delete the record;')">Delete</a></td>
+    </tr>
 <?php
-	}
+  }
 ?>
-</table> -->
+</table>  -->
+
+
+
