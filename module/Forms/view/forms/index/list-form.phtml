@@ -57,122 +57,41 @@
     <h1><center> Les formulaires administratifs </center> </h1>
 
 
-      <div class="row">
-      
-        <div class="col-md-4"> 
-          <div class="thumbnail">
-              <img  src="http://196.203.67.172:8443/concours2016/files/form2-150x150.png" class="maclasse">
-              <div class="caption">
-              <center>
-                <h3>Formulaire 1 </h3>
-                  <p><a href="#" class="btn btn-primary" role="button">Afficher</a> </p>
-              </center>
-              </div>
-          </div>
-
-        </div>
-        <div class="col-md-4">
-        <div class="thumbnail">
-              <img src="http://entraide-sociale.com/wp-content/uploads/2013/06/faire-son-dossier-rsa11.png" alt="">
-              <div class="caption">
-              <center>
-                <h3>Formulaire 2 </h3>
-                  <p><a href="#" class="btn btn-primary" role="button">Afficher</a> </p>
-                  </center>
-              </div>
-
-         </div>
-         </div>
-        <div class="col-md-4">
-        <div class="thumbnail">
-              <img src="http://entraide-sociale.com/wp-content/uploads/2013/06/faire-son-dossier-rsa11.png" alt="">
-              <div class="caption">
-              <center>
-                <h3>Formulaire 3 </h3>
-                  <p><a href="#" class="btn btn-primary" role="button">Afficher</a> </p>
-              </center>
-              </div>
-
-        </div>
-      </div>
-      <div class="col-md-4"> 
-          <div class="thumbnail">
-              <img src="http://entraide-sociale.com/wp-content/uploads/2013/06/faire-son-dossier-rsa11.png" class="img-responsive">
-              <div class="caption">
-              <center>
-                <h3>Formulaire 4 </h3>
-                  <p><a href="#" class="btn btn-primary" role="button">Afficher</a> </p>
-                  </center>
-              </div>
-          </div>
-
-        </div>
-        <div class="col-md-4"> 
-          <div class="thumbnail">
-              <img src="http://entraide-sociale.com/wp-content/uploads/2013/06/faire-son-dossier-rsa11.png" class="img-responsive">
-              <div class="caption">
-              <center>
-                <h3>Formulaire 5 </h3>
-                  <p><a href="#" class="btn btn-primary" role="button">Afficher</a> </p>
-              </center>
-              </div>
-          </div>
-
-        </div>
-        <div class="col-md-4"> 
-          <div class="thumbnail">
-              <img src="http://entraide-sociale.com/wp-content/uploads/2013/06/faire-son-dossier-rsa11.png" class="maclasse">
-              <div class="caption">
-              <center>
-                <h3>Formulaire 6 </h3>
-                  <p><a href="#" class="btn btn-primary" role="button">Afficher</a> </p>
-              </center>
-              </div>
-          </div>
-
-        </div>
-
-      <nav aria-label="...">
-  <ul class="pager">
-    <li><a href="#">Previous</a></li>
-    <li><a href="#">Next</a></li>
-  </ul>
-</nav>
-
-  </div>
 
 
-
-<h1> Liste des fomulaires </h1>
-<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
-    'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un nouveau formulaire'); ?></a>
-
-
-<table>
-<tr>
-  <th>id</th>
-  <th>Nom formulaire</th>
-  <th>formulaire</th>
-</tr>
 <?php
   foreach ($rowset as $row) {
 ?>
-  <tr>    
-    <td><a href="<?php echo $this->url('forms/default', 
-           array('controller' => 'index', 'action' => 'detail-form', 'id' => $row['id'])); ?>"><?php  echo $row['form_name'];?>     
-       </a>
-    </td>
+    <div class="row">
 
-    <td><a href="<?php echo $this->url('forms/default',
-      array('controller' => 'index', 'action' => 'delete', 'id' => $row['id']));?>"onclick="return confirm('Do you rely want to delete the record;')">Delete
-       </a>
-    </td> 
-    </br>
-  </tr>
-</table>  
+ 		<div class="col-md-4"> 
+          <div class="thumbnail">
+              <img  src=/img/form2-150x150.png class="maclasse">
+              <div class="caption">
+              <center>
+               <a href="<?php echo $this->url('forms/default', 
+           			array('controller' => 'index', 'action' => 'detail-form', 'id' => $row['id'])); ?>">     
+       				</a>
+                  <p><a href="#" class="btn btn-primary" role="button"><?php  echo $row['form_name'];?></a> </p>
+                  <p><a href="#" class="btn btn-primary" role="button">Categorie du formulaire</a> </p>
+              </center>
+              </div>
+          </div>
+        </div>
+    </div>
+    
 <?php
   }
 ?>
+
+</div>
+</div>
+</body>  
+</html>
+
+
+
+
 <br>
 </br>
 <h1> Liste des categories</h1>
