@@ -1,0 +1,102 @@
+.maclasse{
+  background-color: #40A497 !important;
+  border-color: #e7e7e7;
+}
+.myclass {
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #CECECE !important;
+}
+.myclass2 {
+  display: inline-block;
+  height: auto;
+  max-width: 100% !important;
+  padding: 4px;
+  line-height: 1.428571429;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+  }
+
+.right{
+  float: right !important;
+}
+
+
+.mytextarea {
+  height: 250px !important;
+}
+.myformcontrol {
+  display: block;
+  width: 100%;
+  height: 50px !important;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555555;
+  vertical-align: middle;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.mybtn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  width: 30%;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+.mycaret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 6px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  float:middle;
+}
+.mycontainer {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.mynav {
+  background-color: #CECECE;
+  border-color: #e7e7e7;
+  
+}
+.ab {
+  color: #000000 !important;
+  text-decoration: none;
+}
+
+
