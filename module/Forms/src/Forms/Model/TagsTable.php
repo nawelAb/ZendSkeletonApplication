@@ -4,8 +4,7 @@ namespace Forms\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\ResultSet\ResultSet;
 
-
-class CategoryTable
+class TagsTable
 {
     protected $tableGateway;
 
@@ -20,7 +19,7 @@ class CategoryTable
         return $resultSet;
     }
 
-    public function getCatgegory($id)
+    public function getTag($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('id' => $id));
@@ -31,20 +30,28 @@ class CategoryTable
         return $row;
     }
 
-    public function saveCategory(CategoryModel $form)
+    public function saveTag(TagsModel $tag)
     {
-        // pour Zend\Db\TableGateway\TableGateway les donnes doivent etre dans un tableau non un objet 
+        
         $data = array(           
-            'id'   => $form->id,
-            'value' => $form->value,                    
+            'id'   => $tag->id,
+            'value' => $tag->value,                    
         );
-        $id = (int)$form->id;
+    
+        $id = (int)$tag->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
-        }         
+            return $id = $this->tableGateway->lastInsertValue;   
+        } else {
+            if ($this->getUser($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Tag id does not exist');
+            }
+        }
     }
     
-    public function deleteCategory($id)
+    public function deleteTag($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }    

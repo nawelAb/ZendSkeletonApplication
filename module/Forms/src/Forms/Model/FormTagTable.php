@@ -5,13 +5,15 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\ResultSet\ResultSet;
 
 
-class CategoryTable
+class FormTagTable
 {
     protected $tableGateway;
+
 
     public function __construct(TableGateway $tableGateway)
     {
         $this->tableGateway = $tableGateway;
+       
     }
 	
     public function fetchAll()
@@ -20,7 +22,7 @@ class CategoryTable
         return $resultSet;
     }
 
-    public function getCatgegory($id)
+    public function getFormTag($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('id' => $id));
@@ -31,21 +33,26 @@ class CategoryTable
         return $row;
     }
 
-    public function saveCategory(CategoryModel $form)
+    public function saveFormTag(FormTagModel $form)
     {
         // pour Zend\Db\TableGateway\TableGateway les donnes doivent etre dans un tableau non un objet 
-        $data = array(           
-            'id'   => $form->id,
-            'value' => $form->value,                    
+        $data = array( 
+            'id'      => $form->id,    
+            'form_id'   => $form->form_id,
+            'tag_id' => $form->tag_id             
         );
+       
         $id = (int)$form->id;
         if ($id == 0) {
-            $this->tableGateway->insert($data);
-        }         
+            $this->tableGateway->insert($data); 
+            return $id = $this->tableGateway->lastInsertValue;         
+        }
     }
     
-    public function deleteCategory($id)
+    public function deleteFormTag($id)
     {
         $this->tableGateway->delete(array('id' => $id));
-    }    
+    }  
+
+   
 }

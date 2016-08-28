@@ -13,6 +13,12 @@ use Forms\Model\FormCommentTable;
 use Forms\Model\CommentsModel;
 use Forms\Model\CommentsTable;
 
+use Forms\Model\TagsModel;
+use Forms\Model\TagsTable;
+
+use Forms\Model\FormTagModel;
+use Forms\Model\FormTagTable;
+
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -51,7 +57,7 @@ class Module
                 'FormsTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormsModel()); // Notice what is set here
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormsModel());  
                     return new TableGateway('forms', $dbAdapter, null, $resultSetPrototype);
                 },    
 
@@ -63,9 +69,8 @@ class Module
                 },
                 'CategoryTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    // var_dump("expression");die;
-                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CategoryModel()); // Notice what is set here
+                    $resultSetPrototype = new ResultSet();              
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CategoryModel()); 
                     return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
                 }, 
 
@@ -77,9 +82,8 @@ class Module
                 },
                 'FormCommentTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    // var_dump("expression");die;
-                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormCommentModel()); // Notice what is set here
+                    $resultSetPrototype = new ResultSet();               
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormCommentModel()); 
                     return new TableGateway('form_comment', $dbAdapter, null, $resultSetPrototype);
                 },
 
@@ -92,9 +96,37 @@ class Module
                 'CommentsTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CommentsModel()); // Notice what is set here
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\CommentsModel()); 
                     return new TableGateway('comments', $dbAdapter, null, $resultSetPrototype);
-                }
+                },
+
+                // tags
+                'Forms\Model\TagsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('TagsTableGateway');
+                    $table = new TagsTable($tableGateway);
+                    return $table;
+                },
+                'TagsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new \Tags\Model\TagsModel()); 
+                    return new TableGateway('tags', $dbAdapter, null, $resultSetPrototype);
+                }, 
+
+                // formTag  
+                'Forms\Model\FormTagTable' =>  function($sm) {
+                    $tableGateway = $sm->get('FormTagTableGateway');
+                    $table = new FormTagTable($tableGateway);
+                    return $table;
+                },
+                'FormTagTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();                 
+                    $resultSetPrototype->setArrayObjectPrototype(new \Forms\Model\FormTagModel()); 
+                    return new TableGateway('form_tag', $dbAdapter, null, $resultSetPrototype);
+                },
+ 
+                           
             ),
         );
     }   
