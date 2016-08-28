@@ -41,6 +41,7 @@ class TagsTable
         $id = (int)$tag->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
+            
             return $id = $this->tableGateway->lastInsertValue;   
         } else {
             if ($this->getUser($id)) {
