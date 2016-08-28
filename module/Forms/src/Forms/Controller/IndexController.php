@@ -32,6 +32,10 @@ use Forms\Model\FormTagModel;
 use Forms\Form\CategoryForm;
 use Forms\Model\CategoryModel;
 use Forms\Model\CategoryTable;
+
+use Forms\Form\FormFilter;
+use Forms\Form\FormsFormUpdate;
+
 // use Comments\Form\CommentsForm;
 // use Comments\Model\CommentsModel;
 // use Comments\Model\CommentsTable;*
@@ -125,12 +129,40 @@ class IndexController extends AbstractActionController
         return array('form' => $form);
     }
 
+
+    public function updateAction() // modifier les donnes d'un formulaire avec ajout de categorie  
+    {        
+        $id = $this->params()->fromRoute('id');
+        if (!$id) return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'list-form'));
+        
+        $form = new FormsFormUpdate();
+        $request = $this->getRequest();
+     
+        if ($request->isPost()) {
+            $form->setInputFilter(new FormFilter());
+            $form->setData($request->getPost());        
+            if ($form->isValid()) {
+                $data = $form->getData();                          
+                unset($data['submit']);          
+                $this->getSelectFormsTable()->update($data, array('id' => $id));
+                var_dump( "success");          
+                         
+                return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'update'));                                                 
+            }            
+        } else {
+            
+            $form->setData($this->getSelectFormsTable()->select(array('id' => $id))->current());          
+        }
+
+        return new ViewModel(array('form'=> $form, 'id' => $id));
+    }
+
     // liste des formulaires 
     public function listFormAction()
     {
-        $list = $this->getSelectFormsTable()->select(array('stat' => 1));
+        $list = $this->getSelectFormsTable()->select(array('state' => 1));
         $categories = $this->getSelectCategoryTable()->select();
-        return new ViewModel(array('rowset' => $list, 'categories' => $categories)); 
+        return new ViewModel(array('rowset' => $list, 'categories' => $categories, 'list'=>$list)); 
     }
 
     // les commentaires d'un formulaire  
@@ -140,6 +172,12 @@ class IndexController extends AbstractActionController
         
         // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
         $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId));
+
+// // il faut tester ca abvec la vue et tt 
+//         $comments = $this->getSelectFormsTable()->formCommentget($formId);
+//         \Zend\Debug\Debug::dump($comments); die;
+///////******************************************************
+  
         // $comment = $this->getSelectCommentsTable()->select();
      
         // ajout d un commentauire 
@@ -179,10 +217,10 @@ class IndexController extends AbstractActionController
    
 ////////////////////////////////////////Comments//////////////////////////////////////////////////////////
 
-    //list form avec  une requete where stat = 0 
+    //list form avec  une requete where state = 0 
     public function adminListFormAction()
     {
-       $list = $this->getSelectFormsTable()->select(array('stat' => 0));
+       $list = $this->getSelectFormsTable()->select(array('state' => 0));
        // $categories = $this->getSelectCategoryTable()->select();
         return new ViewModel(array('rowset' => $list)); 
     }
@@ -195,7 +233,7 @@ class IndexController extends AbstractActionController
 
         // category 
         $categories = $this->getSelectCategoryTable()->select();
-  
+
 /* la requete sql permet de recuperer les id des tags mais je n arrive pas a les afficher 
         // $TAGS = $this->getFormsTable()->formTagGet();
         $select = new Select();
@@ -277,6 +315,8 @@ class IndexController extends AbstractActionController
         return $this->commentsTable;    
     }   
 
+
+    
 //////////////////////////////////////// ESPACE ADMIN::::: Tags  //////////////////////////////////////////////////////////
     public function addTagAction()  // avec sauvegarde des deux id dans form_comment
     {
@@ -340,7 +380,20 @@ class IndexController extends AbstractActionController
 
 ////////////////////////////////////////  Category  //////////////////////////////////////////////////////////
     public function addCategoryAction()
-    {
+    {   
+
+/* la requete sql permet de recuperer les id des formulaire de la category specifié  mais je n arrive pas a les afficher 
+       
+        $categoryId = 1;
+
+        $select = new Select();
+        $select->from('forms')->columns(array('id', 'form_name'))
+            ->join('category', 'forms.category_id = category.id', array(), Select::JOIN_LEFT)            
+            ->where('category.id ='.$categoryId);
+        \Zend\Debug\Debug::dump($select->getSqlString()); die;
+        $select->getSqlString();
+        return $this->tableGateway->selectWith($select);
+*/
         $form = new CategoryForm();
         $request = $this->getRequest();
         if ($request->isPost()) {           
@@ -352,8 +405,7 @@ class IndexController extends AbstractActionController
                 $category->exchangeArray($data);                
                  $this->getCategoryTable()->saveCategory($category);
                  echo 'success'; 
-                // \Zend\Debug\Debug::dump($this->getCategoryTable()->saveCategory($category)); die;
-               
+                // \Zend\Debug\Debug::dump($this->getCategoryTable()->saveCategory($category)); die;               
                     
                 return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'admin-detail-form'));                 
             }            

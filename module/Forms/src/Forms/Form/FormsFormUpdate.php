@@ -4,7 +4,7 @@ namespace Forms\Form;
 
 use Zend\Form\Form;
 
-class FormsForm extends Form
+class FormsFormUpdate extends Form
 {
     public function __construct($name = null)
     {
@@ -22,16 +22,7 @@ class FormsForm extends Form
             ),
         ));
         
-        $this->add(array(
-            'name' => 'fileUpload',
-            'attributes' => array(
-                'type'  => 'file',
-            ),
-            'options' => array(
-                'label' => 'File Upload',
-            ),
-        )); 
-
+       
        
         $this->add(array(
             'name' => 'state',
@@ -51,14 +42,16 @@ class FormsForm extends Form
             'options' => array(
                 'label' => 'category_id',
             ),
-        ));        
-        
+        ));  
+
         $this->add(array(
-            'name' => 'submit',
-            'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Upload Now'
-            ),
-        )); 
+             'name' => 'submit',
+             'attributes' => array(
+                 'type'  => 'submit',
+                 'value' => 'ENVOYER'
+             ),
+         )); 
+          
+        
     }
 }

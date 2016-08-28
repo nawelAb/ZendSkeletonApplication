@@ -1,16 +1,27 @@
 <?php
-echo '<h1>Update</h1>';
+echo '<h1>Update d un formulaire pr l ajout de categorie ... </h1>';
 
+
+// $form = $this->form;
 $form->prepare();
-
-$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index',
- 'action' => 'update', 'id' => $id))); 
-
+// Assuming the "contact/process" route exists...
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'index', 'action' => 'update', 'id' => $id))); //'contact/process'));
+// Set the method attribute for the form
 $form->setAttribute('method', 'post');
-
 echo $this->form()->openTag($form);
-echo $this->formRow($form->get('value'))."</br>";
 
-echo $this->formSubmit($form->get('submit'))."<br></br>";
-// echo $this->formCollection($form);
+
+//  echo $this->form()->openTag($form);
+//  echo $this->formRow($form->get('form_name'))."</br>";
+//  echo $this->formRow($form->get('state'))."</br>";
+//  echo $this->formRow($form->get('category_id'))."</br>";
+// echo $this->formSubmit($form->get('submit'));
+// echo $this->formRow($form->get('usr_active'))."</br>";
+
+
+
+
+
+echo $this->formCollection($form);
+// echo $this->formSubmit($form->get('submit'))."<br></br>";
 echo $this->form()->closeTag();

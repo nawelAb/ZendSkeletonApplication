@@ -12,7 +12,6 @@ class FormsTable
 {
     protected $tableGateway;
 
-
     public function __construct(TableGateway $tableGateway)
     {
         $this->tableGateway = $tableGateway;      
@@ -36,10 +35,7 @@ class FormsTable
      //    $resultSet = $this->tableGateway->selectWith($sql);
      //        \Zend\Debug\Debug::dump($sql->getSqlString(new Zend\Db\Adapter\Platform\Mysql())); die;
      //    $oSelect->getSqlString(new Zend\Db\Adapter\Platform\Mysql());
-    }   
-
-
-
+    } 
 
     public function formCommentget($formId) {
         
@@ -58,7 +54,6 @@ class FormsTable
      //    $resultSet = $this->tableGateway->selectWith($sql);
 
 
-     //        \Zend\Debug\Debug::dump($sql->getSqlString(new Zend\Db\Adapter\Platform\Mysql())); die;
      //    $oSelect->getSqlString(new Zend\Db\Adapter\Platform\Mysql());
     }   
 
@@ -86,17 +81,24 @@ class FormsTable
         $data = array(           
             'id'   => $form->id,
             'form_name' => $form->form_name,
-            'category_id' => $form->category,                   
+            'state' =>$form->state                              
         );
-        // a remplacer par  getArrayCopy() defini dans Auth
-        // $data = $form->getArrayCopy();
-
+      
+      var_dump("var");
+      die;
         $id = (int)$form->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);          
+        } else {                
+            if ($this->getForm($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Form id does not exist');
+            }  
         }
     }
     
+
     public function deleteForm($id)
     {
         $this->tableGateway->delete(array('id' => $id));

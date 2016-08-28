@@ -56,17 +56,17 @@ class AdminController extends AbstractActionController
 			$form->setInputFilter(new UserFilter());
 			$form->setData($request->getPost());
 			 if ($form->isValid()) {
-				$data = $form->getData();
+				$data = $form->getData();      
 				unset($data['submit']);
-				if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
 				$this->getUsersTable()->update($data, array('usr_id' => $id));
 				return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));													
 			}			 
 		}
 		else {
+			
 			$form->setData($this->getUsersTable()->select(array('usr_id' => $id))->current());			
 		}
-		
+
 		return new ViewModel(array('form'=> $form, 'id' => $id));
 	}
 	
