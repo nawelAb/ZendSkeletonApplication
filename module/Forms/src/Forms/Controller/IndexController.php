@@ -25,17 +25,19 @@ use Forms\Form\TagsForm;
 use Forms\Model\TagsModel;
 use Forms\Model\TagsTable;
 
-
 use Forms\Model\FormCommentModel;
 use Forms\Model\FormTagModel;
 
-use Forms\Form\CategoryForm;
+use Forms\Form\CategoryFilter;
 use Forms\Model\CategoryModel;
 use Forms\Model\CategoryTable;
+use Forms\Form\CategoryForm;
+use Forms\Form\CategoryFormUpdate;
 
 use Forms\Form\FormFilter;
 use Forms\Form\FormsFormUpdate;
 
+use Forms\Model\Formulaires;
 // use Comments\Form\CommentsForm;
 // use Comments\Model\CommentsModel;
 // use Comments\Model\CommentsTable;*
@@ -142,7 +144,8 @@ class IndexController extends AbstractActionController
             $form->setInputFilter(new FormFilter());
             $form->setData($request->getPost());        
             if ($form->isValid()) {
-                $data = $form->getData();                          
+                $data = $form->getData();
+                $data['state'] = 1;                          
                 unset($data['submit']);          
                 $this->getSelectFormsTable()->update($data, array('id' => $id));
                 var_dump( "success");          
@@ -168,14 +171,24 @@ class IndexController extends AbstractActionController
     // les commentaires d'un formulaire  
     public function detailFormAction() 
     {
+       
         $formId = $this->params()->fromRoute('id');
         
         // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
         $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId));
-
+var_dump($this->getFormsTable());
+die;
+        $this->getFormsTable()->getFormComment($formId);
 // // il faut tester ca abvec la vue et tt 
-//         $comments = $this->getSelectFormsTable()->formCommentget($formId);
-//         \Zend\Debug\Debug::dump($comments); die;
+// // 
+//         $table = $this->getServiceLocator()->get('Forms\Model\FormsTable');
+//         $joinedData = $table->JoinfetchAll($formId);
+
+//         return $joinedData;
+
+        // $table = $this->getServiceLocator()->get('Forms\Model\Formulaires');
+          // $comments = $this->getFormulaires()->Leases($formId);
+         // \Zend\Debug\Debug::dump($comments); die;
 ///////******************************************************
   
         // $comment = $this->getSelectCommentsTable()->select();
@@ -188,12 +201,20 @@ class IndexController extends AbstractActionController
         
         return new ViewModel(array('form'=>$form,  'unformulaire' => $unformulaire,  'form_id'=>$formId)); // pr afficher les data    
         // \Zend\Debug\Debug::dump($formulaire) ; die;
-         
-        
+          
          
     }
 
-     public function getFormsTable()
+     public function getFormulaires() // test 
+    {
+        if (!$this->formsTable) {
+            $sm = $this->getServiceLocator();
+            $this->formsTable = $sm->get('Forms\Model\Formulaires');
+        }
+        return $this->formsTable;
+    }
+
+    public function getFormsTable()
     {
         if (!$this->formsTable) {
             $sm = $this->getServiceLocator();
@@ -283,8 +304,6 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('form' => $form, 'comments'=>$comments));        
     }
 
-    
-
     public function getCommentsTable()
     {
         if (!$this->commentsTable) {
@@ -314,9 +333,7 @@ class IndexController extends AbstractActionController
         }
         return $this->commentsTable;    
     }   
-
-
-    
+ 
 //////////////////////////////////////// ESPACE ADMIN::::: Tags  //////////////////////////////////////////////////////////
     public function addTagAction()  // avec sauvegarde des deux id dans form_comment
     {
@@ -330,22 +347,26 @@ class IndexController extends AbstractActionController
                 $data = $form->getData();
                 $tags->exchangeArray($data);                
                 $tag_id = $this->getTagsTable()->saveTag($tags); 
+
+                if ($dataId['form_id']) {
+                    $formTag = new FormTagModel();
+
+                    $dataId['form_id'] = $data['form_id'];
+                    $dataId['tag_id'] = $tag_id;
+
+                    $formTag->exchangeArray($dataId);   
+                    $this->getFormTagTable()->saveFormTag($formTag);
+                    
+                    return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'admin-detail-form'));                 
+                }
                
-                $formTag = new FormTagModel();
-
-                $dataId['form_id'] = $data['form_id'];
-                $dataId['tag_id'] = $tag_id;
-
-                $formTag->exchangeArray($dataId);   
-                $this->getFormTagTable()->saveFormTag($formTag);
-
-                // \Zend\Debug\Debug::dump("fin"); die;
-             
-                return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'admin-detail-form'));                 
+                return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'list-tag'));                 
+                
+                // \Zend\Debug\Debug::dump("fin"); die;             
             }            
         }
         return new ViewModel(array('form' => $form));   
-    }      
+    }     
    
 
     public function getTagsTable()
@@ -378,10 +399,32 @@ class IndexController extends AbstractActionController
         return $this->tagsTable;    
     } 
 
+    public function deleteTagAction() //delete tag valide 
+    {
+        $id = $this->params()->fromRoute('id');
+        if ($id) {
+            $this->getTagsTable()->delete(array('id' => $id));
+        }
+        
+        return $this->redirect()->toRoute('forms/default', array('controller' => 'index', 'action' => 'listTag'));                                         
+    }
+
+    public function listTagAction()
+    {
+        // ajouter une nouvelle categorie        
+        $form = new TagsForm();
+        $request = $this->getRequest();
+
+        $list = $this->getSelectTagsTable()->select();
+        return new ViewModel(array('form' =>$form ,'rowset' => $list)); 
+    }
+
+
 ////////////////////////////////////////  Category  //////////////////////////////////////////////////////////
+    // manque la recherche des formulaires suivant la categorie 
+
     public function addCategoryAction()
     {   
-
 /* la requete sql permet de recuperer les id des formulaire de la category specifié  mais je n arrive pas a les afficher 
        
         $categoryId = 1;
@@ -407,16 +450,57 @@ class IndexController extends AbstractActionController
                  echo 'success'; 
                 // \Zend\Debug\Debug::dump($this->getCategoryTable()->saveCategory($category)); die;               
                     
-                return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'admin-detail-form'));                 
+                return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'listCategory'));                 
             }            
         }
         return new ViewModel(array('form' => $form));   
     } 
 
-    public function getCategoriesAction()
+    public function listCategoryAction()
     {
-        return new ViewModel(array('rowset' => $this->getSelectCategoryTable()->select())); 
-    }   
+        // ajouter une nouvelle categorie        
+        $form = new CategoryForm();
+        $request = $this->getRequest();
+
+        $list = $this->getSelectCategoryTable()->select();
+        return new ViewModel(array('form' =>$form ,'rowset' => $list)); 
+    }
+
+    public function updateCategoryAction() // modifier les donnes d'un formulaire avec ajout de categorie  
+    {        
+        $id = $this->params()->fromRoute('id');
+        if (!$id) return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'listCategory'));
+        
+        $form = new CategoryForm();
+        $request = $this->getRequest();
+           
+        if ($request->isPost()) {
+            $form->setInputFilter(new CategoryFilter());
+            $form->setData($request->getPost());        
+            if ($form->isValid()) {
+                $data = $form->getData();                                      
+                unset($data['submit']);          
+                $this->getSelectCategoryTable()->update($data, array('id' => $id));                         
+                return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'updateCategory'));                                                 
+            }            
+        } else {
+            
+            $form->setData($this->getSelectCategoryTable()->select(array('id' => $id))->current());          
+        }
+
+        return new ViewModel(array('form'=> $form, 'id' => $id));
+    }
+   
+    public function deleteCategoryAction() //delete category valide 
+    {
+        $id = $this->params()->fromRoute('id');
+        if ($id) {
+            $this->getCategoryTable()->delete(array('id' => $id));
+        }
+        
+        return $this->redirect()->toRoute('forms/default', array('controller' => 'index', 'action' => 'listCategory'));                                         
+    }
+
 
     public function getSelectCategoryTable()// pr l affichages des donnes 
     {        
@@ -437,5 +521,5 @@ class IndexController extends AbstractActionController
             $this->CategoryTable = $sm->get('Forms\Model\CategoryTable');
         }
         return $this->CategoryTable;
-    }
+    }    
 }

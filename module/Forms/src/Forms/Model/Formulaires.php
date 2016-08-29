@@ -2,21 +2,90 @@
 namespace Forms\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\AbstractTableGateway;
+
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Select;
+ 
+// use Zend\Db\Sql\Adapter\Platefotrm\Mysql;
+// use Zend\Db\Adapter\Platform\Mysql;
 
-class FormsTable
+class Formulaires extends AbstractTableGateway
 {
     protected $tableGateway;
 
-    public function __construct(TableGateway $tableGateway)
+    public function __construct($adapter)
     {
-        $this->tableGateway = $tableGateway;      
+        $this->table = 'forms';
+
+        $this->adapter = $adapter;
+
+        $this->initialize();
     }
+
+    public function Leases($formId)
+    {
+        // $result = $this->select(function (Select $select) use ($poolid) {
+        //     $select
+        //         ->columns(array(
+        //             'ipaddress',
+        //             'accountid',
+        //             'productid',
+        //             'webaccountid'
+        //         ))
+        //         ->join('account', 'account.accountid = ipaddress_pool.accountid', array(
+        //             'firstname',
+        //             'lastname'
+        //         ))
+        //         ->join('product_hosting', 'product_hosting.hostingid = ipaddress_pool.hostingid', array(
+        //             'name'
+        //         ))
+        //         ->join('webaccount', 'webaccount.webaccountid = ipaddress_pool.webaccountid', array(
+        //             'domain'
+        //         ))->where->equalTo('ipaddress_pool.poolid', $poolid);
+        // });
+
+        // return $result->toArray();
+
+
+        $result = $this->select(function (Select $select) use ($formId) {
+            $select
+            ->columns('*')  
+           
+            ->join('forms', 'form_comment.form_id = forms.id', array())
+            ->join('comments', 'form_comment.comment_id = comments.id', array())
+            ->where('forms.id ='.$formId);
+            // ->join('account', 'account.accountid = ipaddress_pool.accountid', array(
+            //         'firstname',
+            //         'lastname'
+            //     ))
+            //     ->join('product_hosting', 'product_hosting.hostingid = ipaddress_pool.hostingid', array(
+            //         'name'
+            //     ))
+            //     ->join('webaccount', 'webaccount.webaccountid = ipaddress_pool.webaccountid', array(
+            //         'domain'
+            //     ))->where->equalTo('ipaddress_pool.poolid', $poolid);
+        });
+
+        return $result->toArray();
+
+
+        // >from('form_comment')->columns(array('comment_id'))
+        //     ->join('forms', 'form_comment.form_id = forms.id', array(), Select::JOIN_LEFT)
+        //     ->join('comments', 'form_comment.comment_id = comments.id', array(), Select::JOIN_LEFT)
+        //     ->where('forms.id ='.$formId);
+    }
+
+
+    // public function __construct(TableGateway $tableGateway)
+    // {
+    //     $this->tableGateway = $tableGateway;      
+    // }
 
     public function JoinfetchAll($formId)
     {
-       
+        
+        
         $sql = $this->tableGateway->getSql();  
      
         $sql->select()
@@ -33,7 +102,7 @@ class FormsTable
         //                   ->join('track', 'track.album_id = album.id', array('*'), 'left');
  
         // return $this->tableGateway->selectWith($sqlSelect);
-    }     
+    }        
 
 
     public function getFormTag($formId) {
@@ -99,21 +168,23 @@ class FormsTable
         $data = array(           
             'id'   => $form->id,
             'form_name' => $form->form_name,
-            'state' => 0                             
+            'state' =>$form->state                              
         );
-   
+      
+      var_dump("var");
+      die;
         $id = (int)$form->id;
         if ($id == 0) {
-         
             $this->tableGateway->insert($data);          
-        } else {                   
+        } else {                
             if ($this->getForm($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new \Exception('Form id does not exist');
             }  
         }
-    }    
+    }
+    
 
     public function deleteForm($id)
     {

@@ -16,24 +16,6 @@ class FormFilter extends InputFilter
             ),
         ));
 		
-		$this->add(array(
-			'name'     => 'state',
-			'required' => false,
-			'filters'  => array(
-				array('name' => 'StripTags'),
-				array('name' => 'StringTrim'),
-			),
-			// 'validators' => array(
-			// 	array(
-			// 		'name'    => 'StringLength',
-			// 		'options' => array(
-			// 			'encoding' => 'UTF-8',
-			// 			'min'      => 6,
-			// 			'max'      => 12,
-			// 		),
-			// 	),
-			// ),
-		));
 
 		$this->add(array(
 			'name'     => 'category_id',

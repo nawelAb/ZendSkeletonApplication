@@ -52,7 +52,7 @@ class TagsTable
         }
     }
     
-    public function deleteTag($id)
+    public function delete($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }    

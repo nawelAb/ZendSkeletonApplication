@@ -77,15 +77,7 @@ class FormsModel implements InputFilterAwareInterface
                 ))
             );
 
-            $inputFilter->add(
-                $factory->createInput(array(
-                    'name'     => 'category',
-                    'required' => true,
-                    'validators' => array(
-                    )
-                ))
-            );
-            
+           
             $this->inputFilter = $inputFilter;
         }        
         return $this->inputFilter;

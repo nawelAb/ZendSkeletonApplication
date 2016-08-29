@@ -1,17 +1,16 @@
-
-<br>
-</br>
-<h1> Liste des formulaires pr l admin</h1>
+<h1> Espace Admin </h1>
+<h2> Liste des formulaires a traiter </h2> </br>
+_________________________________________________________________________________________________________________________________________
+<br></br>
 <?php
   foreach ($rowset as $row) {
 ?>
   <tr>
-
-  	<a href="<?php echo $this->url('forms/default', 
-           			array('controller' => 'index', 'action' => 'update', 'id' => $row['id'])); ?>"> <?php  echo $row['form_name']; ?>    
-    </a>
     <td><?php  echo $row['id']; ?></td>   
-   
+  	<td><a href="<?php echo $this->url('forms/default', 
+           			array('controller' => 'index', 'action' => 'update', 'id' => $row['id'])); ?>"> <?php  echo $row['form_name']; ?>    
+    	</a>
+    </td>   
     </br>
   </tr>
 </table>  

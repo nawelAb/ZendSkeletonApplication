@@ -44,7 +44,7 @@ class CategoryTable
         }         
     }
     
-    public function deleteCategory($id)
+    public function delete($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }    

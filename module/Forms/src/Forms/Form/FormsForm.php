@@ -34,26 +34,6 @@ class FormsForm extends Form
 
        
         $this->add(array(
-            'name' => 'state',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'stat',
-            ),
-        )); 
-
-        $this->add(array(
-            'name' => 'category_id',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'category_id',
-            ),
-        ));        
-        
-        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
