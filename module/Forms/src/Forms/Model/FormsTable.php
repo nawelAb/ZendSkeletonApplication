@@ -20,7 +20,7 @@ class FormsTable
         $sql = $this->tableGateway->getSql();  
      
         $sql->select()
-            ->from('form_comment')->columns(array('comment_id'))
+            ->from('form_comment')->columns(array('comment_id','form_id '))
             ->join('forms', 'form_comment.form_id = forms.id', array(), Select::JOIN_LEFT)
             ->join('comments', 'form_comment.comment_id = comments.id', array(), Select::JOIN_LEFT)
             ->where('forms.id ='.$formId);
@@ -46,8 +46,8 @@ class FormsTable
             ->join('comments', 'form_tag.tag_id = comments.id', array(), Select::JOIN_LEFT)
             ->where('forms.id ='.$formId);
 
-            \Zend\Debug\Debug::dump($select->getSqlString()); die;
-        $select->getSqlString();
+            // \Zend\Debug\Debug::dump($select->getSqlString()); die;
+        // $select->getSqlString();
         return $this->tableGateway->selectWith($select);
         // return  $sql->getSqlstringForSqlObject($sql);
      //    $resultSet = $this->tableGateway->selectWith($sql);
@@ -60,14 +60,15 @@ class FormsTable
         $sql = $this->tableGateway->getSql();
     
         $select = new Select();
-        $select->from('form_comment')->columns(array('comment_id'))
-            ->join('forms', 'form_comment.form_id = forms.id', array(), Select::JOIN_LEFT)
-            ->join('comments', 'form_comment.comment_id = comments.id', array(), Select::JOIN_LEFT)
+        $select->from('form_comment','forms')->columns(array('id', 'comment_id', 'form_id'))
+            ->join('forms', 'form_comment.form_id = forms.id', array(),Select::JOIN_LEFT)
+            ->join('comments', 'form_comment.comment_id = comments.id', array(),Select::JOIN_LEFT)
             ->where('forms.id ='.$formId);
 
-        $select->getSqlString();
-        return $this->tableGateway->selectWith($select);
-            // \Zend\Debug\Debug::dump(  $select->getSqlString()); die;
+        // $select->getSqlString();
+            \Zend\Debug\Debug::dump( $this->tableGateway->selectWith($select)->current()); die;
+        return $this->tableGateway->selectWith($select)->current();
+        var_dump(get_class_methods($this->tableGateway->selectWith($select)));die;
         // return  $sql->getSqlstringForSqlObject($sql);
      //    $resultSet = $this->tableGateway->selectWith($sql);
 

@@ -4,24 +4,32 @@
     'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un nouveau formulaire'); ?></a>
 <br></br>
 
+<?php  echo "<strong>   id du formulaire   : </strong>".$form_id ?> 
+
+<h3> Les tags de ce formulaire sont </h3>
 <?php 
-// foreach($joinedData as $row) {
-            //$row->track_id will called even not registered
-            //in album model class.
-            // echo $row; 
-        // }
+$key = 1 ;
+            foreach($resultSet as $key=>$row){
+                $key = $key + 1; 
+                echo     'premier objet '.$key.'<br>';
+                echo    'tag_id : <strong> '.($row['tag_id']).'</strong> </br>';
+                echo    'tag_value: :<strong> '.($row['value']).'</strong> <br></br>';
+                echo '________________________________________________________________ <br>';
+            }
 ?>
-
-
-
+  <td> <?php   ?> </td>
+  <td> <?php //echo 'id tag '.$comment['id'].'</br>'; ?> </td>
+  <td> <?php //echo 'value tag '.$comment['tag_id'].'</br>'; ?> </td>
+        
+<?php //} ?>
 
 <table>
-<img src=/img/form1.png class="img-thumbnail" alt="Icone form" width="150" height="200">
+<!-- <img src=/img/form1.png class="img-thumbnail" alt="Icone form" width="150" height="200"> -->
 <?php
   foreach ($unformulaire as $formulaire) {
 ?>
   <tr>  
-    <td><?php  echo "<strong> Nom formulaire : </strong>".$formulaire['form_name']; ?></td>   
+    <td><?php  echo "<strong> Nom formulaire : </strong>".$formulaire['form_name'].'</br>'; ?></td>   
     <td><?php  echo "<strong> category  : </strong>".$formulaire['category_id']; ?></td>    
   </tr>
 </table>  
@@ -37,7 +45,6 @@
 
   </br>
 
-  <?php  echo "<strong>   form_id  : </strong>".$form_id ?> 
 
 </br>
 _____________________________________________________________________________________________________________________________________________
@@ -54,8 +61,6 @@ echo $this->formRow($form->get('value'))."<br>";
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
  ?>
-
- </html>
 
 
 

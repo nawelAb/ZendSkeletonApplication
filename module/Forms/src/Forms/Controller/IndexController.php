@@ -171,15 +171,34 @@ class IndexController extends AbstractActionController
 
     // les commentaires d'un formulaire  
     public function detailFormAction() 
-    {
-       
+    {       
         $formId = $this->params()->fromRoute('id');
         
         // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
         $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId));
-var_dump($this->getFormsTable());
-die;
-        $this->getFormsTable()->getFormComment($formId);
+        // $comments = $this->getFormsTable()->getFormComment($formId);         
+         
+        $resultSet = $this->getFormTagTable()->getFormTags($formId);
+
+//            //then in your controller or view:
+// $key = 1 ;
+//             foreach($resultSet as $key=>$row){
+//                 $key = $key + 1; 
+//                 echo     'premier objet '.$key.'<br>';
+//                 echo    'tag_id :'.($row['tag_id']).'tag_value: :::::  '.($row['value']).'<br> </br>';
+//                 echo    'form_id'.($row['form_id']).'<br></br>';
+//                 echo    'form_name : '.($row['form_name']).'<br></br>';
+//                 // echo    'idddd : '.($row['id']).'<br></br>';
+//                 echo    'tag_value: :::::  '.($row['value']).'<br></br>';
+//                 echo '________________________________________________________________ <br>';
+//             }
+
+//             \Zend\Debug\Debug::dump('z'); die;
+
+         
+        
+// var_dump($comments->current());die;
+
 // // il faut tester ca abvec la vue et tt 
 // // 
 //         $table = $this->getServiceLocator()->get('Forms\Model\FormsTable');
@@ -189,7 +208,6 @@ die;
 
         // $table = $this->getServiceLocator()->get('Forms\Model\Formulaires');
           // $comments = $this->getFormulaires()->Leases($formId);
-         // \Zend\Debug\Debug::dump($comments); die;
 ///////******************************************************
   
         // $comment = $this->getSelectCommentsTable()->select();
@@ -200,10 +218,9 @@ die;
         if ($request->isPost()) {
         }
         
-        return new ViewModel(array('form'=>$form,  'unformulaire' => $unformulaire,  'form_id'=>$formId)); // pr afficher les data    
+        return new ViewModel(array('form'=>$form, 'resultSet'=>$resultSet,  'unformulaire' => $unformulaire,  'form_id'=>$formId)); // pr afficher les data    
         // \Zend\Debug\Debug::dump($formulaire) ; die;
-          
-         
+       
     }
 
      public function getFormulaires() // test 
@@ -217,7 +234,7 @@ die;
 
     public function getFormsTable()
     {
-        if (!$this->formsTable) {
+        if (!!$this->formsTable) {
             $sm = $this->getServiceLocator();
             $this->formsTable = $sm->get('Forms\Model\FormsTable');
         }
@@ -255,6 +272,8 @@ die;
 
         // category 
         $categories = $this->getSelectCategoryTable()->select();
+
+
 
 /* la requete sql permet de recuperer les id des tags mais je n arrive pas a les afficher 
         // $TAGS = $this->getFormsTable()->formTagGet();
