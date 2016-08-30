@@ -10,12 +10,14 @@ class CommentsModel implements InputFilterAwareInterface
 {   
     public $id;
     public $value;
+    public $form_id;
     protected $inputFilter;
     
     public function exchangeArray($data)
     {        
         $this->id     = (!empty($data['id'])) ? $data['id'] : null;
         $this->value     = (!empty($data['value'])) ? $data['value'] : null;
+        $this->form_id     = (!empty($data['form_id'])) ? $data['form_id'] : null;
     } 
     
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -48,8 +50,22 @@ class CommentsModel implements InputFilterAwareInterface
                         ),
                     ),
                 ))
-            );           
-           
+            );  
+
+
+            $inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'form_id',
+                    'required' => true,
+                    'filters'  => array(
+                        array('name' => 'StripTags'),
+                        array('name' => 'StringTrim'),
+                    ),
+                    
+                ))
+            );  
+
+
             $this->inputFilter = $inputFilter;
         }        
         return $this->inputFilter;

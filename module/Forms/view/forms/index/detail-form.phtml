@@ -1,57 +1,68 @@
-
 <h1>les informations d 'un formulmaire et ses commentaires</h1>
 <a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
     'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un nouveau formulaire'); ?></a>
-<br></br>
+  </br> 
 
-<?php  echo "<strong>   id du formulaire   : </strong>".$form_id ?> 
+<img src=/img/form2.png class="img-thumbnail" alt="Icone form" width="150" height="200">
+</br>
+<tr>  
+    <td><?php  echo "<strong>   id du formulaire   : </strong>".$form_id."</br>" ?></td> 
+    <td><?php  echo "<strong> Nom formulaire : </strong>".$unformulaire['form_name']."</br>"; ?></td>   
+    <td><?php  echo "<strong> category id  : </strong>".$unformulaire['category_id']."</br>"; ?></td>    
+</tr>
 
-<h3> Les tags de ce formulaire sont </h3>
-<?php 
-$key = 1 ;
-            foreach($formtags as $key=>$row){
-                $key = $key + 1; 
-                echo     'premier objet '.$key.'<br>';
-                echo    'tag_id : <strong> '.($row['tag_id']).'</strong> </br>';
-                echo    'tag_value: :<strong> '.($row['value']).'</strong> <br></br>';
-                echo '________________________________________________________________ <br>';
-            }
-?>
-  <td> <?php   ?> </td>
-  <td> <?php //echo 'id tag '.$comment['id'].'</br>'; ?> </td>
-  <td> <?php //echo 'value tag '.$comment['tag_id'].'</br>'; ?> </td>
-        
-<?php //} ?>
 
+<h1> Liste des commentaires </h1>
 <table>
-<!-- <img src=/img/form1.png class="img-thumbnail" alt="Icone form" width="150" height="200"> -->
 <?php
-  foreach ($unformulaire as $formulaire) {
+  foreach ($comments as $comment) {
 ?>
-  <tr>  
-    <td><?php  echo "<strong> Nom formulaire : </strong>".$formulaire['form_name'].'</br>'; ?></td>   
-    <td><?php  echo "<strong> category  : </strong>".$formulaire['category_id']; ?></td>    
+  <tr>
+      <td><?php  echo $comment['id'].':'; ?></td>   
+      <td><?php  echo $comment['value']; ?></td>
+      <td> 
+        <a href="<?php echo $this->url('forms/default', 
+                array('controller' => 'index', 'action' => 'updateComment', 'id' => $comment['id'])); ?>"> 
+          <u> Modifier </u>   
+        </a>
+      </td>
+      <td> 
+     <?php //var_dump($comment['id']);      die; ?>
+      <a href="<?php echo $this->url('forms/default',
+        array('controller' => 'index', 'action' => 'deleteComment', 'id' => $comment['id'], $form_id));?>" 
+        onclick="return confirm('Do you rely want to delete the record;')"><u> Delete </u> 
+      </a>
+      </td>
+    </br>
   </tr>
 </table>  
-  </br>
 <?php
   }
 ?>
 
-<table>
+</br>
+
+<h1> Les tags de ce formulaire sont </h1>
 <tr>
-  <h2>liste des commentaires de ce formulaire</h2>
+<?php 
+$key = 1 ;
+            foreach($formtags as $key=>$row){
+                $key = $key + 1; ?>
+             <tr>
+                <td> <?php  echo    'tag_id : <strong> '.($row['tag_id']).'</strong> <br></br>'; ?></td>
+                <td> <?php  echo    'tag_value: :<strong> '.($row['value']).'</strong> <br></br>'; ?></td>
+                <td> <?php  echo '________________________________________________________________ <br>'; 
+              } 
+              ?></td> </tr>
 </tr>
 
-  </br>
-
-
+<br>
 </br>
 _____________________________________________________________________________________________________________________________________________
 <h2>Ajouter un nouveau commentaire</h2>
 <?php
 $form = $this->form;
-$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'addComment')));
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'index', 'action' => 'addComment')));
 $form->setData(array('form_id' => $form_id));
 $form->prepare();
 

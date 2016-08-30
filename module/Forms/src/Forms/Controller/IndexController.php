@@ -102,8 +102,7 @@ class IndexController extends AbstractActionController
                 $newName = md5(rand(). $File['name']) . '.' . $ext;
                 $adapter->addFilter('File\Rename', array(
                      'target' => $destination . '/' . $File['name'].$newName,
-                ));
-                  
+                ));                  
                 
                 if (!$adapter->isValid()){
                     $dataError = $adapter->getMessages();
@@ -121,7 +120,7 @@ class IndexController extends AbstractActionController
                         $data = $form->getData();
                         // $data = $this->prepareData($data);
                         $forms->exchangeArray($data);                        
-                        $this->getFormsTable()->saveForm($forms);                    
+                        $this->getFormsTable()->saveForm($forms);               
 
                         echo 'forms success ';                       
                     }
@@ -174,7 +173,8 @@ class IndexController extends AbstractActionController
         $formId = $this->params()->fromRoute('id');        
         if (!$formId) return $this->redirect()->toRoute('forms/default', array('controller' => 'index', 'action' => 'listForm'));
 
-        $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId));
+        $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId))->current();
+        $comments = $this->getSelectCommentsTable()->select(array('form_id' => $formId));
         // $comments = $this->getFormsTable()->getFormComment($formId);         
          
         // les tags du formulaire 
@@ -182,17 +182,16 @@ class IndexController extends AbstractActionController
       
         // $comment = $this->getSelectCommentsTable()->select();
      
-        // \Zend\Debug\Debug::dump($formulaire) ; die;
+        // \Zend\Debug\Debug::dump($unformulaire) ; die;
         // ajout d un commentauire 
         $form = new CommentsForm();
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-        }
+        $request = $this->getRequest();             
         
         return new ViewModel(array(
                                     'form_id'=>$formId, // pr afficher les data    
                                     'unformulaire' => $unformulaire, 
-                                    'formtags'=>$formtags,  
+                                    'formtags'=>$formtags,
+                                    'comments'=> $comments,  
                                     'form'=>$form
         ));        
     }
@@ -206,6 +205,7 @@ class IndexController extends AbstractActionController
         }
         return $this->formsTable;
     }
+
     
     public function getSelectFormsTable()// pr l affichages des donnes 
     {        
@@ -219,7 +219,7 @@ class IndexController extends AbstractActionController
         return $this->formsTable;    
     }   
    
-////////////////////////////////////////Comments//////////////////////////////////////////////////////////
+////////////////////////////////////////ADMIN  Comments//////////////////////////////////////////////////////////
 
     //list form avec  une requete where state = 0 
     public function adminListFormAction()
@@ -238,20 +238,6 @@ class IndexController extends AbstractActionController
         // category 
         $categories = $this->getSelectCategoryTable()->select();
 
-
-
-/* la requete sql permet de recuperer les id des tags mais je n arrive pas a les afficher 
-        // $TAGS = $this->getFormsTable()->formTagGet();
-        $select = new Select();
-        $select->from('form_tag')->columns(array('tag_id'))
-            ->join('forms', 'form_tag.form_id = forms.id', array(), Select::JOIN_LEFT)
-            ->join('comments', 'form_tag.tag_id = comments.id', array(), Select::JOIN_LEFT)
-            ->where('forms.id ='.$formId);
-        $select->getSqlString();
-        return $this->tableGateway->selectWith($select);
-        // \Zend\Debug\Debug::dump($select->getSqlString()); die;
-*/      
-     
         // ajout d un tag
         $form = new TagsForm();
         $request = $this->getRequest();
@@ -270,23 +256,16 @@ class IndexController extends AbstractActionController
             $comments = new CommentsModel();
             $form->setInputFilter($comments->getInputFilter());    
             $form->setData($request->getPost());
+
             if ($form->isValid()) {          
                 $data = $form->getData();
-                $comments->exchangeArray($data);
-                            
-                $comment_id = $this->getCommentsTable()->saveComment($comments);
-                // $comment_id =$this->getCommentId();                
-                $formComment = new FormCommentModel();
-                $dataId['form_id'] = $data['form_id'];
-                $dataId['comment_id'] = $comment_id;             
-
-                $formComment->exchangeArray($dataId);
-                $this->getFormCommentTable()->saveFormComment($formComment);
-
+                $comments->exchangeArray($data);                            
+                $this->getCommentsTable()->saveComment($comments);
+                // \Zend\Debug\Debug::dump($this->getCommentsTable()); die;
             }
-             $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'add-comment'));
+            $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'detailForm', 'id' => $data['form_id']));
         }
-        return new ViewModel(array('form' => $form, 'comments'=>$comments));        
+        return new ViewModel(array('form' => $form));        
     }
 
     public function getCommentsTable()
@@ -317,7 +296,18 @@ class IndexController extends AbstractActionController
             );
         }
         return $this->commentsTable;    
-    }   
+    }  
+
+   public function deleteCommentAction() //delete tag valide 
+    {
+        $id = $this->params()->fromRoute('id');
+
+        if ($id) {
+            $this->getCommentsTable()->delete(array('id' => $id));
+        }        
+        return $this->redirect()->toRoute('forms/default', array('controller' => 'index', 'action' => 'detailForm'));                                         
+    }
+
  
 //////////////////////////////////////// ESPACE ADMIN::::: Tags  //////////////////////////////////////////////////////////
     public function addTagAction()  // avec sauvegarde des deux id dans form_comment
@@ -455,7 +445,7 @@ class IndexController extends AbstractActionController
              if ($form->isValid()) {             
                 $data = $form->getData();
                 $category->exchangeArray($data);                
-                 $this->getCategoryTable()->saveCategory($category);
+                $this->getCategoryTable()->saveCategory($category);
                  echo 'success'; 
                 // \Zend\Debug\Debug::dump($this->getCategoryTable()->saveCategory($category)); die;               
                     

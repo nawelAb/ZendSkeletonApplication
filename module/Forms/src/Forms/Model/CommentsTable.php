@@ -34,16 +34,16 @@ class CommentsTable
 
     public function saveComment(CommentsModel $comment)
     {
-        // pour Zend\Db\TableGateway\TableGateway les donnes doivent etre dans un tableau non un objet 
         $data = array(           
-            'id'   => $comment->id,
-            'value' => $comment->value,                    
+                        'id'        => $comment->id,
+                        'value'     => $comment->value,
+                        'form_id'   => $comment->form_id                  
         );
     
         $id = (int)$comment->id;
         if ($id == 0) {
              $this->tableGateway->insert($data);
-             return $id = $this->tableGateway->lastInsertValue;        
+             return $id = $this->tableGateway->lastInsertValue;       
 
         } else {
             
@@ -58,7 +58,7 @@ class CommentsTable
         return $id = $this->tableGateway->lastInsertValue;  
     }
     
-    public function deleteComment($id)
+    public function delete($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }    
