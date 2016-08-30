@@ -22,6 +22,7 @@ use Forms\Model\CommentsTable;
 
 // tags
 use Forms\Form\TagsForm;
+use Forms\Form\TagFilter;
 use Forms\Model\TagsModel;
 use Forms\Model\TagsTable;
 
@@ -368,6 +369,30 @@ die;
         return new ViewModel(array('form' => $form));   
     }     
    
+    public function updateTagAction()   
+    {        
+        $id = $this->params()->fromRoute('id');
+        if (!$id) return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'listTag'));
+        
+        $form = new TagsForm();
+        $request = $this->getRequest();
+           
+        if ($request->isPost()) {
+            $form->setInputFilter(new TagFilter());
+            $form->setData($request->getPost());        
+            if ($form->isValid()) {
+                $data = $form->getData();                                      
+                unset($data['submit']);          
+                $this->getSelectTagsTable()->update($data, array('id' => $id));                         
+                return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'updateTag'));                                                 
+            }            
+        } else {
+            
+            $form->setData($this->getSelectTagsTable()->select(array('id' => $id))->current());          
+        }
+
+        return new ViewModel(array('form'=> $form, 'id' => $id));
+    }
 
     public function getTagsTable()
     {
