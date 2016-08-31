@@ -197,10 +197,29 @@ class IndexController extends AbstractActionController
         ));        
     }
 
+    public function deleteFormAction()
+    {    
+        $id = $this->params()->fromRoute('id');
+         
+        if ($id) {        
+
+            $this->getFormsTableDelete()->delete(array('id' => $id));
+        }        
+        return $this->redirect()->toRoute('forms/default', array('controller' => 'index', 'action' => 'adminListForm'));                                         
+    }
 
     public function getFormsTable()
     {
         if (!!$this->formsTable) {
+            $sm = $this->getServiceLocator();
+            $this->formsTable = $sm->get('Forms\Model\FormsTable');
+        }
+        return $this->formsTable;
+    }
+
+    public function getFormsTableDelete()
+    {
+        if (!$this->formsTable) {
             $sm = $this->getServiceLocator();
             $this->formsTable = $sm->get('Forms\Model\FormsTable');
         }
@@ -246,7 +265,7 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
         }        
         return new ViewModel(array('form'=>$form,'unformulaire' => $unformulaire, 'categories' => $categories, 'formId'=>$formId)); // pr afficher les data          
-         
+    
     }
 
     public function updateCommentAction()   

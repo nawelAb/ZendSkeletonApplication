@@ -22,7 +22,15 @@ __#ou#_
              'action' => 'AdminDetailForm', 'id' => $row['id'])); ?>"> Ajouter un tag a ce formulaire     
           </a>
       </td>
-    
+
+__#ou#_
+      <td>    
+      <a href="<?php echo $this->url('forms/default', 
+                  array('controller' => 'index', 'action' => 'deleteForm', 'id' => $row['id'])); ?>"" 
+        onclick="return confirm('Do you rely want to delete the record;')"><u> Delete </u> 
+      </a>
+    </td>
+
   </tr>
 
   </br>

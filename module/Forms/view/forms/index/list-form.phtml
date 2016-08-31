@@ -2,19 +2,17 @@
 </br>
 <h1> Liste des formulaires</h1>
 <?php
-  foreach ($list as $b) {
+  foreach ($list as $unformulaire) {
 ?>
   <tr>
-    <td><?php  echo $b['id']; ?></td> 
+    <?php  echo $unformulaire['id']; ?>
+    <td>    
+      <a href="<?php echo $this->url('forms/default', 
+                  array('controller' => 'index', 'action' => 'detail-form', 'id' => $unformulaire['id'])); ?>"> <?php  echo $unformulaire['form_name']; ?>    
+      </a>
+    </td>    
 
-     
-
-
-    <a href="<?php echo $this->url('forms/default', 
-                array('controller' => 'index', 'action' => 'detail-form', 'id' => $b['id'])); ?>"> <?php  echo $b['form_name']; ?>    
-    </a>
-
-    <td><?php  //echo $b['form_name']; ?></td>
+    <td><?php  //echo $unformulaire['form_name']; ?></td>
     </br>
   </tr>
 </table>  
@@ -26,11 +24,11 @@
 </br>
 <h1> Liste des categories</h1>
 <?php
-  foreach ($categories as $a) {
+  foreach ($categories as $unecategorie) {
 ?>
   <tr>
-    <td><?php  echo $a['id']; ?></td>   
-    <td><?php  echo $a['value']; ?></td>
+    <td><?php  echo $unecategorie['id']; ?></td>   
+    <td><?php  echo $unecategorie['value']; ?></td>
     </br>
   </tr>
 </table>  
