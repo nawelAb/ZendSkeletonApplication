@@ -39,9 +39,7 @@ use Forms\Form\CategoryFormUpdate;
 use Forms\Form\FormFilter;
 use Forms\Form\FormsFormUpdate;
 
-// use Comments\Form\CommentsForm;
-// use Comments\Model\CommentsModel;
-// use Comments\Model\CommentsTable;*
+use Forms\Form\TagsFormRech;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 
@@ -59,11 +57,17 @@ class IndexController extends AbstractActionController
 
     public function indexAction() 
     {   
-        $formulaire = $this->getSelectFormsTable()->select();
         $categories = $this->getSelectCategoryTable()->select();
               // \Zend\Debug\Debug::dump($categories); die; 
-        return new ViewModel(array('rowset' => $formulaire, 'categories' => $categories)); // pr afficher les data    
-                                // return array(
+              // 
+        $form = new CategoryForm();
+        $request = $this->getRequest();
+
+        return new ViewModel(array(
+                                    'form'      =>$form,
+                                    'categories'=> $categories
+        )); // pr afficher les data    
+         // return array(
         //     'iduser'    => $id,
         //     'user' => $this->getUserTable()->getUser($id)
         // );                  
@@ -86,7 +90,7 @@ class IndexController extends AbstractActionController
             $data = array_merge(
                  $nonFile,  
                  array('fileUpload'=> $File['name']) 
-             );
+            );
             
             $form->setData($data);
 
@@ -201,8 +205,7 @@ class IndexController extends AbstractActionController
     {    
         $id = $this->params()->fromRoute('id');
          
-        if ($id) {        
-
+        if ($id) { 
             $this->getFormsTableDelete()->delete(array('id' => $id));
         }        
         return $this->redirect()->toRoute('forms/default', array('controller' => 'index', 'action' => 'adminListForm'));                                         
@@ -225,7 +228,6 @@ class IndexController extends AbstractActionController
         }
         return $this->formsTable;
     }
-
     
     public function getSelectFormsTable()// pr l affichages des donnes 
     {        
@@ -588,5 +590,35 @@ class IndexController extends AbstractActionController
             $this->CategoryTable = $sm->get('Forms\Model\CategoryTable');
         }
         return $this->CategoryTable;
-    }    
+    }   
+
+
+// ################################################### affichages ################################################### 
+public function FormByCategoryAction()
+{
+    $categoryId = $this->params()->fromRoute('id');
+    // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
+    // $categories = $this->getSelectFormsTable()->select();
+
+    $list = $this->getSelectFormsTable()->select(array('category_id'=>$categoryId));
+
+
+    return new ViewModel(array( 
+                                'form'=>$form,
+                                'list' => $list,
+    ));
+}
+
+public function findFormByTagAction()
+{
+    $list = $this->getFormTagTable()->getFormTags(11);
+
+    return new ViewModel(array(
+                                'list' => $list,
+    ));           
+}
+
+
+
+
 }

@@ -1,0 +1,25 @@
+<h1>index liste des formulaires de la categorie </h1>
+
+<table>
+<tr>
+	<th>id</th>
+	<th>name</th>
+</tr>
+<?php
+	foreach ($list as $row) {
+?>
+	<tr>
+		<td><?php  echo $row['id']; ?></td>
+
+		<td>
+			<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
+				'action' => 'detailForm', 'id'=>$row['id']));?>"><?php echo $row['form_name']; ?>				
+			</a>
+		<td><?php echo $row['value']; ?></td>
+	</tr>			
+<?php
+	}
+?>
+
+</table> 
+ 

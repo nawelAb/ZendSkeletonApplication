@@ -1,7 +1,7 @@
 <h1>les informations d 'un formulmaire et ses commentaires</h1>
 <a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
     'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un nouveau formulaire'); ?></a>
-  </br> 
+</br> 
 
 <img src=/img/form2.png class="img-thumbnail" alt="Icone form" width="150" height="200">
 </br>
@@ -11,22 +11,21 @@
     <td><?php  echo "<strong> category id  : </strong>".$unformulaire['category_id']."</br>"; ?></td>    
 </tr>
 
-
 <h1> Liste des commentaires </h1>
 <table>
 <?php
   foreach ($comments as $comment) {
 ?>
-  <tr>
-      <td><?php  echo $comment['id'].':'; ?></td>   
-      <td><?php  echo $comment['value']; ?></td>
-      <td> 
-        <a href="<?php echo $this->url('forms/default', 
-                array('controller' => 'index', 'action' => 'updateComment', 'id' => $comment['id'])); ?>"> 
-          <u> Modifier </u>   
-        </a>
-      </td>
-      <td> 
+<tr>
+    <td><?php  echo $comment['id'].':'; ?></td>   
+    <td><?php  echo $comment['value']; ?></td>
+    <td> 
+      <a href="<?php echo $this->url('forms/default', 
+              array('controller' => 'index', 'action' => 'updateComment', 'id' => $comment['id'])); ?>"> 
+        <u> Modifier </u>   
+      </a>
+    </td>
+    <td> 
      <?php //var_dump($comment['id']);      die; ?>
       <a href="<?php echo $this->url('forms/default',
         array('controller' => 'index', 'action' => 'deleteComment', 'id' => $comment['id'], $form_id));?>" 
