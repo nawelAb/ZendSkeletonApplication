@@ -17,6 +17,7 @@ use Forms\Model\FormsModel;
 
 // comments
 use Forms\Form\CommentsForm;
+use Forms\Form\CommentFilter;
 use Forms\Model\CommentsModel;
 use Forms\Model\CommentsTable;
 
@@ -229,9 +230,10 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('rowset' => $list)); 
     }
 
-    public function adminDetailFormAction() 
+    public function adminDetailFormAction() // permet l ajout d un tag a un formulaire 
     {
-        $formId = $this->params()->fromRoute('id');        
+        $formId = $this->params()->fromRoute('id');
+
         // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
         $unformulaire = $this->getSelectFormsTable()->select(array('id' => $formId));
 
@@ -246,6 +248,33 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('form'=>$form,'unformulaire' => $unformulaire, 'categories' => $categories, 'formId'=>$formId)); // pr afficher les data          
          
     }
+
+    public function updateCommentAction()   
+    {        
+        $id = $this->params()->fromRoute('id');
+        if (!$id) return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'detailForm', 'id'=>$id));
+        
+        $form = new CommentsForm();
+        $request = $this->getRequest();
+           
+        if ($request->isPost()) {
+            $form->setInputFilter(new CommentFilter());
+            $form->setData($request->getPost());        
+            if ($form->isValid()) {
+                $data = $form->getData();                                      
+                unset($data['submit'], $data['form_id']);          
+                $this->getSelectCommentsTable()->update($data, array('id' => $id)); 
+
+                return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'detailForm'));                                                 
+            }            
+        } else {
+            
+            $form->setData($this->getSelectCommentsTable()->select(array('id' => $id))->current());          
+        }
+
+        return new ViewModel(array('form'=> $form, 'id' => $id));
+    }
+
 
     public function addCommentAction()  // avec sauvegarde des deux id dans form_comment
     {           
@@ -310,31 +339,51 @@ class IndexController extends AbstractActionController
 
  
 //////////////////////////////////////// ESPACE ADMIN::::: Tags  //////////////////////////////////////////////////////////
-    public function addTagAction()  // avec sauvegarde des deux id dans form_comment
+    
+    public function addTagFormAction() 
     {
         $form = new TagsForm();
         $request = $this->getRequest();
         if ($request->isPost()) {           
+    
             $tags = new TagsModel();
             $form->setInputFilter($tags->getInputFilter());    
             $form->setData($request->getPost());
              if ($form->isValid()) {             
                 $data = $form->getData();
                 $tags->exchangeArray($data);                
-                $tag_id = $this->getTagsTable()->saveTag($tags); 
-
-                if ($dataId['form_id']) {
-                    $formTag = new FormTagModel();
-
-                    $dataId['form_id'] = $data['form_id'];
-                    $dataId['tag_id'] = $tag_id;
-
-                    $formTag->exchangeArray($dataId);   
-                    $this->getFormTagTable()->saveFormTag($formTag);
-                    
-                    return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'admin-detail-form'));                 
-                }
+                $tag_id = $this->getTagsTable()->saveTag($tags);               
+            
+                $formTag = new FormTagModel();
+                $dataId['form_id'] = $data['form_id'];
+                $dataId['tag_id'] = $tag_id;
+                $formTag->exchangeArray($dataId);   
+                $this->getFormTagTable()->saveFormTag($formTag);      
                
+                return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'list-tag'));                 
+                // \Zend\Debug\Debug::dump("fin"); die;                         
+            }            
+        }
+        return new ViewModel(array('form' => $form));        
+    }
+
+
+    public function addTagAction()  // avec sauvegarde des deux id dans form_comment sans liaison avec un formulaire
+    {
+       
+        $form = new TagsForm();
+        $request = $this->getRequest();
+        if ($request->isPost()) {           
+        // var_dump($data['form_id']);        die;
+
+            $tags = new TagsModel();
+            $form->setInputFilter($tags->getInputFilter());    
+            $form->setData($request->getPost());
+             if ($form->isValid()) {             
+                $data = $form->getData();
+                $tags->exchangeArray($data);                
+                $tag_id = $this->getTagsTable()->saveTag($tags);               
+                         
                 return $this->redirect()->toRoute('forms/default', array('controller'=>'Index', 'action'=>'list-tag'));                 
                 
                 // \Zend\Debug\Debug::dump("fin"); die;             

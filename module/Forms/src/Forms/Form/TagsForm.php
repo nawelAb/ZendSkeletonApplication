@@ -21,6 +21,17 @@ class TagsForm extends Form
                 'label' => ' Tag ',
             ),
         ));
+
+
+        $this->add(array(
+            'name' => 'form_id',
+            'attributes' => array(
+                'type'  => 'hidden',
+            ),
+            'options' => array(
+                'label' => ' Tag ',
+            ),
+        ));
         
         $this->add(array(
             'name' => 'submit',

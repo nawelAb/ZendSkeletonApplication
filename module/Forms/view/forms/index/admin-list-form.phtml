@@ -6,14 +6,27 @@ ________________________________________________________________________________
   foreach ($rowset as $row) {
 ?>
   <tr>
-    <td><?php  echo $row['id']; ?></td>   
-  	<td><a href="<?php echo $this->url('forms/default', 
-           			array('controller' => 'index', 'action' => 'update', 'id' => $row['id'])); ?>"> <?php  echo $row['form_name']; ?>    
-    	</a>
-    </td>   
-    </br>
+      <td><?php  echo $row['id']; ?></td>   
+      <td><?php  echo $row['form_name']; ?></td>  
   </tr>
-</table>  
+
+  <tr>
+      <td>
+          <a href="<?php echo $this->url('forms/default', 
+                array('controller' => 'index', 'action' => 'update', 'id' => $row['id'])); ?>"> Modifier le formulaire    
+          </a>
+      </td>
+__#ou#_
+      <td>
+          <a href="<?php echo $this->url('forms/default', array('controller' => 'index',
+             'action' => 'AdminDetailForm', 'id' => $row['id'])); ?>"> Ajouter un tag a ce formulaire     
+          </a>
+      </td>
+    
+  </tr>
+
+  </br>
+  </table>  
 <?php
   }
 ?>

@@ -3,9 +3,22 @@
 $form = $this->form;
 $form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'addCategory')));
 $form->prepare();
-
+// $form->setAttribute('class', 'form-control');
 echo $this->form()->openTag($form);
-echo $this->formRow($form->get('value'))."<br>";
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
- ?>
+// echo '<span class="inner">' . $form->getLabel() . '</span>';
+echo $this->formRow($form->get('value'));?> 
+
+<!-- <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">categorie </label>
+    <input type="text" class="form-control" id="category" placeholder="categorie"
+          value=<?php echo $this->formRow($form->get('value'));?> >
+  </div>
+  
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+ -->
+<?php 	echo $this->formSubmit($form->get('submit'));
+	echo $this->form()->closeTag();
+?>
+  <!-- value=<?php echo $this->formRow($form->get('value'));?> > -->
