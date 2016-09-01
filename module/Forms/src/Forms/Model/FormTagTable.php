@@ -11,12 +11,32 @@ class FormTagTable
 
     public function __construct(TableGateway $tableGateway)
     {
-        $this->tableGateway = $tableGateway;
-       
+        $this->tableGateway = $tableGateway;       
     }
 
-	public function getFormTags($formId) {
+    // recuperer des formulaire a partir d'un tag  
+    public function getFormsByTag($id) 
+    {
         
+        $tagId = (int)($id);
+        $sqlSelect = $this->tableGateway->getSql()->select();
+        $sqlSelect->columns(array('id','tag_id', 'form_id'))
+                  ->join('tags', 'tags.id = form_tag.tag_id', array('id','value'), 'left')
+                  ->join('forms', 'forms.id = form_tag.form_id', array('id','form_name'), 'left')
+                  ->where('tags.id ='.$tagId);
+        $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
+        $resultSet = $statement->execute();
+             // \Zend\Debug\Debug::dump(get_class_methods($this->tableGateway->selectWith($sqlSelect))); die;
+             // \Zend\Debug\Debug::dump($tagId); die;
+             // \Zend\Debug\Debug::dump($this->tableGateway->selectWith($sqlSelect)->current()); die;
+        
+        return $resultSet;
+    }
+
+    // recuperer les tags d un formulaire 
+    public function getFormTags($id) {
+
+        $formId = (int) ($id);        
         $sqlSelect = $this->tableGateway->getSql()->select();
         $sqlSelect->columns(array('id','tag_id', 'form_id'))
                   ->join('tags', 'tags.id = form_tag.tag_id', array('id','value'), 'left')
@@ -27,7 +47,6 @@ class FormTagTable
         return $resultSet;
 
         // $select->getSqlString();
-            // \Zend\Debug\Debug::dump($this->tableGateway->selectWith($select)->next()); die;
         // return $this->tableGateway->selectWith($select)->current();
         // return  $sql->getSqlstringForSqlObject($sql);
             // \Zend\Debug\Debug::dump($select->getSqlString()); die;

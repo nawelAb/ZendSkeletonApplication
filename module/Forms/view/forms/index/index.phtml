@@ -30,14 +30,14 @@ ________________________________________________________________________________
 <h1>recherche un formulaire par un tag </h1>
 <?php
 $form = $this->form;
-$form->setAttribute('action', $this->url('forms/default', array('controller' => 'index', 'action' => 'findFormByTag', $tag)));
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'index',
+ 'action' => 'findFormByTag')));
 //$form->setData(array('form_id' => $form_id));
 $form->prepare();
 
 echo $this->form()->openTag($form);
 //echo $this->formRow($form->get('form_id'))."<br>";*
 
-$tag = $this->formRow($form->get('value'));
 echo $this->formRow($form->get('value'))."<br>";
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();

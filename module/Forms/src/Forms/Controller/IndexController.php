@@ -60,7 +60,7 @@ class IndexController extends AbstractActionController
         $categories = $this->getSelectCategoryTable()->select();
               // \Zend\Debug\Debug::dump($categories); die; 
               // 
-        $form = new CategoryForm();
+        $form = new TagsFormRech();
         $request = $this->getRequest();
 
         return new ViewModel(array(
@@ -611,14 +611,27 @@ public function FormByCategoryAction()
 
 public function findFormByTagAction()
 {
-    $list = $this->getFormTagTable()->getFormTags(11);
-
-    return new ViewModel(array(
-                                'list' => $list,
-    ));           
-}
-
-
-
-
+    $form = new TagsFormRech();
+    $request = $this->getRequest();
+    if ($request->isPost()) {
+        $data = $request->getPost(); 
+        $tagId = $data['value']; 
+        
+        $value = $data['value']; 
+        $rows = $this->getTagsTable()->getTagByValue($tagId); 
+            foreach ($rows as $row) {
+            // 
+                $id = $row[0];
+                $tagId =(int) $id;
+                $list = $this->getFormTagTable()->getFormsByTag($tagId);                                        
+                 
+                // \Zend\Debug\Debug::dump($list); die;
+               // return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'updateCategory'));                                                 
+              
+                return new ViewModel(array(
+                                            'list' => $list,
+                ));           
+            } 
+        }    
+    } 
 }
