@@ -14,10 +14,9 @@ class FormTagTable
         $this->tableGateway = $tableGateway;       
     }
 
-    // recuperer des formulaire a partir d'un tag  
+    // recuperer des formulaire a partir d'un tag  validee  
     public function getFormsByTag($id) 
-    {
-        
+    {        
         $tagId = (int)($id);
         $sqlSelect = $this->tableGateway->getSql()->select();
         $sqlSelect->columns(array('id','tag_id', 'form_id'))
@@ -26,14 +25,11 @@ class FormTagTable
                   ->where('tags.id ='.$tagId);
         $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
         $resultSet = $statement->execute();
-             // \Zend\Debug\Debug::dump(get_class_methods($this->tableGateway->selectWith($sqlSelect))); die;
-             // \Zend\Debug\Debug::dump($tagId); die;
-             // \Zend\Debug\Debug::dump($this->tableGateway->selectWith($sqlSelect)->current()); die;
-        
+             // \Zend\Debug\Debug::dump(get_class_methods($this->tableGateway->selectWith($sqlSelect))); die;      
         return $resultSet;
     }
 
-    // recuperer les tags d un formulaire 
+    // recuperer les tags d un formulaire  validee
     public function getFormTags($id) {
 
         $formId = (int) ($id);        

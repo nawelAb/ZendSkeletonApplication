@@ -26,28 +26,12 @@ class TagsTable
     public function getTagByValue($value)
     {
         $value  = (string) $value;
-        // $sqlSelect = $this->tableGateway->getSql()->select();
-        // $sqlSelect->columns(array('id'))
-
-        // $where = new  Where();
-        // $where->equalTo('id', 1) ;
-        // $sqlSelect->where($where);
-
-        //           // ->where('tags.id = ?'.$value);
-                 
-        // $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
-        //      \Zend\Debug\Debug::dump($this->tableGateway->selectWith($sqlSelect)); die;
-        //      // \Zend\Debug\Debug::dump($this->tableGateway->selectWith($sqlSelect)->current()); die;
-        //      // \Zend\Debug\Debug::dump(get_class_methods($this->tableGateway->selectWith($sqlSelect))); die;
-        // $resultSet = $statement->execute();
-        
-        // return $resultSet;
-
-        
         $rowset = $this->tableGateway->select(array('value' => $value));
         $row = $rowset->current();
         if (!$row) {
-            throw new \Exception("Could not find row $value");
+            $rep = 0;
+            // echo "pas de formulaire correspondant à ce tag";
+            // throw new \Exception("Could not find row $value");
         }
         return $row;
     }
