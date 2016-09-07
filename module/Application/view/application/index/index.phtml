@@ -5,129 +5,104 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/custom.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+ <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <nav id=mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
+       <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Kwaret</a>
+          </div>
+          <ul class="nav navbar-nav">          
+            <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+              'action' => 'index'));?>">Home</a></li>
+            <li><a href="#procedure">Procédure</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+              'action' => 'login'));?>">Se connecter</a></li>
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'registration', 
+              'action' => 'index'));?>">S'inscrire</a></li>  
+            <li><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+                  'action' => 'contact'));?>">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
 
- 
- <nav id=mainNav" class="navbar mynav navbar-fixed-top navbar-custom affix">
+  </div> 
+  <!-- fin navbar -->
 
- <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Kwaret</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Procédure</a></li>
-      <li><a href="#">S'inscrire</a></li> 
-      <li><a href="#">Se connecter</a></li> 
-    </ul>
+  <div class="row s1"> <br></br><br></br></div>
+    <div class="row jumbotron text-center">
+          <h1>Kwaret</h1>      
+            <h5>Plateforme de centralisation de formulaires administratifs Algériens</h5>               
+    </div>   
   </div>
-</nav>
 
+  <div class="row jumbotronMiddle">
+    <br></br> 
+      <div class="container center">   
+        <div class="row text-center">         
+            <h1> Rechercher un formulaire par mot clé </h1>
+             <br></br> 
+              <h4> Mot clé </h4>
+                    <?php
+                          $form = $this->form;
+                          $form->setAttribute('action', $this->url('forms/default', array('controller' => 'index',
+                           'action' => 'findFormByTag')));        
+                          $form->prepare();
+                          echo $this->form()->openTag($form); ?>             
+                          <?php echo $this->formRow($form->get('value')); ?>                         
+                          <?php //echo $this->formRow($form->get('value')); ?>            
+                          <?php  echo $this->formSubmit($form->get('submit'));
+                          echo $this->form()->closeTag();
+                    ?>     
+          </div>  
+          <div class="row text-center"></div>    
+     </div>
   </div>
-</nav>
-<div class="row" >
-<br>
-</br>
-</div>
+
+  <div class="container">          
+              <?php    
+                  foreach ($categories as $key => $categorie) 
+                  {   
+              ?>     
+             
+          <?php }  ?>
+  </div> 
 
 
-<div class="myclass text-center">
-
-<div class="row">
-  <h1>KWARET</h1>
-  <p>Plateforme de centralisation de formulaires administratifs Algériens</p>
-   <form class="form-inline">
-    <input type="Search" class="form-control" size="60" placeholder="Entrez un mot clé" required>
-    <button type="button" class="btn btn-danger">Chercher</button>
-  </form>
-  </div>           
-</div>
- 
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Collaborer</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Chercher</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Télécharger</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
-</div> -->
-<div>
-
-    
-
-
-
-
-<center><h2>Procédure</h2></center>
-<hr></hr>
-
-</div>
-
-<div class="container marketing" >
-    <div class="row">
-        <div class="col-lg-4">
-            
-            <img class="myclass2" class="pull-right"  src="img/Programming-Search-Property-icon.png">
-            <div class="right">
-            <center><h2> Plateforme collaborative </br>
-                    de partage de formulaires administratifs Algériens</h2>
-            <p>Pour faciliter le process,</p>
-            <p> KWARET permet à ses utilisateurs de se connecter à la plateforme, pour ajouter directement les formulaires administratifs vierges.</p> 
-            <p>Ainsi, ils seront validés directement via la plateforme. </p>
-            <p>Une fois validés, la mise en ligne est immédiate, et ces formulaires seront accessibles par tous les citoyens en libre téléchargement. </p>
-            </center>
+ <div class="row jumbotronButtom" id="procedure">
+     <center><h1>Procédure Kwaret</h1></center>   
+        <div class="media">
+            <div class="media-left media-middle"> 
+            <br></br><br></br>
+                <span style="font-size:15em; color: #6cbf6c;" class="glyphicon glyphicon-file"></span>
             </div>
-
-     
-    </div>
-</div>
-
-<form class="form-inline">
-    <input type="Search" class="form-control" size="60" placeholder="Entrez la catégorie du formulaire" required>
-    <button type="button" class="btn btn-danger">Chercher</button>
-  </form>
-<br>
-</br>
-
-  <div>
-    <div class="dropdown">
-      <button class="mybtn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      Sélectionner le formulaire par catégorie
-        <span class="mycaret"> </span>
-      </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#">Etat civil </a></li>
-                      <li><a href="#"> Social </a></li>
-                      <li><a href="#"> Etudes </a></li>
-                      <li><a href="#"> Santé </a></li>
-                      <li><a href="#"> Logement</a></li>
-                      <li><a href="#"> Travail</a></li>
-                    </ul>
-    </div>
-</div>
-
-  </div>
+               
+            <div class="media-body">
+                <hr>  </hr> <br></br>
+                <div class="media-heading left"><h4>Qu'est-ce que Kwaret? Et comment contribuer?</h4>
+                    <br></br>
+                   <p>Kwaret est une plateforme collaborative de centralisation de formulaires admnistratifs Algériens</p>
+                   <p>Elle vise à faire ontribuer les citoyens au <b>partage</b> et à la <b>collaboration</b></p>
+                   <p>Pour faciliter le process, KWARET permet à ses utilisateurs de se connecter à la plateforme, pour ajouter directement les formulaires administratifs vierges. 
+                   <p>Ainsi, ils seront validés directement via la plateforme . </p>
+                   <p>Une fois validés, la mise en ligne est immédiate, et ces formulaires seront accessibles par tous les citoyens en libre téléchargement.
+                </div>
+            </div>    
+        </div>
+</div>  
 
 <div class="row">
     <div class="container">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <p>&nbsp;</p>
 </div>
 
@@ -136,7 +111,7 @@
     <p> </p>
 </div>
 
-<!-- <div>
+<div>
  <footer class="text-center">
     <div class="footer-above">
         <div class="container">
@@ -153,13 +128,8 @@
             </div>
 
         </div>
-    </div>
-               
- </footer>
-</div> -->
-<div class="row" >
-<br>
-</br>
+</div>
+
 </div>
 
 <div id="footer">
@@ -168,6 +138,5 @@
     <center><p class="lead">All rights reserved @<a href="">Kwaret.com</a></p></center>
   </div>
 </div>
-
 </body>
 </html>

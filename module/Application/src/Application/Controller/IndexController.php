@@ -1,23 +1,58 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use Forms\Form\TagsFormRech;
+use Zend\Db\TableGateway\TableGateway;
+
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
+	protected $categoryTable;
+	protected $tagsTable;
+    
+	public function indexAction() 
+    {   
+        $categories = $this->getSelectCategoryTable()->select();
+        $tags = $this->getSelectTagsTable()->select();
+              // \Zend\Debug\Debug::dump($categories); die; 
+             
+        $form = new TagsFormRech();
+        $request = $this->getRequest();
+
+        return new ViewModel(array(
+                                    'form'      =>$form,
+                                    'categories'=> $categories,
+                                    'tags' 		=>$tags
+        ));                           
+    } 
+
+    public function getSelectCategoryTable()
+    {        
+        if (!$this->categoryTable) {
+            $this->categoryTable = new TableGateway(
+                'category', 
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+            );
+        }
+        return $this->categoryTable;    
+    }  
+
+    public function getSelectTagsTable() // pr afficher les donnees depuis la bdd 
     {
-        return new ViewModel();
-    }
+        if (!$this->tagsTable) {
+            $this->tagsTable = new TableGateway(
+                'tags', 
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+
+            );
+        }
+        return $this->tagsTable;    
+    } 
+
+
     public function contactAction()
     {
         return new ViewModel();
