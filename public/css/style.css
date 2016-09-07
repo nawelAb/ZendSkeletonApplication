@@ -70,7 +70,7 @@ body  /* personnalise important */
 
 .jumbotron
 {	
-  max-height:450px !important;
+    max-height:450px !important;
 	background-color: #82c182 !important;/* #d8e0d8; #52a552 ; /*#6cbf6c ;/*#5cb85c;*/
 	height: 220px !important;
 	padding-top: 50px !important;
@@ -78,7 +78,7 @@ body  /* personnalise important */
 	padding-right: 100px !important;
 	padding-left: 10px !important  ;
 	color : white !important;
-  margin-right: -30px;    
+    margin-right: -30px;    
 
 }
 .s1 { /* entre le menu et le jumbotron*/
