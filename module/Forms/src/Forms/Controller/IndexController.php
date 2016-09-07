@@ -124,10 +124,11 @@ class IndexController extends AbstractActionController
 
                         $data = $form->getData();
                         // $data = $this->prepareData($data);
-                        $forms->exchangeArray($data);                        
-                        $this->getFormsTable()->saveForm($forms);               
+                        $forms->exchangeArray($data); 
 
-                        echo 'forms success ';                       
+                        $this->getFormsTableDelete()->saveForm($forms);   // le delete c juste pr nommer ca recupere la table            
+
+                        echo 'forms success ';   die;                    
                     }
                 }  
             }
