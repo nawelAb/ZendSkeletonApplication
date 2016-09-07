@@ -1,19 +1,81 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kwaret</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-$form = $this->form;
+  <nav id=mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
+       <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Kwaret</a>
+          </div>
+          <ul class="nav navbar-nav">          
+            <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+              'action' => 'index'));?>">Home</a></li>
+            <li><a href="#procedure">Procédure</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+              'action' => 'login'));?>">Se connecter</a></li>
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'registration', 
+              'action' => 'index'));?>">S'inscrire</a></li>  
+            <li><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+                  'action' => 'contact'));?>">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+  </div> 
+  <!-- fin navbar -->
 
-$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'uploadForm')));
-   // \Zend\Debug\Debug::dump(''); die; 
-$form->prepare();
+  <div class="row s1"> <br></br><br></br></div>
+    <div class="row">
+      <div class="jumbotron text-center">
+          <h1>Kwaret</h1>      
+            <h5>Plateforme de centralisation de formulaires administratifs Algériens</h5>               
+      </div>
+    </div>   
+  </div>
+        <br></br>   <br></br>   <br></br>
+  <div class="row s1"></div>
+  <div class="row">
+    <div class="contenuLogin">
+        <div class="row">
+          <center> <h3>Charger un formulaire vers la plateforme</h3> </center>        
 
-echo $this->form()->openTag($form);
+			<?php
 
-echo $this->formRow($form->get('form_name'))."<br></br>";
-// echo $this->formRow($form->get('category'))."</br>";
+				$form = $this->form;
+				$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'uploadForm')));
+				   // \Zend\Debug\Debug::dump(''); die; 
+				$form->prepare();
+				echo $this->form()->openTag($form);
+				echo $this->formRow($form->get('form_name'))."<br></br>";
+				echo $this->formRow($form->get('fileUpload'))."</br>";
+				echo $this->formSubmit($form->get('submit'))."<br></br>";
+				echo $this->form()->closeTag();
+			?>
 
-echo $this->formRow($form->get('fileUpload'))."</br>";
+        </div>
+    </div>
+  </div>
 
-echo $this->formSubmit($form->get('submit'))."<br></br>";
-echo $this->form()->closeTag();
-?>
+<div id="footer">
+  <div class="container">
+    <p>&nbsp;</p>
+    <center><p class="lead">All rights reserved @<a href="">Kwaret.com</a></p></center>
+  </div>
+</div>
+
+</body>
+</html>
+
+
 

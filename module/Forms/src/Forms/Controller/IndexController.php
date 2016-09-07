@@ -410,7 +410,10 @@ class IndexController extends AbstractActionController
                 // \Zend\Debug\Debug::dump("fin"); die;             
             }            
         }
-        return new ViewModel(array('form' => $form));   
+        // modiff 
+        return new ViewModel(array(
+            'form' => new TagsForm()
+        ));   
     }     
    
     public function updateTagAction()   
@@ -594,20 +597,20 @@ class IndexController extends AbstractActionController
 
 
 // ################################################### affichages ################################################### 
-public function FormByCategoryAction()
-{
-    $categoryId = $this->params()->fromRoute('id');
-    // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
-    // $categories = $this->getSelectFormsTable()->select();
+    public function FormByCategoryAction()
+    {
+        $categoryId = $this->params()->fromRoute('id');
+        // if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
+        // $categories = $this->getSelectFormsTable()->select();
 
-    $list = $this->getSelectFormsTable()->select(array('category_id'=>$categoryId));
+        $list = $this->getSelectFormsTable()->select(array('category_id'=>$categoryId));
 
 
-    return new ViewModel(array( 
-                                'form'=>$form,
-                                'list' => $list,
-    ));
-}
+        return new ViewModel(array( 
+                                    'form'=>$form,
+                                    'list' => $list,
+        ));
+    }
 
     public function findFormByTagAction()
     {
@@ -627,7 +630,6 @@ public function FormByCategoryAction()
                 $tagId =(int) $id;
                 $list = $this->getFormTagTable()->getFormsByTag($tagId); 
                 // return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'updateCategory'));                                                 
-              
                 return new ViewModel(array(
                                             'list' => $list,
                 ));           

@@ -5,105 +5,66 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+ <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <nav id=mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
+       <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Kwaret</a>
+          </div>
+          <ul class="nav navbar-nav">          
+            <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+              'action' => 'index'));?>">Home</a></li>
+            <li><a href="#procedure">Procédure</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+              'action' => 'login'));?>">Se connecter</a></li>
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'registration', 
+              'action' => 'index'));?>">S'inscrire</a></li>  
+            <li><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+                  'action' => 'contact'));?>">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+  </div> 
+  <!-- fin navbar -->
 
- 
- <nav id=mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
-
- <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Kwaret</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Procédure</a></li>
-      <li><a href="#">S'inscrire</a></li> 
-      <li><a href="#">Se connecter</a></li> 
-    </ul>
-  </div>
-</nav>
-
-  </div>
-</nav>
-<div class="row" >
-<br>
-</br>
-</div>
-
-
-<div class="jumbotron text-center">
-
-<div class="row">
-  <h1>KWARET</h1>
-  <p>Plateforme de centralisation de formulaires administratifs Algériens</p>
-   <form class="form-inline">
-    <input type="Search" class="form-control" size="60" placeholder="Entrez un mot clé" required>
-    <button type="button" class="btn btn-danger">Chercher</button>
-  </form>
-  </div>           
-</div>
-		<h1><center> Se connecter </center> </h1>
-  <br>
-  </br>
-
-<div class="container">
-
-
-      <?php echo $this->escapeHtml($this->messages); ?>
-      <?php
-        $form = $this->form;
-        $form->setAttribute('action', $this->url('auth/default', array('controller' => 'index', 'action' => 'login')));
-        $form->prepare();
-
-        echo $this->form()->openTag($form);
-    
-     
-      
-      ?>
-
-
-  <form>
-    <div class="form-group row">
-      <label for="lgFormGroupInput" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control form-control-lg" id="lgFormGroupInput" placeholder="you@example.com"
-                  value="<?php echo $this->formRow($form->get('usr_email')); ?>">
-
+  <div class="row s1"> <br></br><br></br></div>
+    <div class="row">
+      <div class="jumbotron text-center">
+          <h1>Kwaret</h1>      
+            <h5>Plateforme de centralisation de formulaires administratifs Algériens</h5>               
       </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="lgFormGroupInput" class="col-sm-2 col-form-label col-form-label-lg">Mot de passe</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control form-control-lg" id="lgFormGroupInput" placeholder="your password"
-        value=" <?php echo $this->formRow($form->get('usr_password'));?>">
-        
-      </div>
-    </div>
-    <center>
-    <div class="form-group row">
-      <div class="offset-sm-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Login</button>
-      </div>
-    </div>
-    </center>
-         <?php echo $this->formRow($form->get('rememberme'))."</br>";
-        echo $this->formSubmit($form->get('submit'))."<br></br>";
-        echo $this->form()->closeTag();
-      ?>
-
-    </form>
+    </div>   
   </div>
+        <br></br>   <br></br>   <br></br>
+  <div class="row s1"></div>
+  <div class="row">
+    <div class="contenuLogin">
+        <div class="row">
+          <h4>Authentification</h4>       
+          <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('auth/default', array('controller' => 'index', 'action' => 'login')));
+            $form->prepare();
 
-<div class="row" >
-<br>
-</br>
-</div>
+              echo $this->formRow($form->get('usr_email')); 
+              echo $this->formRow($form->get('usr_password'));
+              echo $this->form()->openTag($form);
+              echo $this->formRow($form->get('rememberme'))."</br>";
+              echo $this->formSubmit($form->get('submit'))."<br></br>";
+              echo $this->form()->closeTag();       
+          
+          ?>
+        </div>
+    </div>
+  </div>
 
 <div id="footer">
   <div class="container">
@@ -115,5 +76,3 @@
 </body>
 </html>
 
-
-__________________________________________________________________________________________________

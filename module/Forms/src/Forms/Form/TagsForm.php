@@ -10,8 +10,7 @@ class TagsForm extends Form
     {
         parent::__construct('Tags');
         $this->setAttribute('method', 'post');
-        // $this->setAttribute('enctype','multipart/form-data');
-        
+      
         $this->add(array(
             'name' => 'value',
             'attributes' => array(
@@ -20,6 +19,10 @@ class TagsForm extends Form
             'options' => array(
                 'label' => ' Tag ',
             ),
+            'attributes' => [
+                'class' => 'form-control',
+                'placeholder'=>'taper un tag pour effectuer une recherche '
+            ]
         ));
 
 

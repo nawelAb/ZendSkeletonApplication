@@ -10,16 +10,23 @@ class TagsFormRech extends Form
     {
         parent::__construct('Tags');
         $this->setAttribute('method', 'post');
-        // $this->setAttribute('enctype','multipart/form-data');
-        
+               
         $this->add(array(
             'name' => 'value',
             'attributes' => array(
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => ' Tag ',
+                // 'label' => ' Tag ',
             ),
+            'attributes'=> array(
+
+                'class' => 'form-control1',
+                'class' => 'form-control1',
+                //'class'=>'form-horizontal1',
+                // 'class'=>'well form-search',
+                // 'class'=>'input-medium search-query'
+            )
         ));
 
         
