@@ -9,6 +9,7 @@
     "homepage": "http://kwaret.ovh/",
     "require": {
         "php": ">=5.5",
-        "zendframework/zendframework": "~2.5"
+        "zendframework/zendframework": "~2.5",
+        "neilime/zf2-twb-bundle": "2.*@stable"
     }
 }
