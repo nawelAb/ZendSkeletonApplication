@@ -1,0 +1,32 @@
+
+
+<?php
+
+
+echo '<h1>Update</h1>';
+// $form = $this->form;
+$form->prepare();
+// Assuming the "contact/process" route exists...
+$form->setAttribute('action', $this->url('auth/default', array('controller' => 'admin', 'action' => 'update', 'id' => $id))); //'contact/process'));
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+// echo '<h1>Update</h1>';
+
+// $form->prepare();
+
+// $form->setAttribute('action', $this->url('auth/default', array('controller' => 'admin', 'action' => 'update', 'id' => $id))); 
+
+// $form->setAttribute('method', 'post');
+
+// echo $this->form()->openTag($form);
+// echo $this->formRow($form->get('usr_password'))."</br>";
+// echo $this->formRow($form->get('usr_email'))."</br>";
+// echo $this->formRow($form->get('usrl_id'))."</br>";
+// echo $this->formRow($form->get('lng_id'))."</br>";
+// echo $this->formRow($form->get('usr_active'))."</br>";
+// echo $this->formSubmit($form->get('submit'))."<br></br>";
+// // echo $this->formCollection($form);
+// echo $this->form()->closeTag();

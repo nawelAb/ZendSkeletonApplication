@@ -1,0 +1,40 @@
+<br>
+</br>
+<h1> Liste des formulaires</h1>
+<?php
+  foreach ($list as $unformulaire) {
+?>
+  <tr>
+    <?php  echo $unformulaire['id']; ?>
+    <td>    
+      <a href="<?php echo $this->url('forms/default', 
+                  array('controller' => 'index', 'action' => 'detailForm', 'id' => $unformulaire['id'])); ?>"> <?php  echo $unformulaire['form_name']; ?>    
+      </a>
+    </td>    
+
+    <td><?php  //echo $unformulaire['form_name']; ?></td>
+    </br>
+  </tr>
+</table>  
+<?php
+  }
+?>
+
+<br>
+</br>
+<h1> Liste des categories</h1>
+<?php
+  foreach ($categories as $unecategorie) {
+?>
+  <tr>
+    <td><?php  echo $unecategorie['id']; ?></td>   
+    <td><?php  echo $unecategorie['value']; ?></td>
+    </br>
+  </tr>
+</table>  
+<?php
+  }
+?>
+
+
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kwaret</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav id=mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
+       <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Kwaret</a>
+          </div>
+          <ul class="nav navbar-nav">          
+            <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+              'action' => 'index'));?>">Home</a></li>
+            <li><a href="#procédure">Procédure</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+              'action' => 'login'));?>">Se connecter</a></li> 
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+            <li><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+                  'action' => 'contact'));?>">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+  </div> 
+
+  <div class="jumbotron text-center">
+    <h2>Kwaret.com</h2>      
+      <h5>Plateforme de centralisation de formulaires administratifs Algériens</h5>
+    <div class="row text-center">
+      <form class="form-inline">
+        <input type="Search" class="form-control" size="60" placeholder="Entrez un mot clé" required>
+        <button type="button" class="btn btn-danger">Chercher</button>
+      </form>
+    </div>   
+  </div> 
+ <!--  <div class="row" ></div >  -->
+  <!-- <div class="row" ><center><h3>Trouver un formulaire </h3></center></div > -->
+  <!-- <div class="row" ><center><h2>Procédure</h2></center></div >   -->
+  <div class=" row jumbotronMiddle">
+
+    <div class="row text-center" >
+     <h2>Recherche par catégories</h2>
+  <br></br>
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+
+            <a href="#" class="btn btn-success btn-lg">
+              <span class="glyphicon glyphicon-file">Etat civil 
+              </span> 
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+         <a href="#" class="btn btn-success btn-lg">
+              <span class="glyphicon glyphicon-file">Etat civil 
+              </span> 
+            </a>
+          <!-- <a class="myglyphicon glyphicon-education"  class="thumbnail">
+            <h3>Etudes</h3>
+          </a> -->
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="btn btn-success btn-lg">
+              <span class="glyphicon glyphicon-file">Etat civil 
+              </span> 
+            </a>
+          <!-- <a class="myglyphicon glyphicon-briefcase" href="#" class="thumbnail">
+            <h3>Travail-Emploi</h3>
+          </a> -->
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="btn btn-success btn-lg">
+              <span class="glyphicon glyphicon-file">Etat civil 
+              </span> 
+            </a>
+          <!-- <a class="myglyphicon glyphicon-pencil" href="#" class="thumbnail">
+           <h3>Etat civil</h3>
+          </a> -->
+        </div>
+    </div>
+    <div class="row"><p>&nbsp </p></br></div>
+  <div class="row"> 
+      <div class="col-xs-6 col-md-3">
+          <a href="#" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-file">Etat civil 
+            </span> 
+          </a>
+       <!--  <a class="myglyphicon glyphicon-user" href="#" class="thumbnail">
+          <h3>Etat civil</h3>
+        </a> -->
+      </div>
+      <div class="col-xs-6 col-md-3">
+          <a href="#" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-file">Etat civil 
+            </span> 
+          </a>
+        <!-- <a class="myglyphicon glyphicon-envelope" href="#" class="thumbnail">
+          <h3>Etat civil</h3>
+        </a> -->
+      </div>
+      <div class="col-xs-6 col-md-3">
+          <a href="#" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-file">Etat civil 
+            </span> 
+          </a>
+        <!-- <a class="myglyphicon glyphicon-pencil" href="#" class="thumbnail">
+          <h 3>Etat civil</h3> 
+        </a> -->
+      </div>
+      <div class="col-xs-6 col-md-3">
+          <a href="#" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-file">Etat civil 
+            </span> 
+          </a>
+        <!-- <a class="myglyphicon glyphicon-pencil" href="#" class="thumbnail">
+          <h3>Etat civil</h3></a> -->
+      </div>
+  </div>
+  </div>
+</div>
+
+<div class=" row jumbotronButtom">
+    <div class="container" >
+      <center><h1>Procédure Kwaret</h1></center>  <hr> </hr>
+       <div class="media">
+        <div class="media-left media-middle">
+          <a href="#">
+            <img src="img/home-image-partage.png" class="img-circle" alt="Cinque Terre" width="304" height="236">
+            <!-- <img class="media-object" class="img-circle"  > -->
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading left">Qu'est-ce que Kwaret? Et comment contribuer?</h4>
+          <br></br>
+             <p>Kwaret est une plateforme collaborative de centralisation de formulaires admnistratifs Algériens</p>
+             <p>Elle vise à faire ontribuer les citoyens au <b>partage</b> et à la <b>collaboration</b></p>
+             <p>Pour faciliter le process, KWARET permet à ses utilisateurs de se connecter à la plateforme, pour ajouter directement les formulaires administratifs vierges. 
+             <p>Ainsi, ils seront validés directement via la plateforme . </p>
+             <p>Une fois validés, la mise en ligne est immédiate, et ces formulaires seront accessibles par tous les citoyens en libre téléchargement.
+        </div>
+       </div>
+  </div>
+</div>
+
+
+<!-- <div class="container marketing" >
+    <div class="row">
+        <div class="col-lg-4">
+            
+            <img class="myclass2" class="pull-right"  src="img/Programming-Search-Property-icon.png">
+            <div class="right">
+            <center><h2> Plateforme collaborative </br>
+                    de partage de formulaires administratifs Algériens</h2>
+            <p>Pour faciliter le process,</p>
+            <p> KWARET permet à ses utilisateurs de se connecter à la plateforme, pour ajouter directement les formulaires administratifs vierges.</p> 
+            <p>Ainsi, ils seront validés directement via la plateforme. </p>
+            <p>Une fois validés, la mise en ligne est immédiate, et ces formulaires seront accessibles par tous les citoyens en libre téléchargement. </p>
+            </center>
+            </div>
+
+     
+    </div>
+</div> -->
+
+
+
+ 
+    <!-- <div class="dropdown">
+      <button class="mybtn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Sélectionner le formulaire par catégorie
+        <span class="mycaret"> </span>
+      </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li><a href="#">Etat civil </a></li>
+                      <li><a href="#"> Social </a></li>
+                      <li><a href="#"> Etudes </a></li>
+                      <li><a href="#"> Santé </a></li>
+                      <li><a href="#"> Logement</a></li>
+                      <li><a href="#"> Travail</a></li>
+                    </ul>
+   
+</div> -->
+
+  </div>
+
+<div class="row">
+    <div class="container">
+    <p>&nbsp;</p>
+</div>
+
+<div class="row">
+    <div class="container">
+    <p> </p>
+</div>
+
+<!-- <div>
+ <footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-md-4">
+                    <h3>Location</h3>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>Around the WEB</h3>
+                </div>
+                <div class="footer-col col-md-4">
+                <h3> About Kwaret </h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div> -->
+
+<div id="footer">
+  <div class="container">
+    <p>&nbsp;</p>
+    <center><p class="lead">All rights reserved @<a href="">Kwaret.com</a></p></center>
+  </div>
+</div>
+
+</body>
+</html>

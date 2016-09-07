@@ -1,0 +1,40 @@
+<h1> Espace Admin </h1>
+<h2> Liste des formulaires a traiter </h2> </br>
+_________________________________________________________________________________________________________________________________________
+<br></br>
+<?php
+  foreach ($rowset as $row) {
+?>
+  <tr>
+      <td><?php  echo $row['id']; ?></td>   
+      <td><?php  echo $row['form_name']; ?></td>  
+  </tr>
+
+  <tr>
+      <td>
+          <a href="<?php echo $this->url('forms/default', 
+                array('controller' => 'index', 'action' => 'update', 'id' => $row['id'])); ?>"> Modifier le formulaire    
+          </a>
+      </td>
+__#ou#_
+      <td>
+          <a href="<?php echo $this->url('forms/default', array('controller' => 'index',
+             'action' => 'AdminDetailForm', 'id' => $row['id'])); ?>"> Ajouter un tag a ce formulaire     
+          </a>
+      </td>
+
+__#ou#_
+      <td>    
+      <a href="<?php echo $this->url('forms/default', 
+                  array('controller' => 'index', 'action' => 'deleteForm', 'id' => $row['id'])); ?>"" 
+        onclick="return confirm('Do you rely want to delete the record;')"><u> Delete </u> 
+      </a>
+    </td>
+
+  </tr>
+
+  </br>
+  </table>  
+<?php
+  }
+?>

@@ -1,0 +1,46 @@
+<h1> Liste des Tags </h1>
+<table>
+<?php
+  foreach ($rowset as $row) {
+?>
+  <tr>
+	    <td><?php  echo $row['id'].':'; ?></td>   
+	    <td><?php  echo $row['value']; ?></td>
+  		<td> 
+    		<a href="<?php echo $this->url('forms/default', 
+                array('controller' => 'index', 'action' => 'updateTag', 'id' => $row['id'])); ?>"> 
+    			<u> Modifier </u>   
+    		</a>
+    	</td>
+    	<td> 
+			<a href="<?php echo $this->url('forms/default',
+				array('controller' => 'index', 'action' => 'deleteTag', 'id' => $row['id']));?>" 
+				onclick="return confirm('Do you rely want to delete the record;')"><u> Delete </u> 
+			</a>
+    	</td>
+    </br>
+  </tr>
+</table>  
+<?php
+  }
+?>
+
+
+
+
+_____________________________________________________________________________________________________________________________________________
+<h2>Ajouter un nouveau tag </h2>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'addTag')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+ ?>
+
+
+
+

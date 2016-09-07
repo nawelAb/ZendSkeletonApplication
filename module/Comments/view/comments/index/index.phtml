@@ -1,0 +1,22 @@
+
+<h1>index liste des commentaires</h1>
+<a href="<?php echo $this->url('comments/default', array('controller' => 'Index', 
+		'action' => 'add'));?>"><?php echo $this->translate('Ajouter un commentaire'); ?></a>
+<table>
+<tr>
+	<th>id</th>
+	<th>value</th>
+</tr>
+<?php
+	foreach ($rowset as $row) {
+?>
+		<tr>
+			<td><?php  echo $row['id']; ?></td>
+			<td><?php  echo $row['value']; ?></td>
+		</tr>
+			
+<?php
+	}
+?>
+</table> 
+ 

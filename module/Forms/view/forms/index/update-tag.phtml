@@ -1,0 +1,11 @@
+<h1> update Tag</h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'updateTag','id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+ ?>

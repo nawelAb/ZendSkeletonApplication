@@ -1,0 +1,16 @@
+<?php
+echo '<h1>Update</h1>';
+
+$form->prepare();
+
+$form->setAttribute('action', $this->url('comments/default', array('controller' => 'Index', 'action' => 'update', 'id' => $id))); 
+
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('id'))."</br>";
+echo $this->formRow($form->get('value'))."</br>";
+
+echo $this->formSubmit($form->get('submit'))."<br></br>";
+// echo $this->formCollection($form);
+echo $this->form()->closeTag();

@@ -1,0 +1,91 @@
+</br>
+<h1> list des categories </h1>
+<table>
+	<tr>
+		<th>id</th>
+		<th>name category</th>
+	</tr>
+<?php
+	foreach ($categories as $categorie) {
+?>
+		<tr>
+			<td><?php  echo $categorie['id']; ?></td>		
+
+			<td><?php    ?>
+				<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
+					'action' => 'FormByCategory', 'id'=>$categorie['id']));?>"><?php echo $categorie['value']; ?>				
+				</a>
+			</td>
+		</tr>
+		<tr>			
+		</tr>			
+<?php
+	}
+?>
+</table>
+</br>
+________________________________________________________________________________________________________________________
+
+
+<h1>recherche un formulaire par un tag </h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'index',
+ 'action' => 'findFormByTag')));
+//$form->setData(array('form_id' => $form_id));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+//echo $this->formRow($form->get('form_id'))."<br>";*
+
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+ ?>
+
+
+
+_________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h1>index liste des formulaires</h1>
+<a href="<?php echo $this->url('forms/default', array('controller' => 'Index', 
+		'action' => 'uploadForm'));?>"><?php echo $this->translate('Ajouter un formulaire'); ?></a>
+<table>
+<tr>
+	<th>id</th>
+	<th>name</th>
+</tr>
+<?php
+	foreach ($rowset as $row) {
+?>
+		<tr>
+			<td><?php  echo $row['id']; ?></td>
+			<td><?php  echo $row['form_name']; ?></td>
+			<td><?php  //echo $row['value']; ?></td>
+		</tr>			
+<?php
+	}
+?>
+
+<
+
+</table> 
+  -->

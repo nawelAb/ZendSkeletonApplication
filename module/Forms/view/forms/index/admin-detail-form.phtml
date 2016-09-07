@@ -1,0 +1,19 @@
+ <?php  echo "<strong>   form_id  : </strong>".$formId ?> 
+
+</br>
+_____________________________________________________________________________________________________________________________________________
+<h2>Ajouter un nouveau tag</h2>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'addTagForm')));
+$form->setData(array('form_id' => $formId));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('form_id'))."<br>";
+echo $this->formRow($form->get('value'))."<br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+ ?>
+
+
