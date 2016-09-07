@@ -18,6 +18,7 @@
             <a class="navbar-brand" href="#">Kwaret</a>
           </div>
           <ul class="nav navbar-nav">          
+
             <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
               'action' => 'index'));?>">Home</a></li>
             <li><a href="#procedure">Procédure</a></li>
@@ -27,13 +28,29 @@
               'action' => 'index'));?>">S'inscrire'</a></li> 
             <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
               'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+=======
+            <li class="active"><a href="#">Home</a></li>         
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+              'action' => 'login'));?>">Se connecter</a></li>
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'registration', 
+              'action' => 'index'));?>">S'inscrire</a></li>  
+>>>>>>> 5f2d21c758eb0bb7739a3fd13e19cba98c2b22c1
             <li><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
                   'action' => 'contact'));?>">Contact</a></li>
           </ul>
         </div>
       </nav>
+<<<<<<< HEAD
   </div>
   <!-- fin menu -->
+=======
+
+  </div> 
+  <!-- fin navbar -->
+
+>>>>>>> 5f2d21c758eb0bb7739a3fd13e19cba98c2b22c1
 
   <div class="row s1"> <br></br><br></br></div>
     <div class="row">

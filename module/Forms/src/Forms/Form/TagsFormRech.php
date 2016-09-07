@@ -21,9 +21,18 @@ class TagsFormRech extends Form
             ),
             'attributes'=> array(
 
+
                 'class' => 'form-control1',
                 'class' => 'form-control1',
                 //'class'=>'form-horizontal1',
+
+                // 'class' => 'form-control1',
+                // 'class'=>'form-horizontal1',
+                // 
+                // 
+                // 
+                // 'class' => 'form-control1',
+
                 // 'class'=>'well form-search',
                 // 'class'=>'input-medium search-query'
             )
