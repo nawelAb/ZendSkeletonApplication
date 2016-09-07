@@ -1,14 +1,14 @@
 body  /* personnalise important */ 
 {   
     padding-top: 0px;
-    padding-bottom: 100px;
+    padding-bottom: 70px !important;
     padding-right: 0px  !important;
     padding-left: 0px !important; /* ajoute */
     margin-right: 0px !important;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #2C3E50 !important;
+    color: #83878c !important;
     background-color: #efefef !important;
 }
 
@@ -22,7 +22,6 @@ body  /* personnalise important */
     width: 1249;
     /*height: 200px;*/
 }
-
 
 .container {  
     margin-right: 10px;
@@ -46,7 +45,6 @@ body  /* personnalise important */
     background-color: black;*/
 
 }
-
 .form-horizontal1 .form-group {
     margin-right: 85px;
     margin-left: 15px;
@@ -70,7 +68,6 @@ body  /* personnalise important */
     margin-right: 100px;
 
 }
-
 
 .jumbotron
 {	
@@ -229,4 +226,61 @@ padding-bottom:0px;
     margin-left: 80px !important;  
     margin-top: -70px !important;  
     padding-top: 40px !important;  
+}
+
+
+/* footer*/
+.alt1
+{
+    background:#eee;
+    min-height:400px;
+    /*background-color: white;*/
+
+}
+
+.alt2
+{
+    background:#333;
+    min-height:150px;
+    color:#fff;
+    text-align:center;
+}
+
+.padding
+{
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left: 250px; 
+    padding-right: 250px;
+   /*ckground-color: white;*/
+}
+
+.a {
+    background-color: red !important;
+}
+
+.col-md-4{
+
+    width: 30%;
+    position: relative !important;
+    min-height: 1px !important;
+    max-height: 300px !important;
+    margin-right: 35px !important;
+    margin-left: 0px !important;
+    background: white !important; 
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 14px;
+    color: #737a82 !important;
+    /*position: relative !important;
+    min-height: 1px !important;
+    max-height: 300px !important;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    background: violet !important;*/
 }
