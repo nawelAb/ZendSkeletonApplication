@@ -50,16 +50,17 @@
 
 			<?php
 
-				$form = $this->form;
-				$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'uploadForm')));
-				   // \Zend\Debug\Debug::dump(''); die; 
-				$form->prepare();
-				echo $this->form()->openTag($form);
-				echo $this->formRow($form->get('form_name'))."<br></br>";
-				echo $this->formRow($form->get('fileUpload'))."</br>";
-				echo $this->formSubmit($form->get('submit'))."<br></br>";
-				echo $this->form()->closeTag();
-			?>
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'uploadForm')));
+           // \Zend\Debug\Debug::dump(''); die; 
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        echo $this->formRow($form->get('form_name'))."<br></br>";
+        echo $this->formRow($form->get('fileUpload'))."</br>";
+        echo $this->formSubmit($form->get('submit'))."<br></br>";
+        echo $this->form()->closeTag();
+      ?>
+
 
         </div>
     </div>
