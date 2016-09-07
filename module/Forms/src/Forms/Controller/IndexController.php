@@ -127,15 +127,22 @@ class IndexController extends AbstractActionController
                     
                         $forms->exchangeArray($data);                        
                         $this->getFormsTableDelete()->saveForm($forms);   // le delete c juste pr nommer ca recupere la table            
-                        // $this->getFormsTable()->saveForm($forms);               
+                        // $this->getFormsTable()->saveForm($forms);   
+                        // 
+                        return $this->redirect()->toRoute('forms/default', array('controller' => 'Index', 'action' => 'upload-form-success'));            
 
-                        echo 'forms success ';                       
+                                       
 
                     }
                 }  
             }
         }         
         return array('form' => $form);
+    }
+
+    public function uploadFormSuccessAction()
+    {
+        return new ViewModel(array());       
     }
 
 

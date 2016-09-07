@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/style.css">
+ <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
@@ -17,11 +17,8 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Kwaret</a>
           </div>
-          <ul class="nav navbar-nav">          
-
-
-            <li class="active"><a href="#">Home</a></li>           
-
+            <ul class="nav navbar-nav"> 
+            <li class="active"><a href="#">Home</a></li> 
             <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
               'action' => 'login'));?>">Se connecter</a></li>
             <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
@@ -49,23 +46,9 @@
   <div class="row">
     <div class="contenuLogin">
         <div class="row">
-          <center> <h3>Charger un formulaire vers la plateforme</h3> </center>        
+          <center> <h2>formulaire a bien été uploadé </h2> </center>        
 
-			<?php
-
-				$form = $this->form;
-				$form->setAttribute('action', $this->url('forms/default', array('controller' => 'Index', 'action' => 'uploadForm')));
-				   // \Zend\Debug\Debug::dump(''); die; 
-				$form->prepare();
-				echo $this->form()->openTag($form);
-				echo $this->formRow($form->get('form_name'))."<br></br>";
-				echo $this->formRow($form->get('fileUpload'))."</br>";
-				echo $this->formSubmit($form->get('submit'))."<br></br>";
-				echo $this->form()->closeTag();
-			?>
-
-
-        </div>
+			  </div>
     </div>
   </div>
 
