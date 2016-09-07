@@ -57,40 +57,40 @@ class Auth implements InputFilterAwareInterface
 
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'usr_email',
-                'required' => true,
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
                 ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
+                // 'validators' => array(
+                //     array(
+                //         'name'    => 'StringLength',
+                //         'options' => array(
+                //             'encoding' => 'UTF-8',
+                //             'min'      => 1,
+                //             'max'      => 100,
+                //         ),
+                //     ),
+                // ),
             )));
 
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'usr_password',
-                'required' => true,
+                'required' => false,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
                 ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
+                // 'validators' => array(
+                //     array(
+                //         'name'    => 'StringLength',
+                //         'options' => array(
+                //             'encoding' => 'UTF-8',
+                //             'min'      => 1,
+                //             'max'      => 100,
+                //         ),
+                //     ),
+                // ),
             )));
 
             $this->inputFilter = $inputFilter;

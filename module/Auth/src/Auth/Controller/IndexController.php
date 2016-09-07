@@ -78,6 +78,7 @@ class IndexController extends AbstractActionController
 							$sessionManager = new \Zend\Session\SessionManager();
 							$sessionManager->rememberMe($time);
 						}
+						return $this->redirect()->toRoute('auth/default', array('controller' => 'index', 'action' => 'login-success'));	
 						break;
 
 					default:
@@ -90,6 +91,11 @@ class IndexController extends AbstractActionController
 			 }
 		}
 		return new ViewModel(array('form' => $form, 'messages' => $messages));
+	}
+
+	public function loginSuccessAction()
+	{
+		return new ViewModel();
 	}
 	
 	public function logoutAction()

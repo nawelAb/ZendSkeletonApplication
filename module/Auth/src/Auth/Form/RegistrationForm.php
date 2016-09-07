@@ -56,6 +56,9 @@ class RegistrationForm extends Form
                 'value' => 'Go',
                 'id' => 'submitbutton',
             ),
+            'options' => array(
+                'label' => 'Inscription    ',
+            ),
         )); 
     }
 }

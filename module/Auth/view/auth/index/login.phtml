@@ -49,14 +49,14 @@
     <div class="contenuLogin">
         <div class="row">
           <h4>Authentification</h4>       
-          <?php
-            $form = $this->form;
-            $form->setAttribute('action', $this->url('auth/default', array('controller' => 'index', 'action' => 'login')));
-            $form->prepare();
+          <?php 
+              $form = $this->form;
+              $form->setAttribute('action', $this->url('auth/default', array('controller' => 'index', 'action' => 'login')));
+              $form->prepare();
 
+              echo $this->form()->openTag($form);
               echo $this->formRow($form->get('usr_email')); 
               echo $this->formRow($form->get('usr_password'));
-              echo $this->form()->openTag($form);
               echo $this->formRow($form->get('rememberme'))."</br>";
               echo $this->formSubmit($form->get('submit'))."<br></br>";
               echo $this->form()->closeTag();       
