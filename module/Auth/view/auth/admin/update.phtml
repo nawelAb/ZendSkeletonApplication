@@ -1,32 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kwaret</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <nav id=mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom affix">
+       <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Kwaret</a>
+          </div>
+          <ul class="nav navbar-nav">          
+
+            <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+                  'action' => 'index'));?>">
+                    <span style="font-size:1.5em; color: #6cbf6c;" class=" glyphicon glyphicon-home"></span>                    
+                  </a></li>
+
+            <!-- <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Gérer les formulaires
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+                                  'action' => 'admin-list-form'));?>"> Liste des formulaires reçus</a></li>
+                  <li><a href="#">Liste des formulaires publiés </a></li>                
+                </ul>
+            </li> -->
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+                                  'action' => 'admin-list-form'));?>"> Liste des formulaires reçus</a></li>
+          
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'admin', 
+              'action' => 'index'));?>">Gérer les utilisateurs</a></li>                         
+
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'list-tag'));?>">Gérer les tags </a></li>
+
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+              'action' => 'list-category'));?>">Gérer les catégories </a></li> 
+
+            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+                  'action' => 'listComment'));?>">Gérer les commentaires </a></li> <!-- A revoire -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-user"></span>   Bienvenu Admin </a></li>
+             
+                <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+                  'action' => 'logout'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-log-in"></span>  Déconnexion </a></li>
+            </ul>
+        </div>
+      </nav>
+  </div> 
+  <!-- fin navbar -->
+
+    <br></br>   <br></br>   <br></br>
+    <div class="row s1"></div>
+    <br></br>
+
+    <div class="containerAdmin">      
+        
+		<?php
+
+			echo '<h1>Update</h1>';
+			// $form = $this->form;
+			$form->prepare();
+			// Assuming the "contact/process" route exists...
+			$form->setAttribute('action', $this->url('auth/default', array('controller' => 'admin', 'action' => 'update', 'id' => $id))); //'contact/process'));
+			// Set the method attribute for the form
+			$form->setAttribute('method', 'post');
+			echo $this->form()->openTag($form);
+			echo $this->formCollection($form);
+			echo $this->form()->closeTag();
+			// echo '<h1>Update</h1>';
+
+			// $form->prepare();
+
+			// $form->setAttribute('action', $this->url('auth/default', array('controller' => 'admin', 'action' => 'update', 'id' => $id))); 
+
+			// $form->setAttribute('method', 'post');
+
+			// echo $this->form()->openTag($form);
+			// echo $this->formRow($form->get('usr_password'))."</br>";
+			// echo $this->formRow($form->get('usr_email'))."</br>";
+			// echo $this->formRow($form->get('usrl_id'))."</br>";
+			// echo $this->formRow($form->get('lng_id'))."</br>";
+			// echo $this->formRow($form->get('usr_active'))."</br>";
+			// echo $this->formSubmit($form->get('submit'))."<br></br>";
+			// // echo $this->formCollection($form);
+			// echo $this->form()->closeTag();
+		?>
+    </div>
+    
+  <div id="footer">
+    <div class="container">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <center><p class="lead">All rights reserved @<a href="">Kwaret.com</a></p></center>
+    </div>
+  </div>
+
+</body>
+</html>
 
 
-<?php
 
 
-echo '<h1>Update</h1>';
-// $form = $this->form;
-$form->prepare();
-// Assuming the "contact/process" route exists...
-$form->setAttribute('action', $this->url('auth/default', array('controller' => 'admin', 'action' => 'update', 'id' => $id))); //'contact/process'));
-// Set the method attribute for the form
-$form->setAttribute('method', 'post');
-echo $this->form()->openTag($form);
-echo $this->formCollection($form);
-echo $this->form()->closeTag();
-// echo '<h1>Update</h1>';
 
-// $form->prepare();
 
-// $form->setAttribute('action', $this->url('auth/default', array('controller' => 'admin', 'action' => 'update', 'id' => $id))); 
 
-// $form->setAttribute('method', 'post');
 
-// echo $this->form()->openTag($form);
-// echo $this->formRow($form->get('usr_password'))."</br>";
-// echo $this->formRow($form->get('usr_email'))."</br>";
-// echo $this->formRow($form->get('usrl_id'))."</br>";
-// echo $this->formRow($form->get('lng_id'))."</br>";
-// echo $this->formRow($form->get('usr_active'))."</br>";
-// echo $this->formSubmit($form->get('submit'))."<br></br>";
-// // echo $this->formCollection($form);
-// echo $this->form()->closeTag();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
