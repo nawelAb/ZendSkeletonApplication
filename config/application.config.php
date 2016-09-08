@@ -8,11 +8,10 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
+        'ManageAcl',
+        'MyAcl',
         'Application',
-
-        'TwbBundle', 
-        'Acl',
-
+        'TwbBundle',
         'Auth',
         'Forms', 
         'Comments',

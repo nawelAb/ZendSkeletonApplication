@@ -25,8 +25,8 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
-        $this -> initAcl($e);
-        $e -> getApplication() -> getEventManager() -> attach('route', array($this, 'checkAcl'));
+        // $this -> initAcl($e);
+        // $e -> getApplication() -> getEventManager() -> attach('route', array($this, 'checkAcl'));
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     // $this -> initAcl($e);
@@ -56,7 +56,7 @@ class Module
     public function initAcl(MvcEvent $e) {
  
         $acl = new \Zend\Permissions\Acl\Acl();
-        $roles = include __DIR__ . '/config/module.acl.roles.php';
+        // $ roles = include __DIR__ . '/config/module.acl.roles.php';
         $allResources = array();
         foreach ($roles as $role => $resources) {
      

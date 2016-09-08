@@ -3,18 +3,18 @@
 return array(
 	'controllers' => array(
         'invokables' => array(
-            'Acl\Controller\Acl' => 'Acl\Controller\AclController',	
+            'ManageAcl\Controller\Index' => 'ManageAcl\Controller\IndexController',	
         ),
 	),
     'router' => array(
         'routes' => array(
-			'tags' => array(
+			'manageAcl' => array(
 				'type'    => 'Literal',
 				'options' => array(
-					'route'    => '/tags',
+					'route'    => '/manageAcl',
 					'defaults' => array(
-						'__NAMESPACE__' => 'Acl\Controller',
-						'controller'    => 'Acl',
+						'__NAMESPACE__' => 'ManageAcl\Controller',
+						'controller'    => 'ManageAcl',
 						// 'action'        => 'init',
 					),
 				),
@@ -42,7 +42,7 @@ return array(
 //            'layout/Auth'           => __DIR__ . '/../view/layout/Auth.phtml',
 //        ),
         'template_path_stack' => array(
-            'acl' => __DIR__ . '/../view',
+            'manageAcl' => __DIR__ . '/../view',
             // __DIR__ . '/../view',
         ),
 		
