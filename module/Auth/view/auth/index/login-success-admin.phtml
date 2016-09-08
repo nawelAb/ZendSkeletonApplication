@@ -20,7 +20,9 @@
           <ul class="nav navbar-nav">          
 
             <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
-                  'action' => 'index'));?>">Home</a></li>
+                  'action' => 'index'));?>">
+                    <span style="font-size:1.5em; color: #6cbf6c;" class=" glyphicon glyphicon-home"></span>                    
+                  </a></li>
 
             <!-- <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Gérer les formulaires
@@ -47,9 +49,10 @@
                   'action' => 'listComment'));?>">Gérer les commentaires </a></li> <!-- A revoire -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span>Bienvenu Admin </a></li>
+                <li><a href="#"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-user"></span>   Bienvenu Admin </a></li>
+             
                 <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
-                  'action' => 'logout'));?>"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                  'action' => 'logout'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-log-in"></span>  Déconnexion </a></li>
             </ul>
         </div>
       </nav>
@@ -74,13 +77,13 @@
     </div>
   </div>
 
-<div id="footer">
-  <div class="container">
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <center><p class="lead">All rights reserved @<a href="">Kwaret.com</a></p></center>
+  <div id="footer">
+    <div class="container">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <center><p class="lead">All rights reserved @<a href="">Kwaret.com</a></p></center>
+    </div>
   </div>
-</div>
 
 </body>
 </html>
