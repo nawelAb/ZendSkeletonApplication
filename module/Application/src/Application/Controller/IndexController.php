@@ -66,25 +66,25 @@ class IndexController extends AbstractActionController
     {
 
          
-            $acl = new Acl();
+            // $acl = new Acl();
 
-            $acl->addRole(new Role('guest'))
-                ->addRole(new Role('member'))
-                ->addRole(new Role('admin'));
+            // $acl->addRole(new Role('guest'))
+            //     ->addRole(new Role('member'))
+            //     ->addRole(new Role('admin'));
 
-            $parents = array('guest', 'member', 'admin');
-            $acl->addRole(new Role('someUser'), $parents);
+            // $parents = array('guest', 'member', 'admin');
+            // $acl->addRole(new Role('someUser'), $parents);
 
-            // $acl->addResource(new Resource('someResource'));
+            // // $acl->addResource(new Resource('someResource'));
 
-            // $acl->deny('guest', 'someResource');
-            // $acl->allow('member', 'someResource');
-            $acl->addResource(new Resource('login'));
+            // // $acl->deny('guest', 'someResource');
+            // // $acl->allow('member', 'someResource');
+            // $acl->addResource(new Resource('login'));
             
-            $acl->deny('guest', 'login');
-            // $acl->allow('member', 'login');
+            // $acl->deny('guest', 'login');
+            // // $acl->allow('member', 'login');
 
-            echo $acl->isAllowed('someUser', 'login') ? 'allowed' : 'denied';
+            // echo $acl->isAllowed('someUser', 'login') ? 'allowed' : 'denied';
 
 
             // $roleGuest = new Role('guest');

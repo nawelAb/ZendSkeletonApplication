@@ -7,7 +7,7 @@ return array(
     ),
     'admin'=> array(
         'user',
-        'dashboard',
+        // 'dashboard',
         'home',
         'admin'
     ),

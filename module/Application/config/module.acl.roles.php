@@ -1,28 +1,28 @@
 <?php 
 return array(
 
-	'roles' => array(
-		'guest' => null,
-		'member' =>'guest',
-		'admin' => 'member'
-	),
+	// 'roles' => array(
+	// 	'guest' => null,
+	// 	'member' =>'guest',
+	// 	'admin' => 'member'
+	// ),
 
-	'ressources' => array (
+	// 'ressources' => array (
 
-		'allow' =>array(
-			'user' => array(
-				'login' =>'guest', 
-				'all'   =>'member'
-			),
+	// 	'allow' =>array(
+	// 		'user' => array(
+	// 			'login' =>'guest', 
+	// 			'all'   =>'member'
+	// 		),
 		
 	
 
-			'Forms\Controller\Index' => array(
-				'index' => 'guest',
-				'upload-form' =>'member',
-			)
-		),
-	),
+	// 		'Forms\Controller\Index' => array(
+	// 			'index' => 'guest',
+	// 			'upload-form' =>'member',
+	// 		)
+	// 	),
+	// ),
 
 
 
