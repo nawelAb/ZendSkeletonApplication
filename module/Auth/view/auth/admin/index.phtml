@@ -33,7 +33,7 @@
                   <li><a href="#">Liste des formulaires publiés </a></li>                
                 </ul>
             </li> -->
-            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+            <li class="active"><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
                                   'action' => 'admin-list-form'));?>"> Liste des formulaires reçus</a></li>
           
             <li><a href="<?php echo $this->url('auth/default', array('controller' => 'admin', 
@@ -45,14 +45,12 @@
             <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
               'action' => 'list-category'));?>">Gérer les catégories </a></li> 
 
-            <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
-                  'action' => 'listComment'));?>">Gérer les commentaires </a></li> <!-- A revoire -->
-            </ul>
+            </ul></ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-user"></span>   Bienvenu Admin </a></li>
              
                 <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
-                  'action' => 'logout'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-log-in"></span>  Déconnexion </a></li>
+                  'action' => 'logout'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class=" glyphicon glyphicon-log-out"></span>  Déconnexion </a></li>
             </ul>
         </div>
       </nav>
