@@ -20,16 +20,34 @@ use Zend\Permissions\Acl\Acl as BaseAcl;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
 use Zend\Permissions\Acl\Resource\GenericResource as Resource;
 
+// use Zend\Session\SessionManager;
+// use Zend\Session\Config\SessionConfig;
+// use Zend\Session\Container;
+
 class Module
-{
+{   
+     public function initSession($config)
+    {
+        $sessionConfig = new SessionConfig();
+        $sessionConfig->setOptions($config);
+        $sessionManager = new SessionManager($sessionConfig);
+        $sessionManager->start();
+        Container::setDefaultManager($sessionManager);
+    }
+
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         // $this -> initAcl($e);
         // $e -> getApplication() -> getEventManager() -> attach('route', array($this, 'checkAcl'));
+         // $this -> initAcl($e);
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-    // $this -> initAcl($e);
+        $this->initSession(array(
+            'remember_me_seconds' => 180,
+            'use_cookies' => true,
+            'cookie_httponly' => true,
+        ));
      }
 
     public function getConfig()
@@ -47,6 +65,8 @@ class Module
             ),
         );
     }
+
+
 
     // public function onBootstrap(MvcEvent $e) {
     //     $this -> initAcl($e);

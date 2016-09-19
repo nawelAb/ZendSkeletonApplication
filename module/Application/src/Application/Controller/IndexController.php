@@ -29,7 +29,10 @@ class IndexController extends AbstractActionController
                                     'form'      =>$form,
                                     'categories'=> $categories,
                                     'tags' 		=>$tags
-        ));                           
+        ));
+
+
+                                   
     } 
 
     public function getSelectCategoryTable()
