@@ -18,7 +18,7 @@ class FormsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Form Name',
+                'label' => 'Nom du formulaire',
             ),
         ));
         
@@ -28,7 +28,7 @@ class FormsForm extends Form
                 'type'  => 'file',
             ),
             'options' => array(
-                'label' => 'File Upload',
+                'label' => ' selectionner un fichier',
             ),
         )); 
 
@@ -37,7 +37,7 @@ class FormsForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Upload Now'
+                'value' => 'Télécharger'
             ),
         )); 
     }
