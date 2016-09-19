@@ -17,12 +17,12 @@ abstract class Factory
     /**
      * @var array Known captcha types
      */
-    protected static $classMap = array(
+    protected static $classMap = [
         'dumb'      => 'Zend\Captcha\Dumb',
         'figlet'    => 'Zend\Captcha\Figlet',
         'image'     => 'Zend\Captcha\Image',
         'recaptcha' => 'Zend\Captcha\ReCaptcha',
-    );
+    ];
 
     /**
      * Create a captcha adapter instance
@@ -74,8 +74,9 @@ abstract class Factory
 
         if (!$captcha instanceof AdapterInterface) {
             throw new Exception\DomainException(sprintf(
-                '%s expects the "class" attribute to resolve to a valid Zend\Captcha\AdapterInterface instance; received "%s"',
+                '%s expects the "class" attribute to resolve to a valid %s instance; received "%s"',
                 __METHOD__,
+                AdapterInterface::class,
                 $class
             ));
         }

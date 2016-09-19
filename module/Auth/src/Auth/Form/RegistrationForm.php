@@ -26,7 +26,7 @@ class RegistrationForm extends Form
                 'type'  => 'password',
             ),
             'options' => array(
-                'label' => 'Password    ',
+                'label' => 'Mot de passe    ',
             ),
         ));
 		
@@ -36,7 +36,7 @@ class RegistrationForm extends Form
                 'type'  => 'password',
             ),
             'options' => array(
-                'label' => 'Confirm Password    ',
+                'label' => 'Confirmer votre mot de passe    ',
             ),
         ));	
 
@@ -44,7 +44,7 @@ class RegistrationForm extends Form
 			'type' => 'Zend\Form\Element\Captcha',
 			'name' => 'captcha',
 			'options' => array(
-				'label' => 'Please verify you are human',
+				'label' => 'Taper le code captcha',
 				'captcha' => new \Zend\Captcha\Figlet(),
 			),
 		));

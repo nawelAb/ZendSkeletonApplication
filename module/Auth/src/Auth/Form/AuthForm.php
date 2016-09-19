@@ -16,7 +16,7 @@ class AuthForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'User Email    ',
+                'label' => 'Email    ',
             ),
         ));
         
@@ -26,7 +26,7 @@ class AuthForm extends Form
                 'type'  => 'password',
             ),
             'options' => array(
-                'label' => 'Password    ',
+                'label' => 'mot de passe    ',
             ),
         ));
 
