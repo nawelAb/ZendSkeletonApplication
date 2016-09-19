@@ -18,19 +18,33 @@
             <a class="navbar-brand" href="#">Kwaret</a>
           </div>
           <ul class="nav navbar-nav">          
-            <li class="active"><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
-              'action' => 'index'));?>">Home</a></li>
-            <li><a href="#procedure">Procédure</a></li>
-            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
-              'action' => 'login'));?>">Se connecter</a></li> 
+
+
+            <li class="active">  
+            <a href="<?php echo $this->url('application/default', array('controller' => 'index', 
+                  'action' => 'index'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-home "></span></a></li>          
+       
+
+            <!-- <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+              'action' => 'login'));?>">Se connecter</a></li> -->
             <li><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
               'action' => 'upload-form'));?>">Uploader un formulaire</a></li>
+            <li><a href="<?php echo $this->url('auth/default', array('controller' => 'registration', 
+              'action' => 'index'));?>">S'inscrire</a></li>  
             <li><a href="<?php echo $this->url('application/default', array('controller' => 'index', 
                   'action' => 'contact'));?>">Contact</a></li>
+
+            </ul></ul>
+            <ul class="nav navbar-nav navbar-right">           
+             
+                <li><a href="<?php echo $this->url('auth/default', array('controller' => 'index', 
+                  'action' => 'logout'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-log-in"></span>  Connexion </a></li>
+            </ul>            
           </ul>
         </div>
       </nav>
-     </div>
+  </div> 
+  <!-- fin navbar -->
 
       	<br></br>		<br></br>		<br></br>
 	<div class="row">
@@ -46,7 +60,8 @@
 			                $key = $key + 1; ?>
 			             <tr>
 			                <td> <?php  //echo    'tag_id : <strong> '.($row['id']).'</strong> <br></br>'; ?></td>
-			                <td> <?php  echo    'form_id: :<strong> '.($row['form_id']).'</strong> <br></br>'; ?></td>
+                      <td> <?php  echo    'form_id: :<strong> '.($row['form_id']).'</strong> <br></br>'; ?></td>
+			                <td> <?php  echo    'form_id: :<strong> '.($row['form_name']).'</strong> <br></br>'; ?></td>
 			               
 			             <?php  } ?> 
 			              </tr>
