@@ -15,7 +15,7 @@ class CommentsForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Value',
+                // 'label' => 'Value',
             ),
         ));    
 
