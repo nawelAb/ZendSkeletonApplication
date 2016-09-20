@@ -313,3 +313,20 @@ padding-bottom:0px;
     background-color: white !important;
     color:  #83878c;
 }*/
+
+/* find form by tag */
+.contenuFindForm {
+    font-size: 0.8em !important;
+    color: #7f847f !important;
+    max-height: 1000px;
+    background-color: #FFFFFF !important;
+    height: 1000 !important;
+    padding-bottom: 70px !important;
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+    padding-top: 70px !important;
+    margin-left: 170px !important;
+    /* color: black; */
+    /* text-align: center; */
+    margin-right: 0px !important;
+}

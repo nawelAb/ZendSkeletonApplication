@@ -17,10 +17,8 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Kwaret</a>
           </div>
-          <ul class="nav navbar-nav">          
-
-
-            <li class="active">  
+          <ul class="nav navbar-nav"> 
+              <li class="active">  
             <a href="<?php echo $this->url('application/default', array('controller' => 'index', 
                   'action' => 'index'));?>"><span style="font-size:1.2em; color: #6cbf6c;" class="glyphicon glyphicon-home "></span></a></li>          
        
@@ -47,30 +45,36 @@
   <!-- fin navbar -->
 
       	<br></br>		<br></br>		<br></br>
+
 	<div class="row">
-		<div class="contenu">
-			<h4>Résultat de la recherche</h4>
-			<th></th>
-		<td> <?php  echo '________________________________________________________________ <br>'; ?>
+		<div class="contenuFindForm">
+			<h4><u>Résultat de la recherche</u></h4>
+			<br></br>
+		<td> <?php  //echo '________________________________________________________________ <br>'; ?>
 		</td>
 			<tr>
-			<?php 
+      
+      <?php 
 			$key = 1 ;
-			            foreach($list as $key=>$row){
-			                $key = $key + 1; ?>
-			             <tr>
-			                <td> <?php  //echo    'tag_id : <strong> '.($row['id']).'</strong> <br></br>'; ?></td>
-                      <td> <?php  echo    'form_id: :<strong> '.($row['form_id']).'</strong> <br></br>'; ?></td>
-			                <td> <?php  echo    'form_id: :<strong> '.($row['form_name']).'</strong> <br></br>'; ?></td>
-			               
-			             <?php  } ?> 
-			              </tr>
+          foreach($list as $key=>$row){
+              $key = $key + 1; ?>
+           <tr>
+            <div class="container"> 
+              <h5><a href="<?php echo $this->url('forms/default', array('controller' => 'index', 
+                  'action' => 'detailForm', 'id' => $row['id']));?>"><span style="font-size:6.2em; color: #6cbf6c;" 
+                      class="glyphicon glyphicon-file"></span> 
+              </a><?php  echo $row['form_name']; ?></h5>
+              <div class="row"> </div>
+    
+            </div>
+      			<td> <?php  //echo    'tag_id : <strong> '.($row['id']).'</strong> <br></br>'; ?></td>
+            <td> <?php // echo    'form_id: :<strong> '.($row['form_id']).'</strong> <br></br>'; ?></td>            
+      <?php  } ?> 
+            </tr>
 			</tr>
 			<br></br> 		
 		</div>
     </div>
-
-
 
 <div id="footer">
   <div class="container">
